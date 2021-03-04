@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:zoom_sdk_demo"
         mc:Ignorable="d"
         Title="start_join_meeting" Height="348" Width="564"
-        Closing="Wnd_Closing"
-            xmlns:ui="http://schemas.modernwpf.com/2019"
-    ui:WindowHelper.UseModernWindowStyle="True">
+        Closing="Wnd_Closing">
+    <!--xmlns:ui="http://schemas.modernwpf.com/2019"
+    ui:WindowHelper.UseModernWindowStyle="True">-->
     <Grid Height="348" Margin="0,0,0,-78" HorizontalAlignment="Left" Width="0">
         <Label x:Name="label_UserName" Content="UserName" HorizontalAlignment="Left" Margin="32,21,-132,0" VerticalAlignment="Top" Width="100"/>
         <Label x:Name="label_UserName_Copy" Content="UserID(start meeting)" HorizontalAlignment="Left" Margin="32,66,-170,0" VerticalAlignment="Top" Width="138"/>
