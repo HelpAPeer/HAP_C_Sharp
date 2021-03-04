@@ -1,0 +1,38 @@
+C:\Users\Barhoum Karam\Documents\Ebrahim\CMU_ETC\Spring 2021\Help A peer\Programming\C#\zoom-c-sharp-wrapper-5.4.54802.0124\bin\zoom_sdk_demo.exe.config
+C:\Users\Barhoum Karam\Documents\Ebrahim\CMU_ETC\Spring 2021\Help A peer\Programming\C#\zoom-c-sharp-wrapper-5.4.54802.0124\bin\zoom_sdk_demo.exe
+C:\Users\Barhoum Karam\Documents\Ebrahim\CMU_ETC\Spring 2021\Help A peer\Programming\C#\zoom-c-sharp-wrapper-5.4.54802.0124\bin\zoom_sdk_demo.pdb
+C:\Users\Barhoum Karam\Documents\Ebrahim\CMU_ETC\Spring 2021\Help A peer\Programming\C#\zoom-c-sharp-wrapper-5.4.54802.0124\zoom_sdk_demo\obj\Release\zoom_sdk_demo.csprojAssemblyReference.cache
+C:\Users\Barhoum Karam\Documents\Ebrahim\CMU_ETC\Spring 2021\Help A peer\Programming\C#\zoom-c-sharp-wrapper-5.4.54802.0124\zoom_sdk_demo\obj\Release\MainWindow.g.cs
+C:\Users\Barhoum Karam\Documents\Ebrahim\CMU_ETC\Spring 2021\Help A peer\Programming\C#\zoom-c-sharp-wrapper-5.4.54802.0124\zoom_sdk_demo\obj\Release\start_join_meeting.g.cs
+C:\Users\Barhoum Karam\Documents\Ebrahim\CMU_ETC\Spring 2021\Help A peer\Programming\C#\zoom-c-sharp-wrapper-5.4.54802.0124\zoom_sdk_demo\obj\Release\App.g.cs
+C:\Users\Barhoum Karam\Documents\Ebrahim\CMU_ETC\Spring 2021\Help A peer\Programming\C#\zoom-c-sharp-wrapper-5.4.54802.0124\zoom_sdk_demo\obj\Release\zoom_sdk_demo_MarkupCompile.cache
+C:\Users\Barhoum Karam\Documents\Ebrahim\CMU_ETC\Spring 2021\Help A peer\Programming\C#\zoom-c-sharp-wrapper-5.4.54802.0124\zoom_sdk_demo\obj\Release\zoom_sdk_demo_MarkupCompile.lref
+C:\Users\Barhoum Karam\Documents\Ebrahim\CMU_ETC\Spring 2021\Help A peer\Programming\C#\zoom-c-sharp-wrapper-5.4.54802.0124\zoom_sdk_demo\obj\Release\MainWindow.baml
+C:\Users\Barhoum Karam\Documents\Ebrahim\CMU_ETC\Spring 2021\Help A peer\Programming\C#\zoom-c-sharp-wrapper-5.4.54802.0124\zoom_sdk_demo\obj\Release\start_join_meeting.baml
+C:\Users\Barhoum Karam\Documents\Ebrahim\CMU_ETC\Spring 2021\Help A peer\Programming\C#\zoom-c-sharp-wrapper-5.4.54802.0124\zoom_sdk_demo\obj\Release\zoom_sdk_demo.g.resources
+C:\Users\Barhoum Karam\Documents\Ebrahim\CMU_ETC\Spring 2021\Help A peer\Programming\C#\zoom-c-sharp-wrapper-5.4.54802.0124\zoom_sdk_demo\obj\Release\zoom_sdk_demo.Properties.Resources.resources
+C:\Users\Barhoum Karam\Documents\Ebrahim\CMU_ETC\Spring 2021\Help A peer\Programming\C#\zoom-c-sharp-wrapper-5.4.54802.0124\zoom_sdk_demo\obj\Release\zoom_sdk_demo.csproj.GenerateResource.cache
+C:\Users\Barhoum Karam\Documents\Ebrahim\CMU_ETC\Spring 2021\Help A peer\Programming\C#\zoom-c-sharp-wrapper-5.4.54802.0124\zoom_sdk_demo\obj\Release\zoom_sdk_demo.csproj.CoreCompileInputs.cache
+C:\Users\Barhoum Karam\Documents\Ebrahim\CMU_ETC\Spring 2021\Help A peer\Programming\C#\zoom-c-sharp-wrapper-5.4.54802.0124\zoom_sdk_demo\obj\Release\zoom_sdk_demo.csproj.CopyComplete
+C:\Users\Barhoum Karam\Documents\Ebrahim\CMU_ETC\Spring 2021\Help A peer\Programming\C#\zoom-c-sharp-wrapper-5.4.54802.0124\zoom_sdk_demo\obj\Release\zoom_sdk_demo.exe
+C:\Users\Barhoum Karam\Documents\Ebrahim\CMU_ETC\Spring 2021\Help A peer\Programming\C#\zoom-c-sharp-wrapper-5.4.54802.0124\zoom_sdk_demo\obj\Release\zoom_sdk_demo.pdb
+C:\Users\Barhoum Karam\Documents\Ebrahim\CMU_ETC\Spring 2021\Help A peer\Programming\C#\zoom-c-sharp-wrapper-5.4.54802.0124\zoom_sdk_demo\obj\Release\App.baml
+C:\Users\etc-student\Documents\Help A Peer\HAP_C_Sharp\bin\zoom_sdk_demo.exe.config
+C:\Users\etc-student\Documents\Help A Peer\HAP_C_Sharp\bin\zoom_sdk_demo.exe
+C:\Users\etc-student\Documents\Help A Peer\HAP_C_Sharp\bin\zoom_sdk_demo.pdb
+C:\Users\etc-student\Documents\Help A Peer\HAP_C_Sharp\zoom_sdk_demo\obj\Release\zoom_sdk_demo.csprojAssemblyReference.cache
+C:\Users\etc-student\Documents\Help A Peer\HAP_C_Sharp\zoom_sdk_demo\obj\Release\MainWindow.g.cs
+C:\Users\etc-student\Documents\Help A Peer\HAP_C_Sharp\zoom_sdk_demo\obj\Release\start_join_meeting.g.cs
+C:\Users\etc-student\Documents\Help A Peer\HAP_C_Sharp\zoom_sdk_demo\obj\Release\App.g.cs
+C:\Users\etc-student\Documents\Help A Peer\HAP_C_Sharp\zoom_sdk_demo\obj\Release\zoom_sdk_demo_MarkupCompile.cache
+C:\Users\etc-student\Documents\Help A Peer\HAP_C_Sharp\zoom_sdk_demo\obj\Release\zoom_sdk_demo_MarkupCompile.lref
+C:\Users\etc-student\Documents\Help A Peer\HAP_C_Sharp\zoom_sdk_demo\obj\Release\App.baml
+C:\Users\etc-student\Documents\Help A Peer\HAP_C_Sharp\zoom_sdk_demo\obj\Release\MainWindow.baml
+C:\Users\etc-student\Documents\Help A Peer\HAP_C_Sharp\zoom_sdk_demo\obj\Release\start_join_meeting.baml
+C:\Users\etc-student\Documents\Help A Peer\HAP_C_Sharp\zoom_sdk_demo\obj\Release\zoom_sdk_demo.g.resources
+C:\Users\etc-student\Documents\Help A Peer\HAP_C_Sharp\zoom_sdk_demo\obj\Release\zoom_sdk_demo.Properties.Resources.resources
+C:\Users\etc-student\Documents\Help A Peer\HAP_C_Sharp\zoom_sdk_demo\obj\Release\zoom_sdk_demo.csproj.GenerateResource.cache
+C:\Users\etc-student\Documents\Help A Peer\HAP_C_Sharp\zoom_sdk_demo\obj\Release\zoom_sdk_demo.csproj.CoreCompileInputs.cache
+C:\Users\etc-student\Documents\Help A Peer\HAP_C_Sharp\zoom_sdk_demo\obj\Release\zoom_sdk_demo.csproj.CopyComplete
+C:\Users\etc-student\Documents\Help A Peer\HAP_C_Sharp\zoom_sdk_demo\obj\Release\zoom_sdk_demo.exe
+C:\Users\etc-student\Documents\Help A Peer\HAP_C_Sharp\zoom_sdk_demo\obj\Release\zoom_sdk_demo.pdb
