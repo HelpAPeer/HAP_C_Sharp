@@ -56,8 +56,10 @@ namespace zoom_sdk_demo
                 {
                     string name = user.GetUserNameW();
                     Console.Write(name);
+                    Console.Write(" ");
                 }
             }
+            Console.WriteLine();
         }
         public void onUserLeft(Array lstUserID)
         {
@@ -76,7 +78,12 @@ namespace zoom_sdk_demo
             Console.WriteLine(userName);
             Console.WriteLine("{0}",userId);
             Array users = ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().GetMeetingParticipantsController().GetParticipantsList();
-            Console.WriteLine(String.Join("\n", users));
+            //Console.WriteLine(String.Join("\n", users));
+            Console.WriteLine("List of Users Currently");
+            foreach (var item in users)
+            {
+                Console.WriteLine(item.ToString());
+            }
         }
         private void RegisterCallBack()
         {
