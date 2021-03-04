@@ -121,7 +121,8 @@ namespace zoom_sdk_demo
             ZOOM_SDK_DOTNET_WRAP.JoinParam param = new ZOOM_SDK_DOTNET_WRAP.JoinParam();
             param.userType = ZOOM_SDK_DOTNET_WRAP.SDKUserType.SDK_UT_WITHOUT_LOGIN;
             ZOOM_SDK_DOTNET_WRAP.JoinParam4WithoutLogin join_api_param = new ZOOM_SDK_DOTNET_WRAP.JoinParam4WithoutLogin();
-            join_api_param.meetingNumber = UInt64.Parse(textBox_meetingnumber_api.Text);
+//TODO: remove the api.text empty spaces
+            join_api_param.meetingNumber = UInt64.Parse(textBox_meetingnumber_api.Text.Replace(" ",""));
             join_api_param.userName = textBox_username_api.Text;
             param.withoutloginJoin = join_api_param;
 
