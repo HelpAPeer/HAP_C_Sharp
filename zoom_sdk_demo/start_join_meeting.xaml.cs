@@ -56,8 +56,10 @@ namespace zoom_sdk_demo
                 {
                     string name = user.GetUserNameW();
                     Console.Write(name);
+                    Console.Write(" ");
                 }
             }
+            Console.WriteLine();
         }
         public void onUserLeft(Array lstUserID)
         {
@@ -73,7 +75,15 @@ namespace zoom_sdk_demo
         }
         public void onUserNameChanged(UInt32 userId, string userName)
         {
-            //todo
+            Console.WriteLine(userName);
+            Console.WriteLine("{0}",userId);
+            Array users = ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().GetMeetingParticipantsController().GetParticipantsList();
+            //Console.WriteLine(String.Join("\n", users));
+            Console.WriteLine("List of Users Currently");
+            foreach (var item in users)
+            {
+                Console.WriteLine(item.ToString());
+            }
         }
         private void RegisterCallBack()
         {
@@ -118,7 +128,8 @@ namespace zoom_sdk_demo
             ZOOM_SDK_DOTNET_WRAP.JoinParam param = new ZOOM_SDK_DOTNET_WRAP.JoinParam();
             param.userType = ZOOM_SDK_DOTNET_WRAP.SDKUserType.SDK_UT_WITHOUT_LOGIN;
             ZOOM_SDK_DOTNET_WRAP.JoinParam4WithoutLogin join_api_param = new ZOOM_SDK_DOTNET_WRAP.JoinParam4WithoutLogin();
-            join_api_param.meetingNumber = UInt64.Parse(textBox_meetingnumber_api.Text);
+//TODO: remove the api.text empty spaces
+            join_api_param.meetingNumber = UInt64.Parse(textBox_meetingnumber_api.Text.Replace(" ",""));
             join_api_param.userName = textBox_username_api.Text;
             param.withoutloginJoin = join_api_param;
 

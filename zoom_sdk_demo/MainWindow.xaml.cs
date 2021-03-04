@@ -65,7 +65,7 @@ namespace zoom_sdk_demo
             //
             ZOOM_SDK_DOTNET_WRAP.AuthContext param = new ZOOM_SDK_DOTNET_WRAP.AuthContext();
             
-            if (textBox_apptoken.Text.Length <= 0)
+            if ((textBox_apptoken.Text.Length <= 0) || (textBox_apptoken.Text=="TextBox"))
             {
                 string genToken = generateJWT();
                 Console.WriteLine(genToken);
