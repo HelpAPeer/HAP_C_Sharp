@@ -18,7 +18,7 @@ namespace zoom_sdk_demo
         //ZOOM_SDK_DOTNET_WRAP.onMeetingStatusChanged
         public void onMeetingStatusChanged(MeetingStatus status, int iResult)
         {
-            switch(status)
+            switch (status)
             {
                 case ZOOM_SDK_DOTNET_WRAP.MeetingStatus.MEETING_STATUS_ENDED:
                 case ZOOM_SDK_DOTNET_WRAP.MeetingStatus.MEETING_STATUS_FAILED:
@@ -65,7 +65,7 @@ namespace zoom_sdk_demo
         public void onUserNameChanged(UInt32 userId, string userName)
         {
             Console.WriteLine(userName);
-            Console.WriteLine("{0}",userId);
+            Console.WriteLine("{0}", userId);
             Array users = ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().GetMeetingParticipantsController().GetParticipantsList();
             //Console.WriteLine(String.Join("\n", users));
             Console.WriteLine("List of Users Currently");
@@ -105,6 +105,9 @@ namespace zoom_sdk_demo
             if (ZOOM_SDK_DOTNET_WRAP.SDKError.SDKERR_SUCCESS == err)
             {
                 Hide();
+                //Show the HAP window on button click
+                HAP_MainWindow hAP_MainWindow = new HAP_MainWindow();
+                hAP_MainWindow.Show();
             }
             else//error handle
             { }
@@ -117,15 +120,23 @@ namespace zoom_sdk_demo
             ZOOM_SDK_DOTNET_WRAP.JoinParam param = new ZOOM_SDK_DOTNET_WRAP.JoinParam();
             param.userType = ZOOM_SDK_DOTNET_WRAP.SDKUserType.SDK_UT_WITHOUT_LOGIN;
             ZOOM_SDK_DOTNET_WRAP.JoinParam4WithoutLogin join_api_param = new ZOOM_SDK_DOTNET_WRAP.JoinParam4WithoutLogin();
-//TODO: remove the api.text empty spaces
-            join_api_param.meetingNumber = UInt64.Parse(textBox_meetingnumber_api.Text.Replace(" ",""));
+            // remove the api.text empty spaces
+            join_api_param.meetingNumber = UInt64.Parse(textBox_meetingnumber_api.Text.Replace(" ", ""));
             join_api_param.userName = textBox_username_api.Text;
             param.withoutloginJoin = join_api_param;
 
             ZOOM_SDK_DOTNET_WRAP.SDKError err = ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().Join(param);
+
+
+
             if (ZOOM_SDK_DOTNET_WRAP.SDKError.SDKERR_SUCCESS == err)
             {
                 Hide();
+
+                //Show the HAP window on button click
+                //ZOOM_SDK_DOTNET_WRAP.IMeetingUIControllerDotNetWrap
+                HAP_MainWindow hAP_MainWindow = new HAP_MainWindow();
+                hAP_MainWindow.Show();
             }
             else//error handle
             { }

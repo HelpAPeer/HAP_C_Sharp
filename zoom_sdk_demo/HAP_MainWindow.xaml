@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:zoom_sdk_demo"
         mc:Ignorable="d"
             xmlns:ui="http://schemas.modernwpf.com/2019"
+        Title="Help-A-PEER" 
     ui:WindowHelper.UseModernWindowStyle="True">
     <Grid Background="#E5E5E5">
         <Grid.ColumnDefinitions>
