@@ -73,7 +73,10 @@ namespace zoom_sdk_demo
         }
         public void onUserNameChanged(UInt32 userId, string userName)
         {
-            //todo
+            Console.WriteLine(userName);
+            Console.WriteLine("{0}",userId);
+            Array users = ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().GetMeetingParticipantsController().GetParticipantsList();
+            Console.WriteLine(String.Join("\n", users));
         }
         private void RegisterCallBack()
         {
