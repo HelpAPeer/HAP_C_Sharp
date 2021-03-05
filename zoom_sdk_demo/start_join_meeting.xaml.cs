@@ -24,10 +24,29 @@ namespace zoom_sdk_demo
                 case ZOOM_SDK_DOTNET_WRAP.MeetingStatus.MEETING_STATUS_ENDED:
                 case ZOOM_SDK_DOTNET_WRAP.MeetingStatus.MEETING_STATUS_FAILED:
                     {
-                        Show();
-                        //TODO: need to check if window is visible
+                        //TODO: need to check if window is visible first before performing hide. Might be damaging
                         hAP_MainWindow.Hide();
 
+                        Show();
+                    }
+                    break;
+
+                case ZOOM_SDK_DOTNET_WRAP.MeetingStatus.MEETING_STATUS_INMEETING:
+                    {
+
+                        //TODO: would be best to show the Ui When we are in the meeting here. This is the view we actually care about
+                        hAP_MainWindow.Show();
+
+                        ValueType firstHwd = null;
+                        ValueType secondHwd = null;
+                        IMeetingUIControllerDotNetWrap meetingUI = CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().GetUIController();
+                        ZOOM_SDK_DOTNET_WRAP.SDKError error = meetingUI.GetMeetingUIWnd(ref firstHwd, ref secondHwd);
+
+                        //TODO: let's check if error is fine and then get the WIndows Handle UI. Error is okay
+                        Console.WriteLine("We are seeing Handle");
+                        Console.WriteLine(error);
+                        //Console.WriteLine(firstHwd.ToString());
+                        //Console.WriteLine(secondHwd.ToString());
                     }
                     break;
                 default://todo
@@ -109,9 +128,6 @@ namespace zoom_sdk_demo
             if (ZOOM_SDK_DOTNET_WRAP.SDKError.SDKERR_SUCCESS == err)
             {
                 Hide();
-                //Show the HAP window on button click
-                HAP_MainWindow hAP_MainWindow = new HAP_MainWindow();
-                hAP_MainWindow.Show();
             }
             else//error handle
             { }
@@ -131,33 +147,11 @@ namespace zoom_sdk_demo
 
             ZOOM_SDK_DOTNET_WRAP.SDKError err = ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().Join(param);
 
-            ValueType firstHwd = null;
-            ValueType secondHwd = null;
-            IMeetingUIControllerDotNetWrap meetingUI = CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().GetUIController();
-            ZOOM_SDK_DOTNET_WRAP.SDKError error = meetingUI.GetMeetingUIWnd(ref firstHwd, ref secondHwd);
-
-            //TODO: let's check if error is fine and then get the WIndows Handle UI. Error is okay
-            Console.WriteLine("We are seeing Handle");
-            Console.WriteLine(error);
-            if (error == ZOOM_SDK_DOTNET_WRAP.SDKError.SDKERR_SUCCESS)
-            {
-                Console.WriteLine(firstHwd);
-                Console.WriteLine(secondHwd);
-
-            }
-
 
             if (ZOOM_SDK_DOTNET_WRAP.SDKError.SDKERR_SUCCESS == err)
             {
                 Hide();
-
-                //Show the HAP window on button click
-                //ZOOM_SDK_DOTNET_WRAP.IMeetingUIControllerDotNetWrap
-
-
-
-                //HAP_MainWindow hAP_MainWindow = new HAP_MainWindow();
-                hAP_MainWindow.Show();
+         
             }
             else//error handle
             { }
