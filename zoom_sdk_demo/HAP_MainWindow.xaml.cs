@@ -23,26 +23,40 @@ namespace zoom_sdk_demo
     public partial class HAP_MainWindow : Window
     {
         public ObservableCollection<Participant> participants;
+        public int id_lastSelected = 0;
 
         public HAP_MainWindow()
         {
-            InitializeComponent();
             participants = ParticipantManager.GetParticipants();
-            DataContext = participants;
+            this.DataContext = participants;
+            InitializeComponent();
 
         }
 
         private void TextBox_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
             TextBox txtBox = sender as TextBox;
-            if (txtBox.Text == "Place your thoughts here")
+            if (txtBox.Text.Contains("Write your thoughts here"))
                 txtBox.Text = string.Empty;
         }
 
         private void participant_list_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var student=(Participant)e.AddedItems[0];
-            NoteTextBox.Text=student.Notes;
+            var student = (Participant)e.AddedItems[0];
+
+            id_lastSelected = participants.IndexOf(student);
+            NoteTextBox.Text = student.Notes;
+        }
+
+        private void NoteTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            //change the participants here to  update notes for each student
+            if (participants.Count != 0)
+            {
+                participants[id_lastSelected].Notes = NoteTextBox.Text;
+               
+            }
+
         }
     }
 }

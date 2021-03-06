@@ -11,7 +11,8 @@ namespace zoom_sdk_demo.Models
     {
         public int ID { get; set; }
         public string Name { get; set; }
-        public string Notes { get; set; } = "";
+        //TODO; persoanlize note message. 
+        public string Notes { get; set; } = "Write your thoughts here on this participant" ;
 
 
     }
@@ -22,15 +23,15 @@ namespace zoom_sdk_demo.Models
         {
             ObservableCollection<Participant> participants = new ObservableCollection<Participant>();
 
-            participants.Add(new Participant { ID = 1, Name = "Vulpate", Notes=""});
-            participants.Add(new Participant { ID = 2, Name = "Mazim", Notes = "" });
-            participants.Add(new Participant { ID = 3, Name = "Elit", Notes = "" });
-            participants.Add(new Participant { ID = 4, Name = "Etiam", Notes = "" });
-            participants.Add(new Participant { ID = 5, Name = "Feugait Eros Libex", Notes = "" });
-            participants.Add(new Participant { ID = 6, Name = "Nonummy Erat", Notes = "" });
-            participants.Add(new Participant { ID = 7, Name = "Nostrud", Notes = "" });
-            participants.Add(new Participant { ID = 8, Name = "Per Modo", Notes = "" });
-            participants.Add(new Participant { ID = 9, Name = "Suscipit Ad", Notes = "" });
+            participants.Add(new Participant { ID = 1, Name = "Vulpate"});
+            participants.Add(new Participant { ID = 2, Name = "Mazim"});
+            participants.Add(new Participant { ID = 3, Name = "Elit"});
+            participants.Add(new Participant { ID = 4, Name = "Etiam"});
+            participants.Add(new Participant { ID = 5, Name = "Feugait Eros Libex"});
+            participants.Add(new Participant { ID = 6, Name = "Nonummy Erat"});
+            participants.Add(new Participant { ID = 7, Name = "Nostrud"});
+            participants.Add(new Participant { ID = 8, Name = "Per Modo"});
+            participants.Add(new Participant { ID = 9, Name = "Suscipit Ad"});
             participants.Add(new Participant { ID = 10, Name = "Decima"});
 
 
