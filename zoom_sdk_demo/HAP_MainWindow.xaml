@@ -42,7 +42,7 @@
                 <Border Margin="10" Grid.Column="0" Background="White" CornerRadius="10">
                     <DockPanel  Margin="10">
                         <TextBlock DockPanel.Dock="Top">Notes</TextBlock>
-                        <TextBox Name="NoteTextBox" DockPanel.Dock="Bottom" TextWrapping="Wrap" GotKeyboardFocus="TextBox_GotKeyboardFocus" TextChanged="NoteTextBox_TextChanged"></TextBox>
+                        <TextBox Name="NoteTextBox"  AcceptsReturn="True" DockPanel.Dock="Bottom" TextWrapping="Wrap" GotKeyboardFocus="TextBox_GotKeyboardFocus" TextChanged="NoteTextBox_TextChanged" VerticalScrollBarVisibility="Hidden" />
                     </DockPanel>
                 </Border>
 
