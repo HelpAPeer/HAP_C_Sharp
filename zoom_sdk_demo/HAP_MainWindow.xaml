@@ -7,6 +7,7 @@
         mc:Ignorable="d"
             xmlns:ui="http://schemas.modernwpf.com/2019"
         Title="Help-A-PEER" 
+        xmlns:data="clr-namespace:zoom_sdk_demo.Models"
     ui:WindowHelper.UseModernWindowStyle="True">
     <Grid Background="#E5E5E5">
         <Grid.ColumnDefinitions>
@@ -39,15 +40,26 @@
                     <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
                 <Border Margin="10" Grid.Column="0" Background="White" CornerRadius="10">
-                    <StackPanel  Margin="10">
-                        <TextBlock>Chat</TextBlock>
-                    </StackPanel>
+                    <DockPanel  Margin="10">
+                        <TextBlock DockPanel.Dock="Top">Notes</TextBlock>
+                        <TextBox DockPanel.Dock="Bottom" Text="Take  a few notes here" TextWrapping="Wrap"></TextBox>
+                    </DockPanel>
                 </Border>
-              
+
                 <Border Margin="10" Grid.Column="1" Background="White" CornerRadius="10">
-                    <StackPanel Margin="10">
-                        <TextBlock>Participants</TextBlock>
-                    </StackPanel>
+                    <DockPanel  Margin="10">
+                        <TextBlock  DockPanel.Dock="Top">Participants</TextBlock>
+                        <ListBox DockPanel.Dock="Bottom" x:Name="lvDataBinding" ItemsSource="{Binding}"  ScrollViewer.VerticalScrollBarVisibility="Visible"
+          ScrollViewer.CanContentScroll="False">
+
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}"/>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+
+                        </ListBox>
+                    </DockPanel>
                 </Border>
             </Grid>
         </Grid>

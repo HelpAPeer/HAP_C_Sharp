@@ -100,6 +100,7 @@
     <Compile Include="HAP_MainWindow.xaml.cs">
       <DependentUpon>HAP_MainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\Participants.cs" />
     <Compile Include="start_join_meeting.xaml.cs">
       <DependentUpon>start_join_meeting.xaml</DependentUpon>
     </Compile>
