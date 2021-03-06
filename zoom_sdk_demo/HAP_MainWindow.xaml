@@ -49,7 +49,7 @@
                 <Border Margin="10" Grid.Column="1" Background="White" CornerRadius="10">
                     <DockPanel  Margin="10">
                         <TextBlock  DockPanel.Dock="Top">Participants</TextBlock>
-                        <ListBox DockPanel.Dock="Bottom" x:Name="participant_list" ItemsSource="{Binding}"  ScrollViewer.VerticalScrollBarVisibility="Visible"
+                        <ListBox DockPanel.Dock="Bottom" x:Name="participant_list"  ScrollViewer.VerticalScrollBarVisibility="Visible"
           ScrollViewer.CanContentScroll="False" SelectionChanged="participant_list_SelectionChanged">
 
                             <ListBox.ItemTemplate>
