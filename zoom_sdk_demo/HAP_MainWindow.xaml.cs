@@ -31,5 +31,18 @@ namespace zoom_sdk_demo
             DataContext = participants;
 
         }
+
+        private void TextBox_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        {
+            TextBox txtBox = sender as TextBox;
+            if (txtBox.Text == "Place your thoughts here")
+                txtBox.Text = string.Empty;
+        }
+
+        private void participant_list_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var student=(Participant)e.AddedItems[0];
+            NoteTextBox.Text=student.Notes;
+        }
     }
 }
