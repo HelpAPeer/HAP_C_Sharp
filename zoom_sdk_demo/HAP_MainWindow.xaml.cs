@@ -27,9 +27,10 @@ namespace zoom_sdk_demo
 
         public HAP_MainWindow()
         {
+            this.DataContext = this;
             participants = ParticipantManager.GetParticipants();
-            this.DataContext = participants;
             InitializeComponent();
+            participant_list.ItemsSource = participants;
 
         }
 
