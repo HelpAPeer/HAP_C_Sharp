@@ -23,12 +23,14 @@ namespace zoom_sdk_demo
     public partial class HAP_MainWindow : Window
     {
         public ObservableCollection<Participant> participants;
+        public ObservableCollection<Question> questions;
         public int id_lastSelected = 0;
 
         public HAP_MainWindow()
         {
             this.DataContext = this;
             participants = ParticipantManager.GetParticipants();
+            questions = new ObservableCollection<Question>();
             InitializeComponent();
             participant_list.ItemsSource = participants;
 
@@ -57,6 +59,13 @@ namespace zoom_sdk_demo
                 participants[id_lastSelected].Notes = NoteTextBox.Text;
                
             }
+
+        }
+
+        private void Add_Question_Click(object sender, RoutedEventArgs e)
+        {
+            var addQuestionWindow = new AddQuestionWindow ();
+            addQuestionWindow.ShowDialog();
 
         }
     }

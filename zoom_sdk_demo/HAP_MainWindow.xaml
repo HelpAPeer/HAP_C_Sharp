@@ -20,7 +20,7 @@
             </TabItem>
             <TabItem Header="Quiz">
                 <DockPanel LastChildFill="False" Background="White">
-                    <Button Margin="5" Padding="5,2" DockPanel.Dock="Top" HorizontalAlignment="Right" Content="+">
+                    <Button Click="Add_Question_Click" Margin="5" Padding="5,2" DockPanel.Dock="Top" HorizontalAlignment="Right" Content="+">
                     </Button>
                     <ListView  Width="Auto" DockPanel.Dock="Top" >
                         <ListView.ItemContainerStyle>
