@@ -45,8 +45,8 @@ namespace zoom_sdk_demo
                         //TODO: let's check if error is fine and then get the WIndows Handle UI. Error is okay
                         Console.WriteLine("We are seeing Handle");
                         Console.WriteLine(error);
-                        //Console.WriteLine(firstHwd.ToString());
-                        //Console.WriteLine(secondHwd.ToString());
+                        Console.WriteLine(firstHwd);
+                        Console.WriteLine(secondHwd);
                     }
                     break;
                 default://todo
