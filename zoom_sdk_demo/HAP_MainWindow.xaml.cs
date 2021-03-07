@@ -32,6 +32,7 @@ namespace zoom_sdk_demo
             participants = ParticipantManager.GetParticipants();
             questions = new ObservableCollection<Question>();
             InitializeComponent();
+            questions_list.ItemsSource = questions;
             participant_list.ItemsSource = participants;
 
         }
