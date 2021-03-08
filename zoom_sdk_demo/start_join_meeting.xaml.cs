@@ -1,17 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.ComponentModel; // CancelEventArgs
+using System.Windows;
 using ZOOM_SDK_DOTNET_WRAP;
 
 namespace zoom_sdk_demo
@@ -21,6 +10,7 @@ namespace zoom_sdk_demo
     /// </summary>
     public partial class start_join_meeting : Window
     {
+        HAP_MainWindow hAP_MainWindow = new HAP_MainWindow();
         public start_join_meeting()
         {
             InitializeComponent();
@@ -29,12 +19,34 @@ namespace zoom_sdk_demo
         //ZOOM_SDK_DOTNET_WRAP.onMeetingStatusChanged
         public void onMeetingStatusChanged(MeetingStatus status, int iResult)
         {
-            switch(status)
+            switch (status)
             {
                 case ZOOM_SDK_DOTNET_WRAP.MeetingStatus.MEETING_STATUS_ENDED:
                 case ZOOM_SDK_DOTNET_WRAP.MeetingStatus.MEETING_STATUS_FAILED:
                     {
+                        //TODO: need to check if window is visible first before performing hide. Might be damaging
+                        hAP_MainWindow.Hide();
+
                         Show();
+                    }
+                    break;
+
+                case ZOOM_SDK_DOTNET_WRAP.MeetingStatus.MEETING_STATUS_INMEETING:
+                    {
+
+                        //TODO: would be best to show the Ui When we are in the meeting here. This is the view we actually care about
+                        hAP_MainWindow.Show();
+
+                        ValueType firstHwd = null;
+                        ValueType secondHwd = null;
+                        IMeetingUIControllerDotNetWrap meetingUI = CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().GetUIController();
+                        ZOOM_SDK_DOTNET_WRAP.SDKError error = meetingUI.GetMeetingUIWnd(ref firstHwd, ref secondHwd);
+
+                        //TODO: let's check if error is fine and then get the WIndows Handle UI. Error is okay
+                        Console.WriteLine("We are seeing Handle");
+                        Console.WriteLine(error);
+                        Console.WriteLine(firstHwd);
+                        Console.WriteLine(secondHwd);
                     }
                     break;
                 default://todo
@@ -76,7 +88,7 @@ namespace zoom_sdk_demo
         public void onUserNameChanged(UInt32 userId, string userName)
         {
             Console.WriteLine(userName);
-            Console.WriteLine("{0}",userId);
+            Console.WriteLine("{0}", userId);
             Array users = ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().GetMeetingParticipantsController().GetParticipantsList();
             //Console.WriteLine(String.Join("\n", users));
             Console.WriteLine("List of Users Currently");
@@ -128,15 +140,18 @@ namespace zoom_sdk_demo
             ZOOM_SDK_DOTNET_WRAP.JoinParam param = new ZOOM_SDK_DOTNET_WRAP.JoinParam();
             param.userType = ZOOM_SDK_DOTNET_WRAP.SDKUserType.SDK_UT_WITHOUT_LOGIN;
             ZOOM_SDK_DOTNET_WRAP.JoinParam4WithoutLogin join_api_param = new ZOOM_SDK_DOTNET_WRAP.JoinParam4WithoutLogin();
-//TODO: remove the api.text empty spaces
-            join_api_param.meetingNumber = UInt64.Parse(textBox_meetingnumber_api.Text.Replace(" ",""));
+            // remove the api.text empty spaces
+            join_api_param.meetingNumber = UInt64.Parse(textBox_meetingnumber_api.Text.Replace(" ", ""));
             join_api_param.userName = textBox_username_api.Text;
             param.withoutloginJoin = join_api_param;
 
             ZOOM_SDK_DOTNET_WRAP.SDKError err = ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().Join(param);
+
+
             if (ZOOM_SDK_DOTNET_WRAP.SDKError.SDKERR_SUCCESS == err)
             {
                 Hide();
+         
             }
             else//error handle
             { }
