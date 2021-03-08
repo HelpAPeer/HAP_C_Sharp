@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel; // CancelEventArgs
 using System.Windows;
+using zoom_sdk_demo.Models;
 using ZOOM_SDK_DOTNET_WRAP;
 
 namespace zoom_sdk_demo
@@ -19,6 +20,7 @@ namespace zoom_sdk_demo
         //ZOOM_SDK_DOTNET_WRAP.onMeetingStatusChanged
         public void onMeetingStatusChanged(MeetingStatus status, int iResult)
         {
+      
             switch (status)
             {
                 case ZOOM_SDK_DOTNET_WRAP.MeetingStatus.MEETING_STATUS_ENDED:
@@ -34,9 +36,17 @@ namespace zoom_sdk_demo
                 case ZOOM_SDK_DOTNET_WRAP.MeetingStatus.MEETING_STATUS_INMEETING:
                     {
 
-                        //TODO: would be best to show the Ui When we are in the meeting here. This is the view we actually care about
-                        hAP_MainWindow.Show();
+                        // Load the meeting partipants now
+                        // TODO: Would be best to update the observable list. Instead of tying a new one https://gist.github.com/tymorrow/9397870
+                        hAP_MainWindow.participants = ParticipantManager.GetParticipantsInMeeting();
+                        hAP_MainWindow.participant_list.ItemsSource=hAP_MainWindow.participants;
+                 
 
+                        //would be best to show the Ui When we are in the meeting here. This is the view we actually care about
+                        hAP_MainWindow.Show();
+                        
+
+                        
                         ValueType firstHwd = null;
                         ValueType secondHwd = null;
                         IMeetingUIControllerDotNetWrap meetingUI = CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().GetUIController();
@@ -151,7 +161,7 @@ namespace zoom_sdk_demo
             if (ZOOM_SDK_DOTNET_WRAP.SDKError.SDKERR_SUCCESS == err)
             {
                 Hide();
-         
+
             }
             else//error handle
             { }

@@ -22,14 +22,22 @@ namespace zoom_sdk_demo
     /// 
     public partial class HAP_MainWindow : Window
     {
-        public ObservableCollection<Participant> participants;
+        public ObservableCollection<Participant> participants = new ObservableCollection<Participant>();
         public ObservableCollection<Question> questions;
         public int id_lastSelected = 0;
 
         public HAP_MainWindow()
         {
             this.DataContext = this;
-            participants = ParticipantManager.GetParticipants();
+
+            // check if participants in meeting is empty. If it is, let's fill with dummy data
+            if (participants.Count() == 0)
+            {
+                Console.WriteLine("this was called at to iniliaze participants");
+                participants = ParticipantManager.GetParticipants();
+            }
+
+
             questions = new ObservableCollection<Question>();
             InitializeComponent();
             questions_list.ItemsSource = questions;
@@ -58,14 +66,14 @@ namespace zoom_sdk_demo
             if (participants.Count != 0)
             {
                 participants[id_lastSelected].Notes = NoteTextBox.Text;
-               
+
             }
 
         }
 
         private void Add_Question_Click(object sender, RoutedEventArgs e)
         {
-            var addQuestionWindow = new AddQuestionWindow ();
+            var addQuestionWindow = new AddQuestionWindow();
             addQuestionWindow.ShowDialog();
 
         }
