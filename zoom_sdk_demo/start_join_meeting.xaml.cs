@@ -37,11 +37,8 @@ namespace zoom_sdk_demo
                     {
 
                         // Load the meeting partipants now
-                        // TODO: Would be best to update the observable list. Instead of tying a new one https://gist.github.com/tymorrow/9397870
-                        hAP_MainWindow.participants = ParticipantManager.GetParticipantsInMeeting();
-                        hAP_MainWindow.participant_list.ItemsSource=hAP_MainWindow.participants;
-                 
-
+                        // Would be best to update the observable list. Instead of tying a new one https://gist.github.com/tymorrow/9397870
+                        ParticipantManager.instance.GetParticipantsInMeeting();
                         //would be best to show the Ui When we are in the meeting here. This is the view we actually care about
                         hAP_MainWindow.Show();
                         

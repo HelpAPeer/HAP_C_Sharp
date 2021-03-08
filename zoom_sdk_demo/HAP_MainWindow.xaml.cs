@@ -22,7 +22,6 @@ namespace zoom_sdk_demo
     /// 
     public partial class HAP_MainWindow : Window
     {
-        public ObservableCollection<Participant> participants = new ObservableCollection<Participant>();
         public ObservableCollection<Question> questions;
         public int id_lastSelected = 0;
 
@@ -31,17 +30,17 @@ namespace zoom_sdk_demo
             this.DataContext = this;
 
             // check if participants in meeting is empty. If it is, let's fill with dummy data
-            if (participants.Count() == 0)
+            if (ParticipantManager.instance.participants.Count() == 0)
             {
                 Console.WriteLine("this was called at to iniliaze participants");
-                participants = ParticipantManager.GetParticipants();
+                ParticipantManager.instance.GetParticipants();
             }
 
 
             questions = new ObservableCollection<Question>();
             InitializeComponent();
             questions_list.ItemsSource = questions;
-            participant_list.ItemsSource = participants;
+            participant_list.ItemsSource = ParticipantManager.instance.participants;
 
         }
 
@@ -56,16 +55,16 @@ namespace zoom_sdk_demo
         {
             var student = (Participant)e.AddedItems[0];
 
-            id_lastSelected = participants.IndexOf(student);
+            id_lastSelected = ParticipantManager.instance.participants.IndexOf(student);
             NoteTextBox.Text = student.Notes;
         }
 
         private void NoteTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             //change the participants here to  update notes for each student
-            if (participants.Count != 0)
+            if (ParticipantManager.instance.participants.Count != 0)
             {
-                participants[id_lastSelected].Notes = NoteTextBox.Text;
+                ParticipantManager.instance.participants[id_lastSelected].Notes = NoteTextBox.Text;
 
             }
 

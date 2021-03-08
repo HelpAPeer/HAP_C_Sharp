@@ -17,12 +17,15 @@ namespace zoom_sdk_demo.Models
 
     }
 
-    public class ParticipantManager
+    public sealed class ParticipantManager
     {
-        public static ObservableCollection<Participant> GetParticipants()
-        {
-            ObservableCollection<Participant> participants = new ObservableCollection<Participant>();
+        public static ParticipantManager instance = new ParticipantManager();
+        private ParticipantManager() { }
+        public ObservableCollection<Participant> participants = new ObservableCollection<Participant>();
 
+
+        public void GetParticipants()
+        {
             participants.Add(new Participant { ID = 1, Name = "Vulpate" });
             participants.Add(new Participant { ID = 2, Name = "Mazim" });
             participants.Add(new Participant { ID = 3, Name = "Elit" });
@@ -33,16 +36,16 @@ namespace zoom_sdk_demo.Models
             participants.Add(new Participant { ID = 8, Name = "Per Modo" });
             participants.Add(new Participant { ID = 9, Name = "Suscipit Ad" });
             participants.Add(new Participant { ID = 10, Name = "Decima" });
-
-
-            return participants;
         }
 
-        public static ObservableCollection<Participant> GetParticipantsInMeeting()
+        public void GetParticipantsInMeeting()
         {
-            ObservableCollection<Participant> participants = new ObservableCollection<Participant>();
+            
 
             Array users = ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().GetMeetingParticipantsController().GetParticipantsList();
+
+            // Make sure the participant list is empty
+            this.participants.Clear();
 
             for (int i = users.GetLowerBound(0); i <= users.GetUpperBound(0); i++)
             {
@@ -58,8 +61,6 @@ namespace zoom_sdk_demo.Models
                     Console.WriteLine(name);
                 }
             }
-
-            return participants;
         }
     }
 }
