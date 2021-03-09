@@ -89,12 +89,12 @@ namespace zoom_sdk_demo
         }
         public void onUserLeft(Array lstUserID)
         {
-            //todo
+            //TODO: fix the remove particpnat code. It is causing some issues with the oneselect UI
             ParticipantManager.instance.RemoveParticpant(lstUserID);
         }
         public void onHostChangeNotification(UInt32 userId)
         {
-            //todo
+            //todo: might need to readdress the issue here
         }
         public void onLowOrRaiseHandStatusChanged(bool bLow, UInt32 userid)
         {
