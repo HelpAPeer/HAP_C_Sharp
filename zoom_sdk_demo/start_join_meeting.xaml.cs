@@ -23,11 +23,17 @@ namespace zoom_sdk_demo
       
             switch (status)
             {
-                case ZOOM_SDK_DOTNET_WRAP.MeetingStatus.MEETING_STATUS_ENDED:
+                case ZOOM_SDK_DOTNET_WRAP.MeetingStatus.MEETING_STATUS_ENDED: {
+                        hAP_MainWindow.Hide();
+                        ParticipantManager.instance.participants.Clear();
+
+                    }
+                    break;
                 case ZOOM_SDK_DOTNET_WRAP.MeetingStatus.MEETING_STATUS_FAILED:
                     {
                         //TODO: need to check if window is visible first before performing hide. Might be damaging
                         hAP_MainWindow.Hide();
+                        ParticipantManager.instance.participants.Clear();
 
                         Show();
                     }
@@ -63,23 +69,23 @@ namespace zoom_sdk_demo
 
         public void onUserJoin(Array lstUserID)
         {
+            ParticipantManager.instance.AddParticipant(lstUserID);
+            //if (null == (Object)lstUserID)
+            //    return;
 
-            if (null == (Object)lstUserID)
-                return;
-
-            for (int i = lstUserID.GetLowerBound(0); i <= lstUserID.GetUpperBound(0); i++)
-            {
-                UInt32 userid = (UInt32)lstUserID.GetValue(i);
-                ZOOM_SDK_DOTNET_WRAP.IUserInfoDotNetWrap user = ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().
-                    GetMeetingParticipantsController().GetUserByUserID(userid);
-                if (null != (Object)user)
-                {
-                    string name = user.GetUserNameW();
-                    Console.Write(name);
-                    Console.Write(" ");
-                }
-            }
-            Console.WriteLine();
+            //for (int i = lstUserID.GetLowerBound(0); i <= lstUserID.GetUpperBound(0); i++)
+            //{
+            //    UInt32 userid = (UInt32)lstUserID.GetValue(i);
+            //    ZOOM_SDK_DOTNET_WRAP.IUserInfoDotNetWrap user = ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().
+            //        GetMeetingParticipantsController().GetUserByUserID(userid);
+            //    if (null != (Object)user)
+            //    {
+            //        string name = user.GetUserNameW();
+            //        Console.Write(name);
+            //        Console.Write(" ");
+            //    }
+            //}
+            //Console.WriteLine();
         }
         public void onUserLeft(Array lstUserID)
         {

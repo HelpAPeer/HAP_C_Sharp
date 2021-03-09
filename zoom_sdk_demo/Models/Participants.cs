@@ -69,14 +69,12 @@ namespace zoom_sdk_demo.Models
                 bool notFound = true;
                 for (int i = lstUserID.GetLowerBound(0); i <= lstUserID.GetUpperBound(0); i++)
                 {
-
                     int userid = (int)(UInt32)lstUserID.GetValue(i);
                     if (participant.ID == userid)
                     {
                         // We found a match
                         notFound = false;
                         break;
-
                     }
                 }
                 if (notFound)
@@ -90,18 +88,30 @@ namespace zoom_sdk_demo.Models
         }
         public void AddParticipant(Array lstUserID)
         {
-            List<int> list_users = new List<int>((IEnumerable<int>)lstUserID);
-
-            //TODO: need to add the ID
-            var participant_to_remove = participants.Where(participant => (list_users.Contains(participant.ID)));
-            Console.WriteLine(participant_to_remove);
-
-            foreach (var item in participant_to_remove)
+            for (int i = lstUserID.GetLowerBound(0); i <= lstUserID.GetUpperBound(0); i++)
             {
-                participants.Remove(item);
+                int userid = (int)(UInt32)lstUserID.GetValue(i);
+                bool notFound = true;
+                foreach (var participant in participants)
+                {
+                    if (participant.ID == userid)
+                    {
+                        notFound = false;
+                        break;
+                    }
+                }
+                if (notFound)
+                {
+                    //We need add the new participant
+                    ZOOM_SDK_DOTNET_WRAP.IUserInfoDotNetWrap user = ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().
+                    GetMeetingParticipantsController().GetUserByUserID((UInt32)userid);
+
+                    string name = user.GetUserNameW();
+                    participants.Add(new Participant { ID = userid, Name = name});
+                    break;
+                }
             }
 
         }
-
     }
 }

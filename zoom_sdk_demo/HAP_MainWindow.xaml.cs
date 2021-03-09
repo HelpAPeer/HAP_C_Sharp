@@ -62,7 +62,7 @@ namespace zoom_sdk_demo
         private void NoteTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             //change the participants here to  update notes for each student
-            if (ParticipantManager.instance.participants.Count != 0)
+            if ((ParticipantManager.instance.participants.Count != 0) &&( id_lastSelected<ParticipantManager.instance.participants.Count) )
             {
                 ParticipantManager.instance.participants[id_lastSelected].Notes = NoteTextBox.Text;
 
