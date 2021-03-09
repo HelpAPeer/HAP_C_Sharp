@@ -26,6 +26,7 @@ namespace zoom_sdk_demo
                 case ZOOM_SDK_DOTNET_WRAP.MeetingStatus.MEETING_STATUS_ENDED: {
                         hAP_MainWindow.Hide();
                         ParticipantManager.instance.participants.Clear();
+                        System.Windows.Application.Current.Shutdown();
 
                     }
                     break;
