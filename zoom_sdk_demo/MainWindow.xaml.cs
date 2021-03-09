@@ -27,6 +27,8 @@ namespace zoom_sdk_demo
     public partial class MainWindow : Window
     {
         start_join_meeting start_meeting_wnd = new start_join_meeting();
+        IAccountInfo account = null;
+
         public MainWindow()
         {
             InitializeComponent(); 
@@ -38,22 +40,50 @@ namespace zoom_sdk_demo
             if (ZOOM_SDK_DOTNET_WRAP.AuthResult.AUTHRET_SUCCESS == ret)
             {
                 Console.WriteLine("Auth Success");
-                start_meeting_wnd.Show();
+                account = ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetAuthServiceWrap().GetAccountInfo();
+                if (account == null)
+                {
+                    tryLogin();
+                }
+                else
+                {
+                    Console.WriteLine(account.GetDisplayName());
+                    Console.WriteLine(account.GetLoginType());
+                    if(account.GetDisplayName().Length == 0 && account.GetLoginType() == ZOOM_SDK_DOTNET_WRAP.LoginType.LoginType_Unknown)
+                    {
+                        tryLogin();
+                    }
+                    else
+                    {
+                        start_meeting_wnd.Show();
+                    }
+                    
+                }
             }
             else//error handle.todo
             {
-                Console.WriteLine("We Failed");
+                Console.WriteLine("Auth Failed");
                 Console.WriteLine(ret);
                 Show();
             }
         }
         public void onLoginRet(LOGINSTATUS ret, IAccountInfo pAccountInfo)
         {
+            Console.WriteLine("Login Returned");
+            Console.WriteLine(ret.ToString());
+            if (ZOOM_SDK_DOTNET_WRAP.LOGINSTATUS.LOGIN_SUCCESS == ret)
+            {
+                account = pAccountInfo;
+                Console.WriteLine(account.GetDisplayName());
+                start_meeting_wnd.Show();
+                account = pAccountInfo;
+            }
             //todo
         }
         public void onLogout()
         {
-            //todo
+            Console.WriteLine("Logged out");
+            Console.WriteLine(ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetAuthServiceWrap().GetAccountInfo().GetDisplayName());
         }
         private void button_auth_Click(object sender, RoutedEventArgs e)
         {
@@ -65,16 +95,11 @@ namespace zoom_sdk_demo
             //
             ZOOM_SDK_DOTNET_WRAP.AuthContext param = new ZOOM_SDK_DOTNET_WRAP.AuthContext();
             
-            if ((textBox_apptoken.Text.Length <= 0) || (textBox_apptoken.Text=="TextBox"))
-            {
-                string genToken = generateJWT();
-                Console.WriteLine(genToken);
-                param.jwt_token = genToken;
-            }
-            else
-            {
-                param.jwt_token = textBox_apptoken.Text;
-            }
+
+            string genToken = generateJWT();
+            Console.WriteLine(genToken);
+            param.jwt_token = genToken; 
+
             
             ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetAuthServiceWrap().SDKAuth(param);
             Hide();
@@ -117,6 +142,26 @@ namespace zoom_sdk_demo
 
             Console.WriteLine("Finished generating token");
             return handler.WriteToken(token);
+        }
+
+
+        public void tryLogin()
+        {
+            ZOOM_SDK_DOTNET_WRAP.LoginParam param = new ZOOM_SDK_DOTNET_WRAP.LoginParam();
+            ZOOM_SDK_DOTNET_WRAP.LoginParam4Email cred = new ZOOM_SDK_DOTNET_WRAP.LoginParam4Email();
+
+            string username = textBox_username.Text;
+            string password = textBox_password.Password;
+
+            cred.userName = username;
+            cred.password = password;
+            cred.bRememberMe = false;
+
+            param.emailLogin = cred;
+            param.loginType = ZOOM_SDK_DOTNET_WRAP.LoginType.LoginType_Email;
+
+            Console.WriteLine("Sending out login message");
+            ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetAuthServiceWrap().Login(param);
         }
 
         void Wnd_Closing(object sender, CancelEventArgs e)
