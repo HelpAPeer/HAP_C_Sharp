@@ -63,6 +63,7 @@ namespace zoom_sdk_demo
 
         public void onUserJoin(Array lstUserID)
         {
+
             if (null == (Object)lstUserID)
                 return;
 
@@ -83,6 +84,7 @@ namespace zoom_sdk_demo
         public void onUserLeft(Array lstUserID)
         {
             //todo
+            ParticipantManager.instance.RemoveParticpant(lstUserID);
         }
         public void onHostChangeNotification(UInt32 userId)
         {

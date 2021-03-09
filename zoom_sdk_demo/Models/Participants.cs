@@ -23,7 +23,7 @@ namespace zoom_sdk_demo.Models
         private ParticipantManager() { }
         public ObservableCollection<Participant> participants = new ObservableCollection<Participant>();
 
-
+        // this is for testing
         public void GetParticipants()
         {
             participants.Add(new Participant { ID = 1, Name = "Vulpate" });
@@ -40,8 +40,6 @@ namespace zoom_sdk_demo.Models
 
         public void GetParticipantsInMeeting()
         {
-            
-
             Array users = ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().GetMeetingParticipantsController().GetParticipantsList();
 
             // Make sure the participant list is empty
@@ -62,5 +60,48 @@ namespace zoom_sdk_demo.Models
                 }
             }
         }
+
+        public void RemoveParticpant(Array lstUserID)
+        {
+            //TODO: would be nice to make this code more consist. (smaller and cleaner
+            foreach (var participant in participants)
+            {
+                bool notFound = true;
+                for (int i = lstUserID.GetLowerBound(0); i <= lstUserID.GetUpperBound(0); i++)
+                {
+
+                    int userid = (int)(UInt32)lstUserID.GetValue(i);
+                    if (participant.ID == userid)
+                    {
+                        // We found a match
+                        notFound = false;
+                        break;
+
+                    }
+                }
+                if (notFound)
+                {
+                    //We have found the item to remove. We can stop the for leap
+                    participants.Remove(participant);
+                    break;
+                }
+            }
+
+        }
+        public void AddParticipant(Array lstUserID)
+        {
+            List<int> list_users = new List<int>((IEnumerable<int>)lstUserID);
+
+            //TODO: need to add the ID
+            var participant_to_remove = participants.Where(participant => (list_users.Contains(participant.ID)));
+            Console.WriteLine(participant_to_remove);
+
+            foreach (var item in participant_to_remove)
+            {
+                participants.Remove(item);
+            }
+
+        }
+
     }
 }
