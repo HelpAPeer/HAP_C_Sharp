@@ -46,29 +46,30 @@
                     <ListBox dd:DragDrop.IsDragSource="True"
          dd:DragDrop.IsDropTarget="True">
                         <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
+                        <ListBoxItem>Student 2</ListBoxItem>
+                        <ListBoxItem>Student 3</ListBoxItem>
+                        <ListBoxItem>Student 4</ListBoxItem>
+                        <ListBoxItem>Student 5</ListBoxItem>
                     </ListBox>
                 </GroupBox>
-                <GroupBox Header="Group1"   Margin="16" >
+                <GroupBox Header="Group2"   Margin="16" >
                     <ListBox dd:DragDrop.IsDragSource="True"
          dd:DragDrop.IsDropTarget="True">
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
+                        <ListBoxItem>Student 6</ListBoxItem>
+                        <ListBoxItem>Student 7</ListBoxItem>
+                        <ListBoxItem>Student 8</ListBoxItem>
+                        <ListBoxItem>Student 9</ListBoxItem>
+                        <ListBoxItem>Student 10</ListBoxItem>
                     </ListBox>
                 </GroupBox>
-                <GroupBox Header="Group1"   Margin="16" >
-                    <ListBox>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
+                <GroupBox Header="Group3"   Margin="16" >
+                    <ListBox  dd:DragDrop.IsDragSource="True"
+         dd:DragDrop.IsDropTarget="True" >
+                        <ListBoxItem>Student 11</ListBoxItem>
+                        <ListBoxItem>Student 12</ListBoxItem>
+                        <ListBoxItem>Student 13</ListBoxItem>
+                        <ListBoxItem>Student 14</ListBoxItem>
+                        <ListBoxItem>Student 15</ListBoxItem>
                     </ListBox>
                 </GroupBox>
              
