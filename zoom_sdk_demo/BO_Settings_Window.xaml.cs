@@ -19,9 +19,35 @@ namespace zoom_sdk_demo
     /// </summary>
     public partial class BO_Settings_Window : Window
     {
+        int groupsize = 3;
         public BO_Settings_Window()
         {
             InitializeComponent();
         }
+
+
+
+
+        private void IncreaseGroupSize_Click(object sender, RoutedEventArgs e)
+        {
+            if (groupsize < 10)
+            {
+                groupsize++;
+            }
+
+            groupSize_block.Text = groupsize.ToString();
+
+        }
+
+        private void DecreaseGroupSize_click(object sender, RoutedEventArgs e)
+        {
+            if (groupsize > 0)
+            {
+                groupsize--;
+            }
+            groupSize_block.Text = groupsize.ToString(); ;
+        }
+
+
     }
 }

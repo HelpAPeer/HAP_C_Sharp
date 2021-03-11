@@ -5,15 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:zoom_sdk_demo"
         mc:Ignorable="d"
-        Title="BO_Settings_Window" Height="450" Width="800">
+        Title="BO_Settings_Window" Height="800" Width="800">
     <Grid>
         <DockPanel>
             <StackPanel Margin="10" DockPanel.Dock="Top" Orientation="Horizontal" >
                 <TextBlock FontWeight="Bold" Margin="0,0,10,0" FontSize="14" VerticalAlignment="Center" > GroupSize</TextBlock>
-                <Button  BorderThickness="0"  
+                <Button  BorderThickness="0"  Click="IncreaseGroupSize_Click"
     Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" FontSize="14" >+</Button>
-                <TextBlock FontSize="14" VerticalAlignment="Center">3</TextBlock>
-                <Button  BorderThickness="0"  
+                <TextBlock x:Name="groupSize_block" FontSize="14" VerticalAlignment="Center" Margin="5,0">3</TextBlock>
+                <Button Click="DecreaseGroupSize_click" BorderThickness="0"  
     Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Margin="0,0,25,0" FontSize="14" >-</Button>
 
                 <TextBlock FontWeight="Bold" Margin="0,0,10,0" FontSize="14" Text="Group Type" VerticalAlignment="Center"></TextBlock>
@@ -21,10 +21,15 @@
                 <RadioButton>Homogenous</RadioButton>
                 <RadioButton IsChecked="True">Random</RadioButton>
 
-                <Button HorizontalAlignment="Right" HorizontalContentAlignment="Right"> Update</Button>
+                <Button HorizontalAlignment="Right" HorizontalContentAlignment="Right">Update</Button>
             </StackPanel>
             <Separator DockPanel.Dock="Top"></Separator>
-            <ScrollViewer>
+            <StackPanel DockPanel.Dock="Right" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Button Margin="5">Start The BO Room</Button>
+                <Button Margin="5">Cancel</Button>
+            </StackPanel>
+            <ScrollViewer DockPanel.Dock="Top" >
+
                 <WrapPanel>
                     <GroupBox Header="Group1"   Margin="16" >
                         <ListBox>
@@ -173,6 +178,8 @@
 
                 </WrapPanel>
             </ScrollViewer>
+
+
         </DockPanel>
     </Grid>
 </Window>
