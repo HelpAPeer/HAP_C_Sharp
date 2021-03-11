@@ -100,6 +100,9 @@
     <Compile Include="AddQuestionWindow.xaml.cs">
       <DependentUpon>AddQuestionWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BO_Settings_Window.xaml.cs">
+      <DependentUpon>BO_Settings_Window.xaml</DependentUpon>
+    </Compile>
     <Compile Include="HAP_MainWindow.xaml.cs">
       <DependentUpon>HAP_MainWindow.xaml</DependentUpon>
     </Compile>
@@ -109,6 +112,10 @@
       <DependentUpon>start_join_meeting.xaml</DependentUpon>
     </Compile>
     <Page Include="AddQuestionWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BO_Settings_Window.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
