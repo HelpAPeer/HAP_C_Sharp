@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:zoom_sdk_demo"
+        xmlns:dd="urn:gong-wpf-dragdrop"
         mc:Ignorable="d"
         Title="BO_Settings_Window" Height="500" Width="800">
     <Grid>
@@ -42,7 +43,18 @@
 
             <WrapPanel>
                 <GroupBox Header="Group1"   Margin="16" >
-                    <ListBox>
+                    <ListBox dd:DragDrop.IsDragSource="True"
+         dd:DragDrop.IsDropTarget="True">
+                        <ListBoxItem>Student 1</ListBoxItem>
+                        <ListBoxItem>Student 1</ListBoxItem>
+                        <ListBoxItem>Student 1</ListBoxItem>
+                        <ListBoxItem>Student 1</ListBoxItem>
+                        <ListBoxItem>Student 1</ListBoxItem>
+                    </ListBox>
+                </GroupBox>
+                <GroupBox Header="Group1"   Margin="16" >
+                    <ListBox dd:DragDrop.IsDragSource="True"
+         dd:DragDrop.IsDropTarget="True">
                         <ListBoxItem>Student 1</ListBoxItem>
                         <ListBoxItem>Student 1</ListBoxItem>
                         <ListBoxItem>Student 1</ListBoxItem>
@@ -59,133 +71,7 @@
                         <ListBoxItem>Student 1</ListBoxItem>
                     </ListBox>
                 </GroupBox>
-                <GroupBox Header="Group1"   Margin="16" >
-                    <ListBox>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                    </ListBox>
-                </GroupBox>
-                <GroupBox Header="Group1"   Margin="16" >
-                    <ListBox>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                    </ListBox>
-                </GroupBox>
-                <GroupBox Header="Group1"   Margin="16" >
-                    <ListBox>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                    </ListBox>
-                </GroupBox>
-                <GroupBox Header="Group1"   Margin="16" >
-                    <ListBox>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                    </ListBox>
-                </GroupBox>
-                <GroupBox Header="Group1"   Margin="16" >
-                    <ListBox>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                    </ListBox>
-                </GroupBox>
-                <GroupBox Header="Group1"   Margin="16" >
-                    <ListBox>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                    </ListBox>
-                </GroupBox>
-                <GroupBox Header="Group1"   Margin="16" >
-                    <ListBox>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                    </ListBox>
-                </GroupBox>
-                <GroupBox Header="Group1"   Margin="16" >
-                    <ListBox>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                    </ListBox>
-                </GroupBox>
-                <GroupBox Header="Group1"   Margin="16" >
-                    <ListBox>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                    </ListBox>
-                </GroupBox>
-                <GroupBox Header="Group1"   Margin="16" >
-                    <ListBox>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                    </ListBox>
-                </GroupBox>
-                <GroupBox Header="Group1"   Margin="16" >
-                    <ListBox>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                    </ListBox>
-                </GroupBox>
-                <GroupBox Header="Group1"   Margin="16" >
-                    <ListBox>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                    </ListBox>
-                </GroupBox>
-                <GroupBox Header="Group1"   Margin="16" >
-                    <ListBox>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                    </ListBox>
-                </GroupBox>
-                <GroupBox Header="Group1"   Margin="16" >
-                    <ListBox>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                        <ListBoxItem>Student 1</ListBoxItem>
-                    </ListBox>
-                </GroupBox>
-
+             
             </WrapPanel>
         </ScrollViewer>
 
