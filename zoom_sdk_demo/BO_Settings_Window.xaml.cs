@@ -20,12 +20,13 @@ namespace zoom_sdk_demo
     /// </summary>
     public partial class BO_Settings_Window : Window
     {
-        int groupsize = 3;
+
         public BO_Settings_Window()
         {
             InitializeComponent();
             GroupManager.instance.getGroups();
             this.DataContext = GroupManager.instance.groups;
+            groupSize_block.Text = GroupManager.instance.groupSize.ToString();
         }
 
 
@@ -33,22 +34,23 @@ namespace zoom_sdk_demo
 
         private void IncreaseGroupSize_Click(object sender, RoutedEventArgs e)
         {
-            if (groupsize < 10)
+            if (GroupManager.instance.groupSize < 10)
             {
-                groupsize++;
+                GroupManager.instance.groupSize++;
+
             }
 
-            groupSize_block.Text = groupsize.ToString();
+            groupSize_block.Text = GroupManager.instance.groupSize.ToString();
 
         }
 
         private void DecreaseGroupSize_click(object sender, RoutedEventArgs e)
         {
-            if (groupsize > 0)
+            if (GroupManager.instance.groupSize > 1)
             {
-                groupsize--;
+                GroupManager.instance.groupSize--;
             }
-            groupSize_block.Text = groupsize.ToString(); ;
+            groupSize_block.Text = GroupManager.instance.groupSize.ToString(); ;
         }
 
 
@@ -59,6 +61,11 @@ namespace zoom_sdk_demo
             //intialize the breakout rooms based on the groups made
 
 
+        }
+
+        private void update_click(object sender, RoutedEventArgs e)
+        {
+            GroupManager.instance.getGroups();
         }
     }
 }
