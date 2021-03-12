@@ -52,5 +52,13 @@ namespace zoom_sdk_demo
         }
 
 
+
+        private void StartBO_Click(object sender, RoutedEventArgs e)
+        {
+            var groups = GroupManager.instance.groups;
+            //intialize the breakout rooms based on the groups made
+
+
+        }
     }
 }

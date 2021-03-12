@@ -13,7 +13,7 @@
             <RowDefinition Height="3*"/>
             <RowDefinition Height="0.5*"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Orientation="Vertical">
+        <StackPanel Grid.Row="0" Orientation="Vertical" >
             <StackPanel Margin="10"  Orientation="Horizontal" >
                 <TextBlock FontWeight="Bold" Margin="0,0,10,0" FontSize="14" VerticalAlignment="Center" > GroupSize</TextBlock>
                 <Button  BorderThickness="0"  Click="IncreaseGroupSize_Click"
@@ -28,21 +28,42 @@
                 <RadioButton IsChecked="True">Random</RadioButton>
 
                 <Button HorizontalAlignment="Right" HorizontalContentAlignment="Right">Update</Button>
-
             </StackPanel>
             <Separator></Separator>
         </StackPanel>
 
         <StackPanel Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Horizontal">
             <Button Margin="5">Cancel</Button>
-            <Button Margin="5">Start The BO Room</Button>
+            <Button Margin="5" Click="StartBO_Click">Start The BO Room</Button>
         </StackPanel>
 
 
         <ScrollViewer Grid.Row="1">
 
-            <WrapPanel>
-                <GroupBox Header="Group1"   Margin="16" >
+            <ItemsControl ItemsSource="{Binding }" Margin="20">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <GroupBox Header="{Binding Name}"   Margin="16" >
+                            <ListBox dd:DragDrop.IsDragSource="True"
+         dd:DragDrop.IsDropTarget="True" ItemsSource="{Binding Participants_in_group}">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}"/>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </GroupBox>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+
+            <!--<WrapPanel>-->
+            <!--<GroupBox Header="Group1"   Margin="16" >
                     <ListBox dd:DragDrop.IsDragSource="True"
          dd:DragDrop.IsDropTarget="True">
                         <ListBoxItem>Student 1</ListBoxItem>
@@ -72,8 +93,8 @@
                         <ListBoxItem>Student 15</ListBoxItem>
                     </ListBox>
                 </GroupBox>
-             
-            </WrapPanel>
+
+            </WrapPanel>-->
         </ScrollViewer>
 
     </Grid>

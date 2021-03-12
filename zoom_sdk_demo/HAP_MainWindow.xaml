@@ -45,7 +45,9 @@
                         </ListView.ItemTemplate>
                         <!--<Border Background="#D9D9D9" CornerRadius="10">
                             <DockPanel Margin="5">
-                                --><!--<TextBlock DockPanel.Dock="Top">Question 1</TextBlock>--><!--
+                                -->
+                        <!--<TextBlock DockPanel.Dock="Top">Question 1</TextBlock>-->
+                        <!--
                                 <TextBlock DockPanel.Dock="Top">Solve for X</TextBlock>
 
                                 <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" DockPanel.Dock="Bottom">

@@ -10,7 +10,7 @@ namespace zoom_sdk_demo.Models
     public class Group
     {
         public String Name { get; set; } = "";
-        public List<Participant> Participants_in_group { get; set; }= new List<Participant>();
+        public ObservableCollection<Participant> Participants_in_group { get; set; }= new ObservableCollection<Participant>();
 
     }
 
