@@ -69,7 +69,11 @@
 
             </TabItem>
             <TabItem Header="Group" Width="Auto">
-                <Label>Divide them into groups</Label>
+                <DockPanel Height="Auto">
+                    <StackPanel Margin="10" DockPanel.Dock="Bottom" HorizontalAlignment="Right">
+                        <Button Click="SetupUpGroups_click" VerticalAlignment="Bottom"> Setup Groups</Button>
+                    </StackPanel>
+                </DockPanel>
             </TabItem>
         </TabControl>
 

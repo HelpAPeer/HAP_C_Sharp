@@ -10,7 +10,7 @@ namespace zoom_sdk_demo.Models
     public class Group
     {
         public String Name { get; set; } = "";
-        public ObservableCollection<Participant> Participants_in_group { get; set; }= new ObservableCollection<Participant>();
+        public ObservableCollection<Participant> Participants_in_group { get; set; } = new ObservableCollection<Participant>();
 
     }
 
@@ -19,6 +19,7 @@ namespace zoom_sdk_demo.Models
         public static GroupManager instance = new GroupManager();
         private GroupManager() { }
         public ObservableCollection<Group> groups = new ObservableCollection<Group>();
+        public int groupSize { get; set; } = 3;
 
         public void getGroups()
         {
@@ -27,10 +28,10 @@ namespace zoom_sdk_demo.Models
             {
                 ParticipantManager.instance.GetParticipants();
             }
-
+            groups.Clear();
             Group group = new Group();
             int count = 0;
-            int groupSize = 3;
+            
             int groupCount = 1;
             foreach (var participant in ParticipantManager.instance.participants)
             {
