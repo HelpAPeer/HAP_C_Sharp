@@ -109,6 +109,7 @@
     <Compile Include="HAP_MainWindow.xaml.cs">
       <DependentUpon>HAP_MainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\Group.cs" />
     <Compile Include="Models\Participants.cs" />
     <Compile Include="Models\Question.cs" />
     <Compile Include="start_join_meeting.xaml.cs">

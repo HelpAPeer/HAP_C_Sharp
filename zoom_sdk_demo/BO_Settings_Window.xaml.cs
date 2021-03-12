@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using zoom_sdk_demo.Models;
 
 namespace zoom_sdk_demo
 {
@@ -23,6 +24,8 @@ namespace zoom_sdk_demo
         public BO_Settings_Window()
         {
             InitializeComponent();
+            GroupManager.instance.getGroups();
+            this.DataContext = GroupManager.instance.groups;
         }
 
 
