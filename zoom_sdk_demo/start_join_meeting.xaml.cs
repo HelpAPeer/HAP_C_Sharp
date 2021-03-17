@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel; // CancelEventArgs
 using System.Windows;
+using zoom_sdk_demo.Models;
 using ZOOM_SDK_DOTNET_WRAP;
 
 namespace zoom_sdk_demo
@@ -19,13 +20,20 @@ namespace zoom_sdk_demo
         //ZOOM_SDK_DOTNET_WRAP.onMeetingStatusChanged
         public void onMeetingStatusChanged(MeetingStatus status, int iResult)
         {
+      
             switch (status)
             {
-                case ZOOM_SDK_DOTNET_WRAP.MeetingStatus.MEETING_STATUS_ENDED:
+                case ZOOM_SDK_DOTNET_WRAP.MeetingStatus.MEETING_STATUS_ENDED: {
+                        hAP_MainWindow.Hide();
+                        ParticipantManager.instance.participants.Clear();
+
+                    }
+                    break;
                 case ZOOM_SDK_DOTNET_WRAP.MeetingStatus.MEETING_STATUS_FAILED:
                     {
                         //TODO: need to check if window is visible first before performing hide. Might be damaging
                         hAP_MainWindow.Hide();
+                        ParticipantManager.instance.participants.Clear();
 
                         Show();
                     }
@@ -34,9 +42,14 @@ namespace zoom_sdk_demo
                 case ZOOM_SDK_DOTNET_WRAP.MeetingStatus.MEETING_STATUS_INMEETING:
                     {
 
-                        //TODO: would be best to show the Ui When we are in the meeting here. This is the view we actually care about
+                        // Load the meeting partipants now
+                        // Would be best to update the observable list. Instead of tying a new one https://gist.github.com/tymorrow/9397870
+                        ParticipantManager.instance.GetParticipantsInMeeting();
+                        //would be best to show the Ui When we are in the meeting here. This is the view we actually care about
                         hAP_MainWindow.Show();
+                        
 
+                        
                         ValueType firstHwd = null;
                         ValueType secondHwd = null;
                         IMeetingUIControllerDotNetWrap meetingUI = CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().GetUIController();
@@ -56,26 +69,28 @@ namespace zoom_sdk_demo
 
         public void onUserJoin(Array lstUserID)
         {
-            if (null == (Object)lstUserID)
-                return;
+            ParticipantManager.instance.AddParticipant(lstUserID);
+            //if (null == (Object)lstUserID)
+            //    return;
 
-            for (int i = lstUserID.GetLowerBound(0); i <= lstUserID.GetUpperBound(0); i++)
-            {
-                UInt32 userid = (UInt32)lstUserID.GetValue(i);
-                ZOOM_SDK_DOTNET_WRAP.IUserInfoDotNetWrap user = ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().
-                    GetMeetingParticipantsController().GetUserByUserID(userid);
-                if (null != (Object)user)
-                {
-                    string name = user.GetUserNameW();
-                    Console.Write(name);
-                    Console.Write(" ");
-                }
-            }
-            Console.WriteLine();
+            //for (int i = lstUserID.GetLowerBound(0); i <= lstUserID.GetUpperBound(0); i++)
+            //{
+            //    UInt32 userid = (UInt32)lstUserID.GetValue(i);
+            //    ZOOM_SDK_DOTNET_WRAP.IUserInfoDotNetWrap user = ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().
+            //        GetMeetingParticipantsController().GetUserByUserID(userid);
+            //    if (null != (Object)user)
+            //    {
+            //        string name = user.GetUserNameW();
+            //        Console.Write(name);
+            //        Console.Write(" ");
+            //    }
+            //}
+            //Console.WriteLine();
         }
         public void onUserLeft(Array lstUserID)
         {
             //todo
+            ParticipantManager.instance.RemoveParticpant(lstUserID);
         }
         public void onHostChangeNotification(UInt32 userId)
         {
@@ -151,7 +166,7 @@ namespace zoom_sdk_demo
             if (ZOOM_SDK_DOTNET_WRAP.SDKError.SDKERR_SUCCESS == err)
             {
                 Hide();
-         
+
             }
             else//error handle
             { }

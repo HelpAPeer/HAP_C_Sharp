@@ -10,12 +10,12 @@
         xmlns:ui="http://schemas.modernwpf.com/2019"
     ui:WindowHelper.UseModernWindowStyle="True">
     <Grid>
-       
-        <Label x:Name="Username" Content="Email" HorizontalAlignment="Left" Margin="79,133,0,0" VerticalAlignment="Top" Width="78"/>
-        <TextBox x:Name="textBox_username" Height="25" Margin="181,133,84,0" TextWrapping="Wrap" Text="email" VerticalAlignment="Top"/>
-        <Label x:Name="Password" Content="Password" HorizontalAlignment="Left" Margin="79,173,0,0" VerticalAlignment="Top" Width="78"/>
-        <PasswordBox x:Name="textBox_password" Height="25" Margin="181,173,84,0"  VerticalAlignment="Top"/>
-        <Button x:Name="button_auth" Content="Auth" HorizontalAlignment="Left" Height="36" Margin="218,220,0,0" VerticalAlignment="Top" Width="148" Click="button_auth_Click"/>
+
+        <Label x:Name="Username" Content="Email" HorizontalAlignment="Left" Margin="70,133,0,0" VerticalAlignment="Top" Width="78"/>
+        <TextBox x:Name="textBox_username" Height="25" Margin="181,127,83.6,0" TextWrapping="Wrap" Text="help.a.peer.21@gmail.com" VerticalAlignment="Top" RenderTransformOrigin="0.501,0.754"/>
+        <Label x:Name="Password" Content="Password" HorizontalAlignment="Left" Margin="70,178,0,0" VerticalAlignment="Top" Width="78"/>
+        <PasswordBox x:Name="textBox_password" Height="35" Margin="181,173,83.6,0"  VerticalAlignment="Top"/>
+        <Button x:Name="button_auth" Content="Auth" HorizontalAlignment="Left" Height="36" Margin="222,243,0,0" VerticalAlignment="Top" Width="148" Click="button_auth_Click"/>
 
     </Grid>
 </Window>
