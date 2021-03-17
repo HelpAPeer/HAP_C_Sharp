@@ -1,0 +1,101 @@
+﻿<Window x:Class="zoom_sdk_demo.BO_Settings_Window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:zoom_sdk_demo"
+        xmlns:dd="urn:gong-wpf-dragdrop"
+        mc:Ignorable="d"
+        Title="BO_Settings_Window" Height="500" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="0.5*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Vertical" >
+            <StackPanel Margin="10"  Orientation="Horizontal" >
+                <TextBlock FontWeight="Bold" Margin="0,0,10,0" FontSize="14" VerticalAlignment="Center" > GroupSize</TextBlock>
+                <Button  BorderThickness="0"  Click="IncreaseGroupSize_Click"
+    Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" FontSize="14" >+</Button>
+                <TextBlock x:Name="groupSize_block" FontSize="14" VerticalAlignment="Center" Margin="5,0" >3</TextBlock>
+                <Button Click="DecreaseGroupSize_click" BorderThickness="0"  
+    Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Margin="0,0,25,0" FontSize="14" >-</Button>
+
+                <TextBlock FontWeight="Bold" Margin="0,0,10,0" FontSize="14" Text="Group Type" VerticalAlignment="Center"></TextBlock>
+                <RadioButton>Heterogenous</RadioButton>
+                <RadioButton>Homogenous</RadioButton>
+                <RadioButton IsChecked="True">Random</RadioButton>
+
+                <Button HorizontalAlignment="Right" HorizontalContentAlignment="Right" Click="update_click">Update</Button>
+            </StackPanel>
+            <Separator></Separator>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Horizontal">
+            <Button Margin="5">Cancel</Button>
+            <Button Margin="5" Click="StartBO_Click">Start The BO Room</Button>
+        </StackPanel>
+
+
+        <ScrollViewer Grid.Row="1">
+
+            <ItemsControl ItemsSource="{Binding }" Margin="20">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <GroupBox Header="{Binding Name}"   Margin="16" >
+                            <ListBox dd:DragDrop.IsDragSource="True"
+         dd:DragDrop.IsDropTarget="True" ItemsSource="{Binding Participants_in_group}">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}"/>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </GroupBox>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+
+            <!--<WrapPanel>-->
+            <!--<GroupBox Header="Group1"   Margin="16" >
+                    <ListBox dd:DragDrop.IsDragSource="True"
+         dd:DragDrop.IsDropTarget="True">
+                        <ListBoxItem>Student 1</ListBoxItem>
+                        <ListBoxItem>Student 2</ListBoxItem>
+                        <ListBoxItem>Student 3</ListBoxItem>
+                        <ListBoxItem>Student 4</ListBoxItem>
+                        <ListBoxItem>Student 5</ListBoxItem>
+                    </ListBox>
+                </GroupBox>
+                <GroupBox Header="Group2"   Margin="16" >
+                    <ListBox dd:DragDrop.IsDragSource="True"
+         dd:DragDrop.IsDropTarget="True">
+                        <ListBoxItem>Student 6</ListBoxItem>
+                        <ListBoxItem>Student 7</ListBoxItem>
+                        <ListBoxItem>Student 8</ListBoxItem>
+                        <ListBoxItem>Student 9</ListBoxItem>
+                        <ListBoxItem>Student 10</ListBoxItem>
+                    </ListBox>
+                </GroupBox>
+                <GroupBox Header="Group3"   Margin="16" >
+                    <ListBox  dd:DragDrop.IsDragSource="True"
+         dd:DragDrop.IsDropTarget="True" >
+                        <ListBoxItem>Student 11</ListBoxItem>
+                        <ListBoxItem>Student 12</ListBoxItem>
+                        <ListBoxItem>Student 13</ListBoxItem>
+                        <ListBoxItem>Student 14</ListBoxItem>
+                        <ListBoxItem>Student 15</ListBoxItem>
+                    </ListBox>
+                </GroupBox>
+
+            </WrapPanel>-->
+        </ScrollViewer>
+
+    </Grid>
+</Window>

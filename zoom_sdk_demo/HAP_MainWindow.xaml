@@ -37,7 +37,7 @@
 
                                         <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" DockPanel.Dock="Bottom">
                                             <Button Margin="5" Content="Result" ></Button>
-                                            <Button Margin="5" Content="Use"></Button>
+                                            <Button Margin="5" Content="Use" Click="usequestion_Click"></Button>
                                         </StackPanel>
                                     </DockPanel>
                                 </Border>
@@ -45,7 +45,9 @@
                         </ListView.ItemTemplate>
                         <!--<Border Background="#D9D9D9" CornerRadius="10">
                             <DockPanel Margin="5">
-                                --><!--<TextBlock DockPanel.Dock="Top">Question 1</TextBlock>--><!--
+                                -->
+                        <!--<TextBlock DockPanel.Dock="Top">Question 1</TextBlock>-->
+                        <!--
                                 <TextBlock DockPanel.Dock="Top">Solve for X</TextBlock>
 
                                 <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" DockPanel.Dock="Bottom">
@@ -67,7 +69,11 @@
 
             </TabItem>
             <TabItem Header="Group" Width="Auto">
-                <Label>Divide them into groups</Label>
+                <DockPanel Height="Auto">
+                    <StackPanel Margin="10" DockPanel.Dock="Bottom" HorizontalAlignment="Right">
+                        <Button Click="SetupUpGroups_click" VerticalAlignment="Bottom"> Setup Groups</Button>
+                    </StackPanel>
+                </DockPanel>
             </TabItem>
         </TabControl>
 

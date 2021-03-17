@@ -62,7 +62,7 @@ namespace zoom_sdk_demo
         private void NoteTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             //change the participants here to  update notes for each student
-            if ((ParticipantManager.instance.participants.Count != 0) &&( id_lastSelected<ParticipantManager.instance.participants.Count) )
+            if ((ParticipantManager.instance.participants.Count != 0) && (id_lastSelected < ParticipantManager.instance.participants.Count))
             {
                 ParticipantManager.instance.participants[id_lastSelected].Notes = NoteTextBox.Text;
 
@@ -75,6 +75,24 @@ namespace zoom_sdk_demo
             var addQuestionWindow = new AddQuestionWindow();
             addQuestionWindow.ShowDialog();
 
+        }
+
+
+
+        private void usequestion_Click(object sender, RoutedEventArgs e)
+        {
+            Question requestingTile = (sender as Button).DataContext as Question;
+
+            Console.WriteLine(requestingTile.question);
+
+        }
+
+
+        private void SetupUpGroups_click(object sender, RoutedEventArgs e)
+        {
+
+            var bo_Settings_Window = new BO_Settings_Window();
+            bo_Settings_Window.ShowDialog();
         }
     }
 }
