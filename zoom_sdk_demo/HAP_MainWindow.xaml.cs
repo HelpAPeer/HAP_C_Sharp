@@ -26,6 +26,8 @@ namespace zoom_sdk_demo
         public ObservableCollection<Question> questions;
         public int id_lastSelected = 0;
 
+        ShowQuestionWindow showQuestionWindow = new ShowQuestionWindow();
+
         public HAP_MainWindow()
         {
             this.DataContext = this;
@@ -68,6 +70,11 @@ namespace zoom_sdk_demo
             var addQuestionWindow = new AddQuestionWindow ();
             addQuestionWindow.ShowDialog();
 
+        }
+
+        private void Use_Question_Click(object sender, RoutedEventArgs e)
+        {
+            showQuestionWindow.question = "test pass!";
         }
     }
 }

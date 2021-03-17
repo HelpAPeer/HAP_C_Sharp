@@ -37,7 +37,7 @@
 
                                         <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" DockPanel.Dock="Bottom">
                                             <Button Margin="5" Content="Result" ></Button>
-                                            <Button Margin="5" Content="Use"></Button>
+                                            <Button Margin="5" Content="Use" Click="Use_Question_Click"></Button>
                                         </StackPanel>
                                     </DockPanel>
                                 </Border>
