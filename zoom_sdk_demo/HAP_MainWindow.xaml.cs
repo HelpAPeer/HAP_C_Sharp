@@ -81,9 +81,13 @@ namespace zoom_sdk_demo
 
         private void usequestion_Click(object sender, RoutedEventArgs e)
         {
-            Question requestingTile = (sender as Button).DataContext as Question;
+            Question problem = (sender as Button).DataContext as Question;
 
-            Console.WriteLine(requestingTile.question);
+            var showquestion = new ShowQuestionWindow();
+            showquestion.UpdateQuestion(problem);
+
+            showquestion.Show();
+            Console.WriteLine(problem.question);
 
         }
 
