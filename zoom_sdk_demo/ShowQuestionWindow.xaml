@@ -7,6 +7,6 @@
         mc:Ignorable="d"
         Title="ShowQuestionWindow" Height="360" Width="640">
     <Grid>
-        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Path=question}"></TextBlock>
+        <TextBlock x:Name="QuestionText" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Path=question}"></TextBlock>
     </Grid>
 </Window>

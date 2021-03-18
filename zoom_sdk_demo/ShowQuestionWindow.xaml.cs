@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using zoom_sdk_demo.Models;
 
 namespace zoom_sdk_demo
 {
@@ -19,11 +20,20 @@ namespace zoom_sdk_demo
     /// </summary>
     public partial class ShowQuestionWindow : Window
     {
-        public string question;
+        public Question problem;
 
         public ShowQuestionWindow()
         {
+            problem = new Question();
+            problem.question = "Default text";
             InitializeComponent();
+            this.DataContext = problem;
+        }
+
+        public void UpdateQuestion(Question problem)
+        {
+            this.problem = problem;
+            this.DataContext = this.problem;
         }
     }
 }

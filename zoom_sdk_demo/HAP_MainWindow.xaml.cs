@@ -30,6 +30,7 @@ namespace zoom_sdk_demo
         public HAP_MainWindow()
         {
             this.DataContext = this;
+            Application.Current.MainWindow = this;
 
             // check if participants in meeting is empty. If it is, let's fill with dummy data
             if (ParticipantManager.instance.participants.Count() == 0)
@@ -74,14 +75,24 @@ namespace zoom_sdk_demo
 
         private void Add_Question_Click(object sender, RoutedEventArgs e)
         {
+            
             var addQuestionWindow = new AddQuestionWindow();
             addQuestionWindow.ShowDialog();
 
         }
 
-        private void Use_Question_Click(object sender, RoutedEventArgs e)
+        //private void Use_Question_Click(object sender, RoutedEventArgs e)
+        //{
+        //    var question = (Question)(sender);
+        //    showQuestionWindow.UpdateQuestion(question);
+        //    showQuestionWindow.Show();
+        //}
+
+        public void UseQuestion(object context)
         {
-            showQuestionWindow.question = "test pass!";
+            var question = (Question)(context);
+            showQuestionWindow.UpdateQuestion(question);
+            showQuestionWindow.Show();
         }
     }
 }
