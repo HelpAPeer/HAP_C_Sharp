@@ -9,6 +9,9 @@
         Title="Help-A-PEER" 
         xmlns:data="clr-namespace:zoom_sdk_demo.Models"
     ui:WindowHelper.UseModernWindowStyle="True">
+    <Window.Resources>
+        <local:HAP_MainWindow x:Key="MainWindowContext" Data="{Binding}"/>
+    </Window.Resources>
     <Grid Background="#E5E5E5">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
@@ -37,7 +40,7 @@
 
                                         <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" DockPanel.Dock="Bottom">
                                             <Button Margin="5" Content="Result" ></Button>
-                                            <Button Margin="5" Content="Use" CommandParameter="{Binding}" Command="{Binding UseQuestion}" ></Button>
+                                            <Button Margin="5" Content="Use" CommandParameter="{Binding}" Command="{Binding Source={StaticResource MainWindowContext}, Path=UseQuestion}" ></Button>
                                         </StackPanel>
                                     </DockPanel>
                                 </Border>

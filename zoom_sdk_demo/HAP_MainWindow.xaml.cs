@@ -20,7 +20,7 @@ namespace zoom_sdk_demo
     /// Interaction logic for HAP_MainWindow.xaml
     /// </summary>
     /// 
-    public partial class HAP_MainWindow : Window
+    public partial class HAP_MainWindow : Window, Freezable
     {
         public ObservableCollection<Question> questions;
         public int id_lastSelected = 0;
