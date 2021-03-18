@@ -70,9 +70,68 @@
             </TabItem>
             <TabItem Header="Group" Width="Auto">
                 <DockPanel Height="Auto">
-                    <StackPanel Margin="10" DockPanel.Dock="Bottom" HorizontalAlignment="Right">
-                        <Button Click="SetupUpGroups_click" VerticalAlignment="Bottom"> Setup Groups</Button>
+                    <StackPanel Margin="10" DockPanel.Dock="Top" HorizontalAlignment="Right">
+                        <Button Click="SetupUpGroups_click" VerticalAlignment="Bottom">Setup Groups</Button>
                     </StackPanel>
+
+                    <ListView Background="White" DockPanel.Dock="Top">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+
+                        <ListViewItem Margin="10" Background="#E5E5E5" Width="Auto">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Column="0">Group 1</TextBlock>
+                                <Button Grid.Column="1" HorizontalAlignment="Right">Join</Button>
+                                <WrapPanel Grid.Row="1" Grid.ColumnSpan="2">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="user-alt-512.png" Height="23" Width="25"></Image>
+                                        <TextBlock> Student Name</TextBlock>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="user-alt-512.png" Height="23" Width="25"></Image>
+                                        <TextBlock> Student Name</TextBlock>
+                                    </StackPanel>
+                                </WrapPanel>
+                            </Grid>
+                        </ListViewItem>
+                        <ListViewItem Margin="10" Background="#E5E5E5" Width="Auto">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Column="0">Group 1</TextBlock>
+                                <Button Grid.Column="1" HorizontalAlignment="Right">Join</Button>
+                                <WrapPanel Grid.Row="1" Grid.ColumnSpan="2">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="user-alt-512.png" Height="23" Width="25"></Image>
+                                        <TextBlock> Student Name</TextBlock>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="user-alt-512.png" Height="23" Width="25"></Image>
+                                        <TextBlock> Student Name</TextBlock>
+                                    </StackPanel>
+                                </WrapPanel>
+                            </Grid>
+                        </ListViewItem>
+
+                    </ListView>
+
                 </DockPanel>
             </TabItem>
         </TabControl>

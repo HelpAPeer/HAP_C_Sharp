@@ -54,8 +54,9 @@ namespace zoom_sdk_demo
                         ValueType firstHwd = null;
                         ValueType secondHwd = null;
                         IMeetingUIControllerDotNetWrap meetingUI = CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().GetUIController();
-                        ZOOM_SDK_DOTNET_WRAP.SDKError error = meetingUI.GetMeetingUIWnd(ref firstHwd, ref secondHwd);
-
+                        //ZOOM_SDK_DOTNET_WRAP.SDKError error = meetingUI.GetMeetingUIWnd(ref firstHwd, ref secondHwd);
+                        //SDKError error = meetingUI.ShowParticipantsListWnd(true, ref firstHwd);
+                        SDKError error = meetingUI.ShowChatDlg(ref firstHwd);
                         //TODO: let's check if error is fine and then get the WIndows Handle UI. Error is okay
                         Console.WriteLine("We are seeing Handle");
                         Console.WriteLine(error);
