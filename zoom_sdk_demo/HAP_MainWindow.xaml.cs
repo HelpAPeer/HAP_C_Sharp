@@ -41,6 +41,7 @@ namespace zoom_sdk_demo
             InitializeComponent();
             questions_list.ItemsSource = questions;
             participant_list.ItemsSource = ParticipantManager.instance.participants;
+            groups_list.ItemsSource = GroupManager.instance.groups;
 
         }
 
