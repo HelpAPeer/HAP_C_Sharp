@@ -70,12 +70,12 @@
 
             </TabItem>
             <TabItem Header="Group" Width="Auto">
-                <DockPanel Height="Auto">
+                <DockPanel Height="Auto" Background="White" >
                     <StackPanel Margin="10" DockPanel.Dock="Top" HorizontalAlignment="Right">
                         <Button Click="SetupUpGroups_click" VerticalAlignment="Bottom">Setup Groups</Button>
                     </StackPanel>
 
-                    <ListView x:Name="groups_list"  Background="White" DockPanel.Dock="Top" ItemsSource="{Binding}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                    <ListView x:Name="groups_list"  DockPanel.Dock="Top" ItemsSource="{Binding}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
                                 <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -84,35 +84,37 @@
 
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <Grid Margin="10" Background="#E5E5E5">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="2*"/>
-                                        <ColumnDefinition Width="1*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="2*"/>
-                                    </Grid.RowDefinitions>
-                                    <TextBlock Grid.Column="0" Text="{Binding Path=Name}"/>
-                                    <Button Grid.Column="1" HorizontalAlignment="Right">Join</Button>
+                                <Border Background="#E5E5E5" CornerRadius="10" Margin="5">
+                                    <Grid Margin="10" >
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="2*"/>
+                                            <ColumnDefinition Width="1*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="2*"/>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Grid.Column="0" Text="{Binding Path=Name}"/>
+                                        <Button Grid.Column="1" HorizontalAlignment="Right">Join</Button>
 
-                                    <ItemsControl Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{Binding Participants_in_group}">
-                                        <ItemsControl.ItemTemplate>
-                                            <DataTemplate>
-                                                <StackPanel Orientation="Horizontal" Margin="5">
-                                                    <Image Source="Assets/user-alt-512.png" Height="23" Width="25"></Image>
-                                                    <TextBlock Text="{Binding Name}"/>
-                                                </StackPanel>
-                                            </DataTemplate>
-                                        </ItemsControl.ItemTemplate>
-                                        <ItemsControl.ItemsPanel>
-                                            <ItemsPanelTemplate>
-                                                <WrapPanel/>
-                                            </ItemsPanelTemplate>
-                                        </ItemsControl.ItemsPanel>
+                                        <ItemsControl Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{Binding Participants_in_group}">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal" Margin="5">
+                                                        <Image Source="Assets/user-alt-512.png" Height="23" Width="25"></Image>
+                                                        <TextBlock Text="{Binding Name}"/>
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                            <ItemsControl.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <WrapPanel/>
+                                                </ItemsPanelTemplate>
+                                            </ItemsControl.ItemsPanel>
 
-                                    </ItemsControl>
-                                </Grid>
+                                        </ItemsControl>
+                                    </Grid>
+                                </Border>
                             </DataTemplate>
                         </ListView.ItemTemplate>
 
