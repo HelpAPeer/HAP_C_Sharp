@@ -9,9 +9,6 @@
         Title="Help-A-PEER" 
         xmlns:data="clr-namespace:zoom_sdk_demo.Models"
     ui:WindowHelper.UseModernWindowStyle="True">
-    <Window.Resources>
-        <local:HAP_MainWindow x:Key="MainWindowContext" Data="{Binding}"/>
-    </Window.Resources>
     <Grid Background="#E5E5E5">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
@@ -40,7 +37,7 @@
 
                                         <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" DockPanel.Dock="Bottom">
                                             <Button Margin="5" Content="Result" ></Button>
-                                            <Button Margin="5" Content="Use" CommandParameter="{Binding}" Command="{Binding Source={StaticResource MainWindowContext}, Path=UseQuestion}" ></Button>
+                                            <Button Margin="5" Content="Use" Click="usequestion_Click"></Button>
                                         </StackPanel>
                                     </DockPanel>
                                 </Border>
@@ -48,7 +45,9 @@
                         </ListView.ItemTemplate>
                         <!--<Border Background="#D9D9D9" CornerRadius="10">
                             <DockPanel Margin="5">
-                                --><!--<TextBlock DockPanel.Dock="Top">Question 1</TextBlock>--><!--
+                                -->
+                        <!--<TextBlock DockPanel.Dock="Top">Question 1</TextBlock>-->
+                        <!--
                                 <TextBlock DockPanel.Dock="Top">Solve for X</TextBlock>
 
                                 <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" DockPanel.Dock="Bottom">
@@ -70,7 +69,70 @@
 
             </TabItem>
             <TabItem Header="Group" Width="Auto">
-                <Label>Divide them into groups</Label>
+                <DockPanel Height="Auto">
+                    <StackPanel Margin="10" DockPanel.Dock="Top" HorizontalAlignment="Right">
+                        <Button Click="SetupUpGroups_click" VerticalAlignment="Bottom">Setup Groups</Button>
+                    </StackPanel>
+
+                    <ListView Background="White" DockPanel.Dock="Top">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+
+                        <ListViewItem Margin="10" Background="#E5E5E5" Width="Auto">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Column="0">Group 1</TextBlock>
+                                <Button Grid.Column="1" HorizontalAlignment="Right">Join</Button>
+                                <WrapPanel Grid.Row="1" Grid.ColumnSpan="2">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="user-alt-512.png" Height="23" Width="25"></Image>
+                                        <TextBlock> Student Name</TextBlock>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="user-alt-512.png" Height="23" Width="25"></Image>
+                                        <TextBlock> Student Name</TextBlock>
+                                    </StackPanel>
+                                </WrapPanel>
+                            </Grid>
+                        </ListViewItem>
+                        <ListViewItem Margin="10" Background="#E5E5E5" Width="Auto">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Column="0">Group 1</TextBlock>
+                                <Button Grid.Column="1" HorizontalAlignment="Right">Join</Button>
+                                <WrapPanel Grid.Row="1" Grid.ColumnSpan="2">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="user-alt-512.png" Height="23" Width="25"></Image>
+                                        <TextBlock> Student Name</TextBlock>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="user-alt-512.png" Height="23" Width="25"></Image>
+                                        <TextBlock> Student Name</TextBlock>
+                                    </StackPanel>
+                                </WrapPanel>
+                            </Grid>
+                        </ListViewItem>
+
+                    </ListView>
+
+                </DockPanel>
             </TabItem>
         </TabControl>
 

@@ -26,6 +26,7 @@ namespace zoom_sdk_demo
                 case ZOOM_SDK_DOTNET_WRAP.MeetingStatus.MEETING_STATUS_ENDED: {
                         hAP_MainWindow.Hide();
                         ParticipantManager.instance.participants.Clear();
+                        System.Windows.Application.Current.Shutdown();
 
                     }
                     break;
@@ -53,8 +54,9 @@ namespace zoom_sdk_demo
                         ValueType firstHwd = null;
                         ValueType secondHwd = null;
                         IMeetingUIControllerDotNetWrap meetingUI = CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().GetUIController();
-                        ZOOM_SDK_DOTNET_WRAP.SDKError error = meetingUI.GetMeetingUIWnd(ref firstHwd, ref secondHwd);
-
+                        //ZOOM_SDK_DOTNET_WRAP.SDKError error = meetingUI.GetMeetingUIWnd(ref firstHwd, ref secondHwd);
+                        //SDKError error = meetingUI.ShowParticipantsListWnd(true, ref firstHwd);
+                        SDKError error = meetingUI.ShowChatDlg(ref firstHwd);
                         //TODO: let's check if error is fine and then get the WIndows Handle UI. Error is okay
                         Console.WriteLine("We are seeing Handle");
                         Console.WriteLine(error);
@@ -89,12 +91,12 @@ namespace zoom_sdk_demo
         }
         public void onUserLeft(Array lstUserID)
         {
-            //todo
+            //TODO: fix the remove particpnat code. It is causing some issues with the oneselect UI
             ParticipantManager.instance.RemoveParticpant(lstUserID);
         }
         public void onHostChangeNotification(UInt32 userId)
         {
-            //todo
+            //todo: might need to readdress the issue here
         }
         public void onLowOrRaiseHandStatusChanged(bool bLow, UInt32 userid)
         {

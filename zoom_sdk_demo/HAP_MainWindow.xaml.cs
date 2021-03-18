@@ -20,17 +20,14 @@ namespace zoom_sdk_demo
     /// Interaction logic for HAP_MainWindow.xaml
     /// </summary>
     /// 
-    public partial class HAP_MainWindow : Window, Freezable
+    public partial class HAP_MainWindow : Window
     {
         public ObservableCollection<Question> questions;
         public int id_lastSelected = 0;
 
-        ShowQuestionWindow showQuestionWindow = new ShowQuestionWindow();
-
         public HAP_MainWindow()
         {
             this.DataContext = this;
-            Application.Current.MainWindow = this;
 
             // check if participants in meeting is empty. If it is, let's fill with dummy data
             if (ParticipantManager.instance.participants.Count() == 0)
@@ -65,7 +62,7 @@ namespace zoom_sdk_demo
         private void NoteTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             //change the participants here to  update notes for each student
-            if ((ParticipantManager.instance.participants.Count != 0) &&( id_lastSelected<ParticipantManager.instance.participants.Count) )
+            if ((ParticipantManager.instance.participants.Count != 0) && (id_lastSelected < ParticipantManager.instance.participants.Count))
             {
                 ParticipantManager.instance.participants[id_lastSelected].Notes = NoteTextBox.Text;
 
@@ -75,24 +72,31 @@ namespace zoom_sdk_demo
 
         private void Add_Question_Click(object sender, RoutedEventArgs e)
         {
-            
             var addQuestionWindow = new AddQuestionWindow();
             addQuestionWindow.ShowDialog();
 
         }
 
-        //private void Use_Question_Click(object sender, RoutedEventArgs e)
-        //{
-        //    var question = (Question)(sender);
-        //    showQuestionWindow.UpdateQuestion(question);
-        //    showQuestionWindow.Show();
-        //}
 
-        public void UseQuestion(object context)
+
+        private void usequestion_Click(object sender, RoutedEventArgs e)
         {
-            var question = (Question)(context);
-            showQuestionWindow.UpdateQuestion(question);
-            showQuestionWindow.Show();
+            Question problem = (sender as Button).DataContext as Question;
+
+            var showquestion = new ShowQuestionWindow();
+            showquestion.UpdateQuestion(problem);
+
+            showquestion.Show();
+            Console.WriteLine(problem.question);
+
+        }
+
+
+        private void SetupUpGroups_click(object sender, RoutedEventArgs e)
+        {
+
+            var bo_Settings_Window = new BO_Settings_Window();
+            bo_Settings_Window.ShowDialog();
         }
     }
 }

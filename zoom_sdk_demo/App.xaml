@@ -1,5 +1,6 @@
 ﻿<!--StartupUri="MainWindow.xaml"-->
 <!--Startup="Application_Startup"-->
+<!--StartupUri="BO_Settings_Window.xaml"-->
 <Application x:Class="zoom_sdk_demo.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
