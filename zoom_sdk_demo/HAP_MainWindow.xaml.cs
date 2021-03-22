@@ -25,6 +25,10 @@ namespace zoom_sdk_demo
         public ObservableCollection<Question> questions;
         public int id_lastSelected = 0;
 
+        public static Question activeQuestion = null;
+
+        ChatListener chat = new ChatListener();
+
         public HAP_MainWindow()
         {
             this.DataContext = this;
@@ -83,6 +87,8 @@ namespace zoom_sdk_demo
         private void usequestion_Click(object sender, RoutedEventArgs e)
         {
             Question problem = (sender as Button).DataContext as Question;
+
+            activeQuestion = problem;
 
             var showquestion = new ShowQuestionWindow();
             showquestion.UpdateQuestion(problem);
