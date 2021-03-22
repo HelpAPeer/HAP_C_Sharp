@@ -65,6 +65,7 @@ Interface ZOOM_SDK_DOTNET_WRAP.IUserInfoDotNetWrap: AutoLayout, AnsiClass, Class
     IsMySelf(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
     IsInWaitingRoom(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
     IsRaiseHand(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
+    IsTalking(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
     GetUserRole(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
     IsPurePhoneUser(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
 Struct ZOOM_SDK_DOTNET_WRAP.WndPosition: AutoLayout, AnsiClass, Class, Public, SequentialLayout, Sealed, BeforeFieldInit

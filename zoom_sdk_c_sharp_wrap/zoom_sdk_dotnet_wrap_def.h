@@ -132,6 +132,7 @@ namespace ZOOM_SDK_DOTNET_WRAP {
 		bool IsMySelf();
 		bool IsInWaitingRoom();
 		bool IsRaiseHand();
+		bool IsTalking();
 		UserRole GetUserRole();
 		bool IsPurePhoneUser();
 	};

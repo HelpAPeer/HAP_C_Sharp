@@ -310,6 +310,13 @@ namespace ZOOM_SDK_DOTNET_WRAP {
 			return false;
 		}
 
+		virtual bool IsTalking()
+		{
+			if (m_pInfo)
+				return m_pInfo->IsTalking();
+			return false;
+		}
+
 		virtual UserRole GetUserRole()
 		{
 			if (m_pInfo)
