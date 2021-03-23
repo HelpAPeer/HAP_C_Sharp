@@ -125,12 +125,14 @@ namespace ZOOM_SDK_DOTNET_WRAP {
 		String^ GetUserName();
 		bool IsHost();
 		unsigned int GetUserID();
+		String^ GetParticipantID();
 		bool IsVideoOn();
 		bool IsAudioMuted();
 		AudioType GetAudioJoinType();
 		bool IsMySelf();
 		bool IsInWaitingRoom();
 		bool IsRaiseHand();
+		bool IsTalking();
 		UserRole GetUserRole();
 		bool IsPurePhoneUser();
 	};

@@ -50,6 +50,12 @@ namespace zoom_sdk_demo.Models
                 UInt32 userid = (UInt32)users.GetValue(i);
                 ZOOM_SDK_DOTNET_WRAP.IUserInfoDotNetWrap user = ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().
                     GetMeetingParticipantsController().GetUserByUserID(userid);
+
+                // Testing the new functionality added
+
+                Console.WriteLine("Talking");
+                Console.WriteLine(user.IsTalking().ToString());
+
                 if (null != (Object)user)
                 {
                     string name = user.GetUserNameW();

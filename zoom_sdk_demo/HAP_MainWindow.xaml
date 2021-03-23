@@ -4,10 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:zoom_sdk_demo"
-        mc:Ignorable="d"
+    mc:Ignorable="d"
             xmlns:ui="http://schemas.modernwpf.com/2019"
         Title="Help-A-PEER" 
         xmlns:data="clr-namespace:zoom_sdk_demo.Models"
+           xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
     ui:WindowHelper.UseModernWindowStyle="True">
     <Grid Background="#E5E5E5">
         <Grid.ColumnDefinitions>
@@ -155,9 +156,13 @@
                 <RowDefinition Height="2*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0">
-                <TextBlock HorizontalAlignment="Center">Zoom</TextBlock>
-            </StackPanel>
+
+
+            <WindowsFormsHost Margin="10"  Grid.Row="0" Name="ZoomPlace">
+                <wf:Panel x:Name="CBox"/>
+            </WindowsFormsHost>
+
+
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>

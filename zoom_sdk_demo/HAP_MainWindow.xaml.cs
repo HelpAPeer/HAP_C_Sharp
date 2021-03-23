@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Interop;
 using zoom_sdk_demo.Models;
+using ZOOM_SDK_DOTNET_WRAP;
 
 namespace zoom_sdk_demo
 {
@@ -25,6 +26,13 @@ namespace zoom_sdk_demo
     {
         public ObservableCollection<Question> questions;
         public int id_lastSelected = 0;
+
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        static extern int SetParent(IntPtr hWndChild, IntPtr hWndNewParent);
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+        private const int WM_SYSCOMMAND = 0x112;
+        private const int SC_MAXIMIZE = 0xF030;
 
         public static Question activeQuestion = null;
 
@@ -44,12 +52,30 @@ namespace zoom_sdk_demo
 
             questions = new ObservableCollection<Question>();
             InitializeComponent();
+            //embedZoom();
             questions_list.ItemsSource = questions;
             participant_list.ItemsSource = ParticipantManager.instance.participants;
             groups_list.ItemsSource = GroupManager.instance.groups;
 
         }
 
+        public void embedZoom()
+        {
+            IMeetingUIControllerDotNetWrap uictrl_service = CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().GetUIController();
+            ValueType va_1 = new HWNDDotNet();
+            ValueType va_2 = new HWNDDotNet();
+            uictrl_service.GetMeetingUIWnd(ref va_1, ref va_2);
+            // need to check if dual screen or not
+            uictrl_service.EnterFullScreen(true, false);
+            HWNDDotNet firstHwd = (HWNDDotNet)va_1;
+
+            SetParent((System.IntPtr)firstHwd.value, CBox.Handle);
+            Console.WriteLine("after call GetMeetingUIWnd: firstHwd.value = " + firstHwd.value);
+            //SetParent(firstHwd.value,);
+
+            SendMessage((System.IntPtr)firstHwd.value, WM_SYSCOMMAND, SC_MAXIMIZE, 0);
+
+        }
         private void TextBox_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
             TextBox txtBox = sender as TextBox;
@@ -113,5 +139,7 @@ namespace zoom_sdk_demo
             var bo_Settings_Window = new BO_Settings_Window();
             bo_Settings_Window.ShowDialog();
         }
+
+     
     }
 }

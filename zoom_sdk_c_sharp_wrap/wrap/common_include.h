@@ -23,6 +23,7 @@
 #include "../h/meeting_service_components/meeting_audio_interface.h"
 #include "../h/meeting_service_components/meeting_emoji_reaction_interface.h"
 #include "../h/meeting_service_components/meeting_breakout_rooms_interface.h"
+#include "../h/meeting_service_components/meeting_breakout_rooms_interface_v2.h"
 #include "../h/meeting_service_components/meeting_chat_interface.h"
 #include "../h/meeting_service_components/meeting_configuration_interface.h"
 #include "../h/meeting_service_components/meeting_h323_helper_interface.h"
