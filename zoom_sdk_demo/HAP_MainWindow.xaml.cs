@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Interop;
 using zoom_sdk_demo.Models;
 using ZOOM_SDK_DOTNET_WRAP;
 
@@ -32,6 +33,10 @@ namespace zoom_sdk_demo
         static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
         private const int WM_SYSCOMMAND = 0x112;
         private const int SC_MAXIMIZE = 0xF030;
+
+        public static Question activeQuestion = null;
+
+        ChatListener chat = new ChatListener();
 
         public HAP_MainWindow()
         {
@@ -110,11 +115,20 @@ namespace zoom_sdk_demo
         {
             Question problem = (sender as Button).DataContext as Question;
 
-            var showquestion = new ShowQuestionWindow();
+            activeQuestion = problem;
+
+            var showquestion = new ShowQuestionWindow(); // TODO: Make more resource efficient
             showquestion.UpdateQuestion(problem);
 
             showquestion.Show();
             Console.WriteLine(problem.question);
+
+            WindowInteropHelper helper = new WindowInteropHelper(showquestion); // TODO: Make more resource efficient
+            helper.Owner = helper.Handle;
+
+            ZOOM_SDK_DOTNET_WRAP.HWNDDotNet wind = new ZOOM_SDK_DOTNET_WRAP.HWNDDotNet(); // TODO: Make more resource efficient
+            wind.value = (uint)helper.Handle;
+            ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().GetMeetingShareController().StartAppShare(wind);
 
         }
 
