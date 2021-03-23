@@ -34,6 +34,7 @@ namespace zoom_sdk_demo
         {
             this.problem = problem;
             this.DataContext = this.problem;
+
         }
     }
 }
