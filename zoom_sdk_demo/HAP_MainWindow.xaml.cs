@@ -124,9 +124,6 @@ namespace zoom_sdk_demo
             bo_Settings_Window.ShowDialog();
         }
 
-        private void ZoomPlace_ChildChanged(object sender, System.Windows.Forms.Integration.ChildChangedEventArgs e)
-        {
-
-        }
+     
     }
 }

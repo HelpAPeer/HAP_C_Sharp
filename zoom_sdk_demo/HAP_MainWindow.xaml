@@ -158,7 +158,7 @@
             </Grid.RowDefinitions>
 
 
-            <WindowsFormsHost ChildChanged="ZoomPlace_ChildChanged" Grid.Row="0" Name="ZoomPlace">
+            <WindowsFormsHost  Grid.Row="0" Name="ZoomPlace">
                 <wf:Panel x:Name="CBox"/>
             </WindowsFormsHost>
 
