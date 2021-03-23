@@ -60,6 +60,8 @@ namespace zoom_sdk_demo
             ValueType va_1 = new HWNDDotNet();
             ValueType va_2 = new HWNDDotNet();
             uictrl_service.GetMeetingUIWnd(ref va_1, ref va_2);
+            // need to check if dual screen or not
+            uictrl_service.EnterFullScreen(true, false);
             HWNDDotNet firstHwd = (HWNDDotNet)va_1;
 
             SetParent((System.IntPtr)firstHwd.value, CBox.Handle);
