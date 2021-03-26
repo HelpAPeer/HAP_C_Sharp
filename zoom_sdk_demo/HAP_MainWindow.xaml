@@ -16,9 +16,9 @@
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <TabControl Grid.Column="1">
-            <TabItem Header="Chat">
+            <!--<TabItem Header="Chat">
                 <Label Content="chat with your students" />
-            </TabItem>
+            </TabItem>-->
             <TabItem Header="Quiz">
                 <DockPanel LastChildFill="False" Background="White">
                     <Button Click="Add_Question_Click" Margin="5" Padding="5,2" DockPanel.Dock="Top" HorizontalAlignment="Right" Content="+">
