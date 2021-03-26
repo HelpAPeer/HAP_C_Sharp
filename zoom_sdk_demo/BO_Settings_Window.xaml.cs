@@ -24,7 +24,10 @@ namespace zoom_sdk_demo
         public BO_Settings_Window()
         {
             InitializeComponent();
-            GroupManager.instance.getGroups();
+            if (GroupManager.instance.groups.Count < 1)
+            {
+                GroupManager.instance.getGroups();
+            }
             this.DataContext = GroupManager.instance.groups;
             groupSize_block.Text = GroupManager.instance.groupSize.ToString();
         }
