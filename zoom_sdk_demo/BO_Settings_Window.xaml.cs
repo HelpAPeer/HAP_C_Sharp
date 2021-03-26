@@ -60,12 +60,20 @@ namespace zoom_sdk_demo
             var groups = GroupManager.instance.groups;
             //intialize the breakout rooms based on the groups made
 
+            Close();
+
 
         }
 
         private void update_click(object sender, RoutedEventArgs e)
         {
             GroupManager.instance.getGroups();
+        }
+
+        private void cancel_click(object sender, RoutedEventArgs e)
+        {
+            GroupManager.instance.groups.Clear();
+            Close();
         }
     }
 }
