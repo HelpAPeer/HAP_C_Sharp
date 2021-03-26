@@ -24,7 +24,10 @@ namespace zoom_sdk_demo
         public BO_Settings_Window()
         {
             InitializeComponent();
-            GroupManager.instance.getGroups();
+            if (GroupManager.instance.groups.Count < 1)
+            {
+                GroupManager.instance.getGroups();
+            }
             this.DataContext = GroupManager.instance.groups;
             groupSize_block.Text = GroupManager.instance.groupSize.ToString();
         }
@@ -60,12 +63,20 @@ namespace zoom_sdk_demo
             var groups = GroupManager.instance.groups;
             //intialize the breakout rooms based on the groups made
 
+            Close();
+
 
         }
 
         private void update_click(object sender, RoutedEventArgs e)
         {
             GroupManager.instance.getGroups();
+        }
+
+        private void cancel_click(object sender, RoutedEventArgs e)
+        {
+            GroupManager.instance.groups.Clear();
+            Close();
         }
     }
 }
