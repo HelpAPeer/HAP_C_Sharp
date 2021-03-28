@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using System.Windows.Interop;
 using zoom_sdk_demo.Models;
 using ZOOM_SDK_DOTNET_WRAP;
+using System.ComponentModel;
 
 namespace zoom_sdk_demo
 {
@@ -140,6 +141,13 @@ namespace zoom_sdk_demo
             bo_Settings_Window.ShowDialog();
         }
 
-     
+        void Wnd_Closing(object sender, CancelEventArgs e)
+        {
+            //LeaveMeetingCmd ID = LeaveMeetingCmd.END_MEETING;
+            //CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().Leave(ID);
+            System.Windows.Application.Current.Shutdown();
+        }
+
+
     }
 }
