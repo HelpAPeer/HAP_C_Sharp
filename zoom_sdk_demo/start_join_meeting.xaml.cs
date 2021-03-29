@@ -84,6 +84,8 @@ namespace zoom_sdk_demo
         public void onHostChangeNotification(UInt32 userId)
         {
             //todo: might need to readdress the issue here
+
+
         }
         public void onLowOrRaiseHandStatusChanged(bool bLow, UInt32 userid)
         {
