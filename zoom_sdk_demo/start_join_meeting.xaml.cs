@@ -85,7 +85,6 @@ namespace zoom_sdk_demo
         {
             //todo: might need to readdress the issue here
             //ParticipantManager.instance.
-
         }
         public void onLowOrRaiseHandStatusChanged(bool bLow, UInt32 userid)
         {
