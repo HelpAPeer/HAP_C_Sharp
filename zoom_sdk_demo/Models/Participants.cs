@@ -7,12 +7,17 @@ using System.Threading.Tasks;
 
 namespace zoom_sdk_demo.Models
 {
+    public static class GlobalVar
+    {
+        public const string default_note = "Write your thoughts here on this participant";
+    }
+
     public class Participant
     {
         public int ID { get; set; }
         public string Name { get; set; }
         //TODO; persoanlize note message. 
-        public string Notes { get; set; } = "Write your thoughts here on this participant";
+        public string Notes { get; set; } = GlobalVar.default_note;
 
 
     }
@@ -86,7 +91,6 @@ namespace zoom_sdk_demo.Models
         //This gives the array of participants to remove
         public void RemoveParticpant(Array lstUserID)
         {
-            //TODO: would be nice to make this code more consist. (smaller and cleaner) This now runs in n2 if the user id is the last one
 
             Console.WriteLine("Length of the Users to remove " + lstUserID.Length);
 
@@ -94,7 +98,14 @@ namespace zoom_sdk_demo.Models
             {
                 int userid = (int)(UInt32)lstUserID.GetValue(i);
                 Participant participant_toRemove = participants.Single(user => user.ID == (int)userid);
-                participants.Remove(participant_toRemove);
+                
+                //TODO: make sure this item is not selected before delete.
+
+                //if no notes were taken on this inidvidual it is safe to delete
+                if (participant_toRemove.Notes == GlobalVar.default_note)
+                {
+                    participants.Remove(participant_toRemove);
+                }
 
             }
             //foreach (var participant in participants)
