@@ -61,27 +61,12 @@ namespace zoom_sdk_demo
         public void onUserJoin(Array lstUserID)
         {
             ParticipantManager.instance.AddParticipant(lstUserID);
-            //if (null == (Object)lstUserID)
-            //    return;
 
-            //for (int i = lstUserID.GetLowerBound(0); i <= lstUserID.GetUpperBound(0); i++)
-            //{
-            //    UInt32 userid = (UInt32)lstUserID.GetValue(i);
-            //    ZOOM_SDK_DOTNET_WRAP.IUserInfoDotNetWrap user = ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().
-            //        GetMeetingParticipantsController().GetUserByUserID(userid);
-            //    if (null != (Object)user)
-            //    {
-            //        string name = user.GetUserNameW();
-            //        Console.Write(name);
-            //        Console.Write(" ");
-            //    }
-            //}
-            //Console.WriteLine();
         }
 
-//Callback event of notification of user who leaves the meeting.
-//Parameters
-//lstUserID List of the user ID who leaves the meeting.
+        //Callback event of notification of user who leaves the meeting.
+        //Parameters
+        //lstUserID List of the user ID who leaves the meeting.
         public void onUserLeft(Array lstUserID)
         {
             //TODO: fix the remove particpnat code. It is causing some issues with the oneselect UI
@@ -101,8 +86,10 @@ namespace zoom_sdk_demo
         }
         public void onUserNameChanged(UInt32 userId, string userName)
         {
-            Console.WriteLine(userName);
-            Console.WriteLine("{0}", userId);
+            ParticipantManager.instance.ChangeName(userId, userName);
+
+            //Console.WriteLine(userName);
+            Console.WriteLine("{0} {1}", userId, userName);
             Array users = ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().GetMeetingParticipantsController().GetParticipantsList();
             //Console.WriteLine(String.Join("\n", users));
             Console.WriteLine("List of Users Currently");

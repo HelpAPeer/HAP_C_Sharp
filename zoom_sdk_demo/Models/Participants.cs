@@ -98,7 +98,7 @@ namespace zoom_sdk_demo.Models
             {
                 int userid = (int)(UInt32)lstUserID.GetValue(i);
                 Participant participant_toRemove = participants.Single(user => user.ID == (int)userid);
-                
+
                 //TODO: make sure this item is not selected before delete.
 
                 //if no notes were taken on this inidvidual it is safe to delete
@@ -132,6 +132,18 @@ namespace zoom_sdk_demo.Models
             //        break;
             //    }
             //}
+
+        }
+        public void ChangeName(UInt32 userId, string userName)
+        {
+            Console.WriteLine("name was changed");
+            Console.WriteLine(userName);
+            Participant participant_toModify = participants.Single(user => user.ID == (int)userId);
+            participant_toModify.Name = userName;
+            int index = participants.IndexOf(participant_toModify);
+            participants.RemoveAt(index);
+            participants.Insert(index, participant_toModify);
+            //participants.Add(new Participant { ID = (int)userId, Name = userName });
 
         }
         public void AddParticipant(Array lstUserID)
