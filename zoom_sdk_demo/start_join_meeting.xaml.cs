@@ -20,10 +20,11 @@ namespace zoom_sdk_demo
         //ZOOM_SDK_DOTNET_WRAP.onMeetingStatusChanged
         public void onMeetingStatusChanged(MeetingStatus status, int iResult)
         {
-      
+
             switch (status)
             {
-                case ZOOM_SDK_DOTNET_WRAP.MeetingStatus.MEETING_STATUS_ENDED: {
+                case ZOOM_SDK_DOTNET_WRAP.MeetingStatus.MEETING_STATUS_ENDED:
+                    {
                         hAP_MainWindow.Hide();
                         ParticipantManager.instance.participants.Clear();
                         System.Windows.Application.Current.Shutdown();
@@ -56,6 +57,7 @@ namespace zoom_sdk_demo
             }
         }
 
+        //Callback event of notification of users who are in the meeting.
         public void onUserJoin(Array lstUserID)
         {
             ParticipantManager.instance.AddParticipant(lstUserID);
@@ -76,14 +78,22 @@ namespace zoom_sdk_demo
             //}
             //Console.WriteLine();
         }
+
+//Callback event of notification of user who leaves the meeting.
+//Parameters
+//lstUserID List of the user ID who leaves the meeting.
         public void onUserLeft(Array lstUserID)
         {
             //TODO: fix the remove particpnat code. It is causing some issues with the oneselect UI
             ParticipantManager.instance.RemoveParticpant(lstUserID);
         }
+
+        //userId	Specify the ID of the new host.
+
         public void onHostChangeNotification(UInt32 userId)
         {
             //todo: might need to readdress the issue here
+            ParticipantManager.instance.hostChanged(userId);
         }
         public void onLowOrRaiseHandStatusChanged(bool bLow, UInt32 userid)
         {

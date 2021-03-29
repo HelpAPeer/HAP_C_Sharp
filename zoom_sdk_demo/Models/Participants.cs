@@ -7,12 +7,17 @@ using System.Threading.Tasks;
 
 namespace zoom_sdk_demo.Models
 {
+    public static class GlobalVar
+    {
+        public const string default_note = "Write your thoughts here on this participant";
+    }
+
     public class Participant
     {
         public int ID { get; set; }
         public string Name { get; set; }
         //TODO; persoanlize note message. 
-        public string Notes { get; set; } = "Write your thoughts here on this participant";
+        public string Notes { get; set; } = GlobalVar.default_note;
 
 
     }
@@ -53,8 +58,8 @@ namespace zoom_sdk_demo.Models
 
                 // Testing the new functionality added
 
-                Console.WriteLine("Talking");
-                Console.WriteLine(user.IsTalking().ToString());
+                //Console.WriteLine("Talking");
+                //Console.WriteLine(user.IsTalking().ToString());
 
                 if (null != (Object)user)
                 {
@@ -67,29 +72,66 @@ namespace zoom_sdk_demo.Models
             }
         }
 
+        public void hostChanged(UInt32 userId)
+        {
+            //check id the new user and their name is the same. Then we have nothing to worry about
+            ZOOM_SDK_DOTNET_WRAP.IUserInfoDotNetWrap user = ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().
+                  GetMeetingParticipantsController().GetUserByUserID((uint)userId);
+
+            Participant potential_host = participants.Single(i => i.ID == (int)userId);
+            Console.WriteLine("Host Changed");
+            if (potential_host.Name == user.GetUserNameW())
+            {
+                Console.WriteLine("Everthing Seems fine. Host ID did not change");
+            }
+
+
+        }
+
+        //This gives the array of participants to remove
         public void RemoveParticpant(Array lstUserID)
         {
-            //TODO: would be nice to make this code more consist. (smaller and cleaner
-            foreach (var participant in participants)
+
+            Console.WriteLine("Length of the Users to remove " + lstUserID.Length);
+
+            for (int i = lstUserID.GetLowerBound(0); i <= lstUserID.GetUpperBound(0); i++)
             {
-                bool notFound = true;
-                for (int i = lstUserID.GetLowerBound(0); i <= lstUserID.GetUpperBound(0); i++)
+                int userid = (int)(UInt32)lstUserID.GetValue(i);
+                Participant participant_toRemove = participants.Single(user => user.ID == (int)userid);
+                
+                //TODO: make sure this item is not selected before delete.
+
+                //if no notes were taken on this inidvidual it is safe to delete
+                if (participant_toRemove.Notes == GlobalVar.default_note)
                 {
-                    int userid = (int)(UInt32)lstUserID.GetValue(i);
-                    if (participant.ID == userid)
-                    {
-                        // We found a match
-                        notFound = false;
-                        break;
-                    }
+                    participants.Remove(participant_toRemove);
                 }
-                if (notFound)
-                {
-                    //We have found the item to remove. We can stop the for leap
-                    participants.Remove(participant);
-                    break;
-                }
+
             }
+            //foreach (var participant in participants)
+            //{
+            //    bool notFound = true;
+            //    for (int i = lstUserID.GetLowerBound(0); i <= lstUserID.GetUpperBound(0); i++)
+            //    {
+            //        int userid = (int)(UInt32)lstUserID.GetValue(i);
+            //        ZOOM_SDK_DOTNET_WRAP.IUserInfoDotNetWrap user = ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().
+            //       GetMeetingParticipantsController().GetUserByUserID((uint)userid);
+
+            //        if ((participant.ID == userid) & (participant.Name == user.GetUserNameW()))
+            //        {
+            //            // We found a match
+            //            notFound = false;
+            //            break;
+            //        }
+
+            //    }
+            //    if (notFound)
+            //    {
+            //        //We have found the item to remove. We can stop the for leap
+            //        participants.Remove(participant);
+            //        break;
+            //    }
+            //}
 
         }
         public void AddParticipant(Array lstUserID)
@@ -97,10 +139,13 @@ namespace zoom_sdk_demo.Models
             for (int i = lstUserID.GetLowerBound(0); i <= lstUserID.GetUpperBound(0); i++)
             {
                 int userid = (int)(UInt32)lstUserID.GetValue(i);
+
+                ZOOM_SDK_DOTNET_WRAP.IUserInfoDotNetWrap user = ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().
+            GetMeetingParticipantsController().GetUserByUserID((uint)userid);
                 bool notFound = true;
                 foreach (var participant in participants)
                 {
-                    if (participant.ID == userid)
+                    if ((participant.ID == userid) & (participant.Name == user.GetUserNameW()))
                     {
                         notFound = false;
                         break;
@@ -109,11 +154,11 @@ namespace zoom_sdk_demo.Models
                 if (notFound)
                 {
                     //We need add the new participant
-                    ZOOM_SDK_DOTNET_WRAP.IUserInfoDotNetWrap user = ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().
-                    GetMeetingParticipantsController().GetUserByUserID((UInt32)userid);
+                    //ZOOM_SDK_DOTNET_WRAP.IUserInfoDotNetWrap user = ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().
+                    //GetMeetingParticipantsController().GetUserByUserID((UInt32)userid);
 
                     string name = user.GetUserNameW();
-                    participants.Add(new Participant { ID = userid, Name = name});
+                    participants.Add(new Participant { ID = userid, Name = name });
                     break;
                 }
             }
