@@ -14,6 +14,59 @@ namespace zoom_sdk_demo.Models
         //TODO; persoanlize note message. 
         public string Notes { get; set; } = "Write your thoughts here on this participant";
 
+        // TODO: Distinguish teachers from students
+        public bool isStudent = true;
+
+        // Index 0 is always Evaluations from quizzes for now
+        public List<double> Evaluation = new List<double>();
+
+        public double Evaluate(List<Question> questions )
+        {
+            int numQ = 0;
+            double eval = 0;
+            foreach (Question q in questions)
+            {
+                if (q.used)
+                {
+                    numQ++;
+                    if (q.responses[Name].Item2)
+                    {
+                        eval++;
+                    }
+                    else
+                    {
+                        eval--;
+                    }
+                }
+            }
+            if (numQ > 0)
+            {
+                if (Evaluation.Count < 1)
+                {
+                    Evaluation.Add(eval / numQ);
+                }
+                else
+                {
+                    Evaluation[0] = eval / numQ;
+                }
+
+                return eval / numQ;
+            }
+            else
+            {
+                if (Evaluation.Count < 1)
+                {
+                    Evaluation.Add(0);
+                }
+                else
+                {
+                    Evaluation[0] = 0;
+                }
+                return 0;
+            }
+            
+        }
+
 
     }
 
@@ -107,11 +160,43 @@ namespace zoom_sdk_demo.Models
                     GetMeetingParticipantsController().GetUserByUserID((UInt32)userid);
 
                     string name = user.GetUserNameW();
-                    participants.Add(new Participant { ID = userid, Name = name});
+                    participants.Add(new Participant { ID = userid, Name = name });
                     break;
                 }
             }
 
+        }
+
+        public void EvaluateStudents(List<Question> questions)
+        {
+            foreach (Participant p in participants)
+            {
+                if (p.isStudent)
+                {
+                    p.Evaluate(questions);
+                }
+            }
+        }
+
+        public List<(Participant, double)> GetSortedStudents()
+        {
+            // Must call Evaluate students first!
+            List<(Participant, double)> students = new List<(Participant, double)>();
+            foreach (Participant p in participants)
+            {
+                if (p.isStudent)
+                {
+                    students.Add((p, p.Evaluation[0]));
+                }
+            }
+            students.Sort(CompareStudents);
+
+            return students;
+        }
+
+        public static int CompareStudents((Participant, double) a, (Participant, double) b)
+        {
+            return a.Item2.CompareTo(b.Item2);
         }
     }
 }
