@@ -67,38 +67,60 @@ namespace zoom_sdk_demo.Models
             }
         }
 
-        public void hostChanged()
+        public void hostChanged(UInt32 userId)
         {
+            //check id the new user and their name is the same. Then we have nothing to worry about
+            ZOOM_SDK_DOTNET_WRAP.IUserInfoDotNetWrap user = ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().
+                  GetMeetingParticipantsController().GetUserByUserID((uint)userId);
+
+            Participant potential_host = participants.Single(i => i.ID == (int)userId);
+            Console.WriteLine("Host Changed");
+            if (potential_host.Name == user.GetUserNameW())
+            {
+                Console.WriteLine("Everthing Seems fine. Host ID did not change");
+            }
+
 
         }
 
+        //This gives the array of participants to remove
         public void RemoveParticpant(Array lstUserID)
         {
-            //TODO: would be nice to make this code more consist. (smaller and cleaner
-            foreach (var participant in participants)
+            //TODO: would be nice to make this code more consist. (smaller and cleaner) This now runs in n2 if the user id is the last one
+
+            Console.WriteLine("Length of the Users to remove " + lstUserID.Length);
+
+            for (int i = lstUserID.GetLowerBound(0); i <= lstUserID.GetUpperBound(0); i++)
             {
-                bool notFound = true;
-                for (int i = lstUserID.GetLowerBound(0); i <= lstUserID.GetUpperBound(0); i++)
-                {
-                    int userid = (int)(UInt32)lstUserID.GetValue(i);
-                    ZOOM_SDK_DOTNET_WRAP.IUserInfoDotNetWrap user = ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().
-                   GetMeetingParticipantsController().GetUserByUserID((uint)userid);
+                int userid = (int)(UInt32)lstUserID.GetValue(i);
+                Participant participant_toRemove = participants.Single(user => user.ID == (int)userid);
+                participants.Remove(participant_toRemove);
 
-                    if ((participant.ID == userid) && (participant.Name == user.GetUserNameW()))
-                    {
-                        // We found a match
-                        notFound = false;
-                        break;
-                    }
-
-                }
-                if (notFound)
-                {
-                    //We have found the item to remove. We can stop the for leap
-                    participants.Remove(participant);
-                    break;
-                }
             }
+            //foreach (var participant in participants)
+            //{
+            //    bool notFound = true;
+            //    for (int i = lstUserID.GetLowerBound(0); i <= lstUserID.GetUpperBound(0); i++)
+            //    {
+            //        int userid = (int)(UInt32)lstUserID.GetValue(i);
+            //        ZOOM_SDK_DOTNET_WRAP.IUserInfoDotNetWrap user = ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().
+            //       GetMeetingParticipantsController().GetUserByUserID((uint)userid);
+
+            //        if ((participant.ID == userid) & (participant.Name == user.GetUserNameW()))
+            //        {
+            //            // We found a match
+            //            notFound = false;
+            //            break;
+            //        }
+
+            //    }
+            //    if (notFound)
+            //    {
+            //        //We have found the item to remove. We can stop the for leap
+            //        participants.Remove(participant);
+            //        break;
+            //    }
+            //}
 
         }
         public void AddParticipant(Array lstUserID)
@@ -112,7 +134,7 @@ namespace zoom_sdk_demo.Models
                 bool notFound = true;
                 foreach (var participant in participants)
                 {
-                    if ((participant.ID == userid) && (participant.Name == user.GetUserNameW()))
+                    if ((participant.ID == userid) & (participant.Name == user.GetUserNameW()))
                     {
                         notFound = false;
                         break;
