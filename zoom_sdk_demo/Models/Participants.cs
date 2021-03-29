@@ -53,8 +53,8 @@ namespace zoom_sdk_demo.Models
 
                 // Testing the new functionality added
 
-                Console.WriteLine("Talking");
-                Console.WriteLine(user.IsTalking().ToString());
+                //Console.WriteLine("Talking");
+                //Console.WriteLine(user.IsTalking().ToString());
 
                 if (null != (Object)user)
                 {
@@ -67,6 +67,11 @@ namespace zoom_sdk_demo.Models
             }
         }
 
+        public void hostChanged()
+        {
+
+        }
+
         public void RemoveParticpant(Array lstUserID)
         {
             //TODO: would be nice to make this code more consist. (smaller and cleaner
@@ -76,12 +81,16 @@ namespace zoom_sdk_demo.Models
                 for (int i = lstUserID.GetLowerBound(0); i <= lstUserID.GetUpperBound(0); i++)
                 {
                     int userid = (int)(UInt32)lstUserID.GetValue(i);
-                    if (participant.ID == userid)
+                    ZOOM_SDK_DOTNET_WRAP.IUserInfoDotNetWrap user = ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().
+                   GetMeetingParticipantsController().GetUserByUserID((uint)userid);
+
+                    if ((participant.ID == userid) && (participant.Name == user.GetUserNameW()))
                     {
                         // We found a match
                         notFound = false;
                         break;
                     }
+
                 }
                 if (notFound)
                 {
@@ -97,10 +106,13 @@ namespace zoom_sdk_demo.Models
             for (int i = lstUserID.GetLowerBound(0); i <= lstUserID.GetUpperBound(0); i++)
             {
                 int userid = (int)(UInt32)lstUserID.GetValue(i);
+
+                ZOOM_SDK_DOTNET_WRAP.IUserInfoDotNetWrap user = ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().
+            GetMeetingParticipantsController().GetUserByUserID((uint)userid);
                 bool notFound = true;
                 foreach (var participant in participants)
                 {
-                    if (participant.ID == userid)
+                    if ((participant.ID == userid) && (participant.Name == user.GetUserNameW()))
                     {
                         notFound = false;
                         break;
@@ -109,11 +121,11 @@ namespace zoom_sdk_demo.Models
                 if (notFound)
                 {
                     //We need add the new participant
-                    ZOOM_SDK_DOTNET_WRAP.IUserInfoDotNetWrap user = ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().
-                    GetMeetingParticipantsController().GetUserByUserID((UInt32)userid);
+                    //ZOOM_SDK_DOTNET_WRAP.IUserInfoDotNetWrap user = ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().
+                    //GetMeetingParticipantsController().GetUserByUserID((UInt32)userid);
 
                     string name = user.GetUserNameW();
-                    participants.Add(new Participant { ID = userid, Name = name});
+                    participants.Add(new Participant { ID = userid, Name = name });
                     break;
                 }
             }
