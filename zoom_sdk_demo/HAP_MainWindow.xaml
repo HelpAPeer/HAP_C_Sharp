@@ -4,23 +4,25 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:zoom_sdk_demo"
-        mc:Ignorable="d"
+    mc:Ignorable="d"
             xmlns:ui="http://schemas.modernwpf.com/2019"
         Title="Help-A-PEER" 
         xmlns:data="clr-namespace:zoom_sdk_demo.Models"
-    ui:WindowHelper.UseModernWindowStyle="True">
+           xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
+    ui:WindowHelper.UseModernWindowStyle="True"
+        Closing="Wnd_Closing">
     <Grid Background="#E5E5E5">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <TabControl Grid.Column="1">
-            <TabItem Header="Chat">
+            <!--<TabItem Header="Chat">
                 <Label Content="chat with your students" />
-            </TabItem>
+            </TabItem>-->
             <TabItem Header="Quiz">
                 <DockPanel LastChildFill="False" Background="White">
-                    <Button Click="Add_Question_Click" Margin="5" Padding="5,2" DockPanel.Dock="Top" HorizontalAlignment="Right" Content="+">
+                    <Button Click="Add_Question_Click" Margin="5" Padding="5,2" DockPanel.Dock="Top" HorizontalAlignment="Right" Content="+" FontSize="24">
                     </Button>
                     <ListView  x:Name="questions_list" Width="Auto" DockPanel.Dock="Top" ItemsSource="{Binding}" >
                         <ListView.ItemContainerStyle>
@@ -155,9 +157,13 @@
                 <RowDefinition Height="2*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0">
-                <TextBlock HorizontalAlignment="Center">Zoom</TextBlock>
-            </StackPanel>
+
+
+            <WindowsFormsHost Margin="10"  Grid.Row="0" Name="ZoomPlace">
+                <wf:Panel x:Name="CBox"/>
+            </WindowsFormsHost>
+
+
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>

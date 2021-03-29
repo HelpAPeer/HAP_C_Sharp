@@ -261,6 +261,13 @@ namespace ZOOM_SDK_DOTNET_WRAP {
 			return 0;
 		}
 
+		virtual String^ GetParticipantID()
+		{
+			if (m_pInfo)
+				return WChar2PlatformString(m_pInfo->GetParticipantID());
+			return nullptr;
+		}
+
 		virtual bool IsVideoOn()
 		{
 			if (m_pInfo)
@@ -300,6 +307,13 @@ namespace ZOOM_SDK_DOTNET_WRAP {
 		{
 			if (m_pInfo)
 				return m_pInfo->IsRaiseHand();
+			return false;
+		}
+
+		virtual bool IsTalking()
+		{
+			if (m_pInfo)
+				return m_pInfo->IsTalking();
 			return false;
 		}
 
