@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
@@ -77,6 +78,14 @@ namespace zoom_sdk_demo
         {
             GroupManager.instance.groups.Clear();
             Close();
+        }
+
+        private void ShareGroup_Click(object sender, RoutedEventArgs e)
+        {
+            ZOOM_SDK_DOTNET_WRAP.HWNDDotNet wind = new ZOOM_SDK_DOTNET_WRAP.HWNDDotNet(); // TODO: Make more resource efficient
+            IntPtr windowHandle = new WindowInteropHelper(this).Handle;
+            wind.value = (uint)windowHandle;
+            ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().GetMeetingShareController().StartAppShare(wind);
         }
     }
 }
