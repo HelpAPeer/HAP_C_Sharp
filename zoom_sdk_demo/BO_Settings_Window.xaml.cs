@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using zoom_sdk_demo.Models;
+using ZOOM_SDK_DOTNET_WRAP;
 
 namespace zoom_sdk_demo
 {
@@ -63,6 +64,30 @@ namespace zoom_sdk_demo
         {
             var groups = GroupManager.instance.groups;
             //intialize the breakout rooms based on the groups made
+            // Reference: https://devforum.zoom.us/t/how-to-use-the-ibocreator-class-in-c/26548/2
+            ZOOM_SDK_DOTNET_WRAP.IMeetingBreakoutRoomsControllerDotNetWrap BO_controller = ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().GetMeetingBreakoutRoomsController();
+
+            // only gets all the breakout rooms when you are host
+            Array list_of_BOs = BO_controller.GetBreakoutRoomsInfoList();
+
+            //if (list_of_BOs.Length > 0)
+            if (!(list_of_BOs is null))
+            {
+                for (int i = list_of_BOs.GetLowerBound(0); i <= list_of_BOs.GetUpperBound(0); i++)
+                {
+                    IBreakoutRoomsInfoDotNet breakout_room = (IBreakoutRoomsInfoDotNet)list_of_BOs.GetValue(i);
+                    Console.WriteLine(breakout_room.GetBID());
+                    Console.WriteLine(breakout_room.GetBreakoutRoomName());
+                    //BO_controller.JoinBreakoutRoom(breakout_room.GetBID());
+                }
+            }
+
+            //TODO:need to fix
+            //foreach (IBreakoutRoomsInfoDotNet bo in list_of_BOs)
+            //{
+            //    Console.WriteLine(bo.GetBID());
+            //    Console.WriteLine(bo.GetBreakoutRoomName());
+            //}
 
             Close();
 
