@@ -11,6 +11,7 @@ namespace zoom_sdk_demo.Models
     {
         public String Name { get; set; } = "";
         public ObservableCollection<Participant> Participants_in_group { get; set; } = new ObservableCollection<Participant>();
+        public String group_ID { get; set; } = "";
 
     }
 
@@ -31,7 +32,7 @@ namespace zoom_sdk_demo.Models
             groups.Clear();
             Group group = new Group();
             int count = 0;
-            
+
             int groupCount = 1;
             foreach (var participant in ParticipantManager.instance.participants)
             {
@@ -39,7 +40,7 @@ namespace zoom_sdk_demo.Models
                 count++;
                 if (count % groupSize == 0)
                 {
-                    group.Name = "Group " + groupCount.ToString();
+                    group.Name = "Room " + groupCount.ToString();
                     groups.Add(group);
                     groupCount++;
                     group = new Group();
@@ -49,7 +50,7 @@ namespace zoom_sdk_demo.Models
                 //Continue for the if before holds if we have exactly number of participants divisble by group size
                 if (count == ParticipantManager.instance.participants.Count)
                 {
-                    group.Name = "Group " + groupCount.ToString();
+                    group.Name = "Room " + groupCount.ToString();
                     groups.Add(group);
 
                 }

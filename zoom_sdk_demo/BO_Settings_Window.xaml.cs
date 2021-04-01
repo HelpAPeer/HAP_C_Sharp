@@ -59,7 +59,7 @@ namespace zoom_sdk_demo
         }
 
 
-
+        // Need to be host for this to work 
         private void StartBO_Click(object sender, RoutedEventArgs e)
         {
             var groups = GroupManager.instance.groups;
@@ -77,7 +77,21 @@ namespace zoom_sdk_demo
                 {
                     IBreakoutRoomsInfoDotNet breakout_room = (IBreakoutRoomsInfoDotNet)list_of_BOs.GetValue(i);
                     Console.WriteLine(breakout_room.GetBID());
+                    String b_id = breakout_room.GetBID();
                     Console.WriteLine(breakout_room.GetBreakoutRoomName());
+                    String b_roomName = breakout_room.GetBreakoutRoomName();
+                    Group group_toModify = groups.FirstOrDefault(group => group.Name.Contains(b_roomName));
+
+
+                    if (!(group_toModify is null))
+                    {
+                        Console.WriteLine("We Found something");
+                        group_toModify.group_ID = breakout_room.GetBID();
+                        int index = groups.IndexOf(group_toModify);
+                        groups.RemoveAt(index);
+                        groups.Insert(index, group_toModify);
+                    }
+
                     //BO_controller.JoinBreakoutRoom(breakout_room.GetBID());
                 }
             }
