@@ -177,10 +177,13 @@ namespace zoom_sdk_demo
                 Participant person = group.Participants_in_group[i];
 
                 // above is working
-                //This inside
-                //int index = ParticipantManager.instance.participants.IndexOf(person);
-                //ParticipantManager.instance.participants.RemoveAt(0);
-                //ParticipantManager.instance.participants.Insert(0, person);
+                //It might be that notes are not updated within the observation list
+
+                Participant person_in_list = ParticipantManager.instance.participants.FirstOrDefault(j => j.ID == person.ID);
+                int index = ParticipantManager.instance.participants.IndexOf(person_in_list);
+
+                Console.WriteLine("Index for the particapnt we want to remove {0}", index);
+                ParticipantManager.instance.participants.Move(index, 0);
             }
 
         }
