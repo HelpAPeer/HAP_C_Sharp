@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using zoom_sdk_demo.Models;
+using ZOOM_SDK_DOTNET_WRAP;
 
 namespace zoom_sdk_demo
 {
@@ -58,11 +59,49 @@ namespace zoom_sdk_demo
         }
 
 
-
+        // Need to be host for this to work 
         private void StartBO_Click(object sender, RoutedEventArgs e)
         {
             var groups = GroupManager.instance.groups;
             //intialize the breakout rooms based on the groups made
+            // Reference: https://devforum.zoom.us/t/how-to-use-the-ibocreator-class-in-c/26548/2
+            ZOOM_SDK_DOTNET_WRAP.IMeetingBreakoutRoomsControllerDotNetWrap BO_controller = ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().GetMeetingBreakoutRoomsController();
+
+            // only gets all the breakout rooms when you are host
+            Array list_of_BOs = BO_controller.GetBreakoutRoomsInfoList();
+
+            //if (list_of_BOs.Length > 0)
+            if (!(list_of_BOs is null))
+            {
+                for (int i = list_of_BOs.GetLowerBound(0); i <= list_of_BOs.GetUpperBound(0); i++)
+                {
+                    IBreakoutRoomsInfoDotNet breakout_room = (IBreakoutRoomsInfoDotNet)list_of_BOs.GetValue(i);
+                    Console.WriteLine(breakout_room.GetBID());
+                    String b_id = breakout_room.GetBID();
+                    Console.WriteLine(breakout_room.GetBreakoutRoomName());
+                    String b_roomName = breakout_room.GetBreakoutRoomName();
+                    Group group_toModify = groups.FirstOrDefault(group => group.Name.Contains(b_roomName));
+
+
+                    if (!(group_toModify is null))
+                    {
+                        Console.WriteLine("We Found something");
+                        group_toModify.group_ID = breakout_room.GetBID();
+                        int index = groups.IndexOf(group_toModify);
+                        groups.RemoveAt(index);
+                        groups.Insert(index, group_toModify);
+                    }
+
+                    //BO_controller.JoinBreakoutRoom(breakout_room.GetBID());
+                }
+            }
+
+            //TODO:need to fix
+            //foreach (IBreakoutRoomsInfoDotNet bo in list_of_BOs)
+            //{
+            //    Console.WriteLine(bo.GetBID());
+            //    Console.WriteLine(bo.GetBreakoutRoomName());
+            //}
 
             Close();
 
