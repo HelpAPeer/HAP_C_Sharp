@@ -151,12 +151,37 @@ namespace zoom_sdk_demo
         private void join_Bo_click(object sender, RoutedEventArgs e)
         {
             Group group = (sender as Button).DataContext as Group;
-            (sender as Button).Content = "Joined";
 
             ZOOM_SDK_DOTNET_WRAP.IMeetingBreakoutRoomsControllerDotNetWrap BO_controller = ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().GetMeetingBreakoutRoomsController();
-            BO_controller.JoinBreakoutRoom(group.group_ID);
+            if (group.group_ID != "")
+            {
+                //We need to leave an y breakout rooms that we might be in
+                if (GroupManager.instance.last_groupID != "")
+                {
+                    BO_controller.LeaveBreakoutRoom();
+                    //TODO: wait for in meeting status then we can call Join Breakout room
+                }
+                GroupManager.instance.joinedBO_Room = true;
+                BO_controller.JoinBreakoutRoom(group.group_ID);
+                GroupManager.instance.last_groupID = group.group_ID;
+                (sender as Button).Content = "Joined";
+            }
 
-//TODO: get list of people in the BO Group and put their name first
+
+            //TODO: get list of people in the BO Group and put their name first
+            // we are doing this via the group
+            Console.WriteLine(group.Participants_in_group.Count);
+            for (int i = 0; i < group.Participants_in_group.Count; i++)
+            {
+                Console.WriteLine("We are here");
+                Participant person = group.Participants_in_group[i];
+
+                // above is working
+                //This inside
+                //int index = ParticipantManager.instance.participants.IndexOf(person);
+                //ParticipantManager.instance.participants.RemoveAt(0);
+                //ParticipantManager.instance.participants.Insert(0, person);
+            }
 
         }
     }
