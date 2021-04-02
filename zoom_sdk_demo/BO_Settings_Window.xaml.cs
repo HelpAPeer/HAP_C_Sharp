@@ -70,6 +70,7 @@ namespace zoom_sdk_demo
 
         private void update_click(object sender, RoutedEventArgs e)
         {
+            //ParticipantManager.instance.EvaluateStudents(((HAP_MainWindow)Application.Current.MainWindow).questions);
             GroupManager.instance.getGroups();
         }
 

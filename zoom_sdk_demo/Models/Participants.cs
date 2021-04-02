@@ -20,13 +20,15 @@ namespace zoom_sdk_demo.Models
         // Index 0 is always Evaluations from quizzes for now
         public List<double> Evaluation = new List<double>();
 
-        public double Evaluate(List<Question> questions )
+        public double Evaluate(ObservableCollection<Question> questions )
         {
+            Console.WriteLine("Evaluating student " + Name);
+
             int numQ = 0;
             double eval = 0;
             foreach (Question q in questions)
             {
-                if (q.used)
+                if (q.used && q.responses.ContainsKey(Name))
                 {
                     numQ++;
                     if (q.responses[Name].Item2)
@@ -37,6 +39,10 @@ namespace zoom_sdk_demo.Models
                     {
                         eval--;
                     }
+                }
+                else
+                {
+                    Console.WriteLine("Student " + Name + " has not responded to question " + q.question);
                 }
             }
             if (numQ > 0)
@@ -50,6 +56,7 @@ namespace zoom_sdk_demo.Models
                     Evaluation[0] = eval / numQ;
                 }
 
+                Console.WriteLine(Name + " evaluated as " + Evaluation[0]);
                 return eval / numQ;
             }
             else
@@ -62,6 +69,7 @@ namespace zoom_sdk_demo.Models
                 {
                     Evaluation[0] = 0;
                 }
+                Console.WriteLine(Name + " not evaluated.");
                 return 0;
             }
             
@@ -173,8 +181,9 @@ namespace zoom_sdk_demo.Models
 
         }
 
-        public void EvaluateStudents(List<Question> questions)
+        public void EvaluateStudents(ObservableCollection<Question> questions)
         {
+            Console.WriteLine("Evaluating all students");
             foreach (Participant p in participants)
             {
                 if (p.isStudent)

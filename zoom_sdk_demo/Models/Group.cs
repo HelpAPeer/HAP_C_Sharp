@@ -22,7 +22,7 @@ namespace zoom_sdk_demo.Models
         public int groupSize { get; set; } = 3;
 
         // Substitute for enum, 0 = Hetero, 1 = Homo, 2 = Random
-        public int groupType { get; set; } = 2;
+        public int groupType { get; set; } = 0;
 
         public void getGroups()
         {
