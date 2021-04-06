@@ -196,9 +196,5 @@ namespace zoom_sdk_demo
             System.Windows.Application.Current.Shutdown();
         }
 
-        private void textBox_meetingnumber_api_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
-        {
-
-        }
     }
 }
