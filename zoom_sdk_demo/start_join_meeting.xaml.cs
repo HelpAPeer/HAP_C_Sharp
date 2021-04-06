@@ -128,19 +128,28 @@ namespace zoom_sdk_demo
                 GetMeetingParticipantsController().Add_CB_onUserLeft(onUserLeft);
             ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().
                 GetMeetingParticipantsController().Add_CB_onUserNameChanged(onUserNameChanged);
+            //CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().GetMeetingParticipantsController().
         }
         private void button_start_api_Click(object sender, RoutedEventArgs e)
         {
             RegisterCallBack();
             ZOOM_SDK_DOTNET_WRAP.StartParam param = new ZOOM_SDK_DOTNET_WRAP.StartParam();
-            param.userType = ZOOM_SDK_DOTNET_WRAP.SDKUserType.SDK_UT_WITHOUT_LOGIN;
-            ZOOM_SDK_DOTNET_WRAP.StartParam4WithoutLogin start_withoutlogin_param = new ZOOM_SDK_DOTNET_WRAP.StartParam4WithoutLogin();
-            start_withoutlogin_param.meetingNumber = UInt64.Parse(textBox_meetingnumber_api.Text);
-            start_withoutlogin_param.userID = textBox_userid_api.Text;
-            //start_withoutlogin_param.userZAK = textBox_AccessToken.Text;
-            start_withoutlogin_param.userName = textBox_username_api.Text;
-            start_withoutlogin_param.zoomuserType = ZOOM_SDK_DOTNET_WRAP.ZoomUserType.ZoomUserType_APIUSER;
-            param.withoutloginStart = start_withoutlogin_param;
+
+            //param.userType = ZOOM_SDK_DOTNET_WRAP.SDKUserType.SDK_UT_WITHOUT_LOGIN;
+            //ZOOM_SDK_DOTNET_WRAP.StartParam4WithoutLogin start_withoutlogin_param = new ZOOM_SDK_DOTNET_WRAP.StartParam4WithoutLogin();
+            //start_withoutlogin_param.meetingNumber = UInt64.Parse(textBox_meetingnumber_api.Text);
+            //start_withoutlogin_param.userID = textBox_userid_api.Text;
+            ////start_withoutlogin_param.userZAK = textBox_AccessToken.Text;
+            //start_withoutlogin_param.userName = textBox_username_api.Text;
+            //start_withoutlogin_param.zoomuserType = ZOOM_SDK_DOTNET_WRAP.ZoomUserType.ZoomUserType_APIUSER;
+            //param.withoutloginStart = start_withoutlogin_param;
+
+            param.userType = SDKUserType.SDK_UT_NORMALUSER;
+            ZOOM_SDK_DOTNET_WRAP.StartParam4NormalUser start_withlogin = new ZOOM_SDK_DOTNET_WRAP.StartParam4NormalUser();
+            //start_withlogin.
+            start_withlogin.meetingNumber = UInt64.Parse(textBox_meetingnumber_api.Text.Replace(" ", ""));
+
+            param.normaluserStart = start_withlogin;
 
             ZOOM_SDK_DOTNET_WRAP.SDKError err = ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().Start(param);
             if (ZOOM_SDK_DOTNET_WRAP.SDKError.SDKERR_SUCCESS == err)
@@ -156,15 +165,22 @@ namespace zoom_sdk_demo
         {
             RegisterCallBack();
             ZOOM_SDK_DOTNET_WRAP.JoinParam param = new ZOOM_SDK_DOTNET_WRAP.JoinParam();
-            param.userType = ZOOM_SDK_DOTNET_WRAP.SDKUserType.SDK_UT_WITHOUT_LOGIN;
-            ZOOM_SDK_DOTNET_WRAP.JoinParam4WithoutLogin join_api_param = new ZOOM_SDK_DOTNET_WRAP.JoinParam4WithoutLogin();
-            // remove the api.text empty spaces
-            join_api_param.meetingNumber = UInt64.Parse(textBox_meetingnumber_api.Text.Replace(" ", ""));
-            join_api_param.userName = textBox_username_api.Text;
-            param.withoutloginJoin = join_api_param;
+
+            //param.userType = ZOOM_SDK_DOTNET_WRAP.SDKUserType.SDK_UT_WITHOUT_LOGIN;
+            //ZOOM_SDK_DOTNET_WRAP.JoinParam4WithoutLogin join_api_param = new ZOOM_SDK_DOTNET_WRAP.JoinParam4WithoutLogin();
+            //// remove the api.text empty spaces
+            //join_api_param.meetingNumber = UInt64.Parse(textBox_meetingnumber_api.Text.Replace(" ", ""));
+            //join_api_param.userName = textBox_username_api.Text;
+            //param.withoutloginJoin = join_api_param;
+
+            param.userType = ZOOM_SDK_DOTNET_WRAP.SDKUserType.SDK_UT_NORMALUSER;
+            ZOOM_SDK_DOTNET_WRAP.JoinParam4NormalUser join_api_param = new ZOOM_SDK_DOTNET_WRAP.JoinParam4NormalUser();
+            //join_api_param.
+            join_api_param.meetingNumber = UInt64.Parse(textBox_meetingnumber_api.Text.Replace(" ", "")); ;
+            param.normaluserJoin = join_api_param;
+
 
             ZOOM_SDK_DOTNET_WRAP.SDKError err = ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().Join(param);
-
 
             if (ZOOM_SDK_DOTNET_WRAP.SDKError.SDKERR_SUCCESS == err)
             {
@@ -180,9 +196,5 @@ namespace zoom_sdk_demo
             System.Windows.Application.Current.Shutdown();
         }
 
-        private void textBox_meetingnumber_api_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
-        {
-
-        }
     }
 }
