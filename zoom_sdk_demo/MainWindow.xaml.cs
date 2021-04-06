@@ -31,7 +31,7 @@ namespace zoom_sdk_demo
 
         public MainWindow()
         {
-            InitializeComponent(); 
+            InitializeComponent();
         }
 
         //callback
@@ -49,7 +49,7 @@ namespace zoom_sdk_demo
                 {
                     Console.WriteLine(account.GetDisplayName());
                     Console.WriteLine(account.GetLoginType());
-                    if(account.GetDisplayName().Length == 0 && account.GetLoginType() == ZOOM_SDK_DOTNET_WRAP.LoginType.LoginType_Unknown)
+                    if (account.GetDisplayName().Length == 0 && account.GetLoginType() == ZOOM_SDK_DOTNET_WRAP.LoginType.LoginType_Unknown)
                     {
                         tryLogin();
                     }
@@ -57,7 +57,7 @@ namespace zoom_sdk_demo
                     {
                         start_meeting_wnd.Show();
                     }
-                    
+
                 }
             }
             else//error handle.todo
@@ -94,15 +94,20 @@ namespace zoom_sdk_demo
             ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetAuthServiceWrap().Add_CB_onLogout(onLogout);
             //
             ZOOM_SDK_DOTNET_WRAP.AuthContext param = new ZOOM_SDK_DOTNET_WRAP.AuthContext();
-            
+
 
             string genToken = generateJWT();
             Console.WriteLine(genToken);
-            param.jwt_token = genToken; 
+            param.jwt_token = genToken;
 
-            
-            ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetAuthServiceWrap().SDKAuth(param);
-            Hide();
+
+            ZOOM_SDK_DOTNET_WRAP.SDKError err = ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetAuthServiceWrap().SDKAuth(param);
+
+            if (ZOOM_SDK_DOTNET_WRAP.SDKError.SDKERR_SUCCESS == err)
+            {
+                Hide();
+            }
+
         }
 
         private string generateJWT()
@@ -115,7 +120,7 @@ namespace zoom_sdk_demo
             // Generating the time values for token
             var now = DateTimeOffset.UtcNow.AddMilliseconds(-30);
             var epoch = new DateTimeOffset(1970, 1, 1, 0, 1, 0, TimeSpan.Zero);
-            var iat = (long) (now - epoch).TotalSeconds;
+            var iat = (long)(now - epoch).TotalSeconds;
             var exp = (long)(now.AddHours(40) - epoch).TotalSeconds;
             var tokenExp = (long)(now.AddMinutes(45) - epoch).TotalSeconds;
 
