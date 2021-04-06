@@ -26,7 +26,7 @@ namespace zoom_sdk_demo
                 case ZOOM_SDK_DOTNET_WRAP.MeetingStatus.MEETING_STATUS_ENDED:
                     {
                         hAP_MainWindow.Hide();
-                        ParticipantManager.instance.participants.Clear();
+                        //ParticipantManager.instance.participants.Clear();
                         System.Windows.Application.Current.Shutdown();
 
                     }
@@ -40,16 +40,28 @@ namespace zoom_sdk_demo
                         Show();
                     }
                     break;
-
+                //This is called when you join meeting and when you join a breakout room as well
                 case ZOOM_SDK_DOTNET_WRAP.MeetingStatus.MEETING_STATUS_INMEETING:
                     {
 
+
                         // Load the meeting partipants now
                         // Would be best to update the observable list. Instead of tying a new one https://gist.github.com/tymorrow/9397870
-                        ParticipantManager.instance.GetParticipantsInMeeting();
+
+                        //Check that we aren't join a breakout room! We don't want to get the new part
+                        if (!GroupManager.instance.joinedBO_Room)
+                        {
+                            ParticipantManager.instance.GetParticipantsInMeeting();
+                        }
                         //would be best to show the Ui When we are in the meeting here. This is the view we actually care about
                         hAP_MainWindow.Show();
                         hAP_MainWindow.embedZoom();
+                    }
+                    break;
+                case MeetingStatus.MEETING_STATUS_LEAVE_BREAKOUT_ROOM:
+                    {
+                        //We left the breakout room. we would need to add some functions into this
+                        GroupManager.instance.joinedBO_Room = false;
                     }
                     break;
                 default://todo
@@ -60,7 +72,12 @@ namespace zoom_sdk_demo
         //Callback event of notification of users who are in the meeting.
         public void onUserJoin(Array lstUserID)
         {
-            ParticipantManager.instance.AddParticipant(lstUserID);
+            Console.WriteLine("participant Joined");
+            //TODO: need a way to rest if in main room
+            if (!(GroupManager.instance.joinedBO_Room))
+            {
+                ParticipantManager.instance.AddParticipant(lstUserID);
+            }
 
         }
 
@@ -77,7 +94,7 @@ namespace zoom_sdk_demo
 
         public void onHostChangeNotification(UInt32 userId)
         {
-            //todo: might need to readdress the issue here
+            // might need to readdress the issue here.[IDs don't change when hosts change
             ParticipantManager.instance.hostChanged(userId);
         }
         public void onLowOrRaiseHandStatusChanged(bool bLow, UInt32 userid)

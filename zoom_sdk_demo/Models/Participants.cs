@@ -162,14 +162,18 @@ namespace zoom_sdk_demo.Models
             for (int i = lstUserID.GetLowerBound(0); i <= lstUserID.GetUpperBound(0); i++)
             {
                 int userid = (int)(UInt32)lstUserID.GetValue(i);
-                Participant participant_toRemove = participants.Single(user => user.ID == (int)userid);
+                Participant participant_toRemove = participants.FirstOrDefault(user => user.ID == (int)userid);
 
                 //TODO: make sure this item is not selected before delete.
 
                 //if no notes were taken on this inidvidual it is safe to delete
-                if (participant_toRemove.Notes == GlobalVar.default_note)
+                if (!(participant_toRemove is null))
                 {
-                    participants.Remove(participant_toRemove);
+                    if (participant_toRemove.Notes == GlobalVar.default_note)
+                    {
+                        participants.Remove(participant_toRemove);
+                    }
+
                 }
 
             }

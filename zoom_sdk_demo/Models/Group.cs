@@ -21,6 +21,8 @@ namespace zoom_sdk_demo.Models
         private GroupManager() { }
         public ObservableCollection<Group> groups = new ObservableCollection<Group>();
         public int groupSize { get; set; } = 3;
+        public bool joinedBO_Room { get; set; } = false;
+        public string last_groupID { get; set; } = "";
 
         // Substitute for enum, 0 = Hetero, 1 = Homo, 2 = Random
         public int groupType { get; set; } = 0;

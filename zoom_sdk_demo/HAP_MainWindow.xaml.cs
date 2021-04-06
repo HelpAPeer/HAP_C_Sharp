@@ -149,6 +149,15 @@ namespace zoom_sdk_demo
             System.Windows.Application.Current.Shutdown();
         }
 
+        private void join_Bo_click(object sender, RoutedEventArgs e)
+        {
+            Group group = (sender as Button).DataContext as Group;
 
+            ZOOM_SDK_DOTNET_WRAP.IMeetingBreakoutRoomsControllerDotNetWrap BO_controller = ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().GetMeetingBreakoutRoomsController();
+            BO_controller.JoinBreakoutRoom(group.group_ID);
+
+//TODO: get list of people in the BO Group and put their name first
+
+        }
     }
 }
