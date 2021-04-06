@@ -28,6 +28,7 @@ namespace zoom_sdk_demo
             InitializeComponent();
             if (GroupManager.instance.groups.Count < 1)
             {
+                ParticipantManager.instance.EvaluateStudents(((HAP_MainWindow)Application.Current.MainWindow).questions);
                 GroupManager.instance.getGroups();
             }
             this.DataContext = GroupManager.instance.groups;
@@ -110,7 +111,7 @@ namespace zoom_sdk_demo
 
         private void update_click(object sender, RoutedEventArgs e)
         {
-            //ParticipantManager.instance.EvaluateStudents(((HAP_MainWindow)Application.Current.MainWindow).questions);
+            ParticipantManager.instance.EvaluateStudents(((HAP_MainWindow)Application.Current.MainWindow).questions);
             GroupManager.instance.getGroups();
         }
 

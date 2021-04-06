@@ -97,7 +97,7 @@
                                             <RowDefinition Height="2*"/>
                                         </Grid.RowDefinitions>
                                         <TextBlock Grid.Column="0" Text="{Binding Path=Name}"/>
-                                        <Button Grid.Column="1" HorizontalAlignment="Right" Name="join_button" Click="join_Bo_click">Join</Button>
+                                        <Button Grid.Column="1" HorizontalAlignment="Right">Join</Button>
 
                                         <ItemsControl Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{Binding Participants_in_group}">
                                             <ItemsControl.ItemTemplate>

@@ -123,7 +123,8 @@ namespace zoom_sdk_demo.Models
             for (int i = 0; groupCount < numGroups;)
             {
                 // Coppied from above code
-                group.Participants_in_group.Add(students[(i * groupSize + groupCount) %  students.Count].Item1);
+                if ((i * groupSize + groupCount) >= students.Count) break;
+                group.Participants_in_group.Add(students[(i * groupSize + groupCount)].Item1);
                 i++;
 
                 if (i == groupSize)

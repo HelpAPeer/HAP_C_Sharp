@@ -34,6 +34,12 @@ namespace zoom_sdk_demo.Models
         public void LogResponse(string student, string response)
         {
             var eval = (response, false);
+            if (responses.ContainsKey(student))
+            {
+                Console.WriteLine("Student " + student + " has already responded");
+                return;
+            }
+
             if (answers.Contains(response)) //TODO: Add methods for regrading, both for adding more answers and for marking specific student as correct
             {
                 eval.Item2 = true;

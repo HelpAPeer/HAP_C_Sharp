@@ -45,10 +45,14 @@ namespace zoom_sdk_demo.Models
                         eval--;
                     }
                 }
-                else
+                else if (q.used)
                 {
                     Console.WriteLine("Student " + Name + " has not responded to question " + q.question);
                 }
+                else
+                {
+                    Console.WriteLine("Question is not eligable");
+                }    
             }
             if (numQ > 0)
             {
@@ -240,7 +244,6 @@ namespace zoom_sdk_demo.Models
 
         public void EvaluateStudents(ObservableCollection<Question> questions)
         {
-            Console.WriteLine("Evaluating all students");
             foreach (Participant p in participants)
             {
                 if (p.isStudent)
