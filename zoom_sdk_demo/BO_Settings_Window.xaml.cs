@@ -28,6 +28,7 @@ namespace zoom_sdk_demo
             InitializeComponent();
             if (GroupManager.instance.groups.Count < 1)
             {
+                ParticipantManager.instance.EvaluateStudents(((HAP_MainWindow)Application.Current.MainWindow).questions);
                 GroupManager.instance.getGroups();
             }
             this.DataContext = GroupManager.instance.groups;
@@ -110,6 +111,7 @@ namespace zoom_sdk_demo
 
         private void update_click(object sender, RoutedEventArgs e)
         {
+            ParticipantManager.instance.EvaluateStudents(((HAP_MainWindow)Application.Current.MainWindow).questions);
             GroupManager.instance.getGroups();
         }
 
@@ -125,6 +127,21 @@ namespace zoom_sdk_demo
             IntPtr windowHandle = new WindowInteropHelper(this).Handle;
             wind.value = (uint)windowHandle;
             ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().GetMeetingShareController().StartAppShare(wind);
+        }
+
+        private void RadioButton_Checked_1(object sender, RoutedEventArgs e)
+        {
+            GroupManager.instance.groupType = 0;
+        }
+
+        private void RadioButton_Checked_2(object sender, RoutedEventArgs e)
+        {
+            GroupManager.instance.groupType = 1;
+        }
+
+        private void RadioButton_Checked_3(object sender, RoutedEventArgs e)
+        {
+            GroupManager.instance.groupType = 2;
         }
     }
 }

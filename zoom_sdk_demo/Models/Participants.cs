@@ -19,6 +19,71 @@ namespace zoom_sdk_demo.Models
         //TODO; persoanlize note message. 
         public string Notes { get; set; } = GlobalVar.default_note;
 
+        // TODO: Distinguish teachers from students
+        public bool isStudent = true;
+
+        // Index 0 is always Evaluations from quizzes for now
+        public List<double> Evaluation = new List<double>();
+
+        public double Evaluate(ObservableCollection<Question> questions )
+        {
+            Console.WriteLine("Evaluating student " + Name);
+
+            int numQ = 0;
+            double eval = 0;
+            foreach (Question q in questions)
+            {
+                if (q.used && q.responses.ContainsKey(Name))
+                {
+                    numQ++;
+                    if (q.responses[Name].Item2)
+                    {
+                        eval++;
+                    }
+                    else
+                    {
+                        eval--;
+                    }
+                }
+                else if (q.used)
+                {
+                    Console.WriteLine("Student " + Name + " has not responded to question " + q.question);
+                }
+                else
+                {
+                    Console.WriteLine("Question is not eligable");
+                }    
+            }
+            if (numQ > 0)
+            {
+                if (Evaluation.Count < 1)
+                {
+                    Evaluation.Add(eval / numQ);
+                }
+                else
+                {
+                    Evaluation[0] = eval / numQ;
+                }
+
+                Console.WriteLine(Name + " evaluated as " + Evaluation[0]);
+                return eval / numQ;
+            }
+            else
+            {
+                if (Evaluation.Count < 1)
+                {
+                    Evaluation.Add(0);
+                }
+                else
+                {
+                    Evaluation[0] = 0;
+                }
+                Console.WriteLine(Name + " not evaluated.");
+                return 0;
+            }
+            
+        }
+
 
     }
 
@@ -179,6 +244,38 @@ namespace zoom_sdk_demo.Models
                 }
             }
 
+        }
+
+        public void EvaluateStudents(ObservableCollection<Question> questions)
+        {
+            foreach (Participant p in participants)
+            {
+                if (p.isStudent)
+                {
+                    p.Evaluate(questions);
+                }
+            }
+        }
+
+        public List<(Participant, double)> GetSortedStudents()
+        {
+            // Must call Evaluate students first!
+            List<(Participant, double)> students = new List<(Participant, double)>();
+            foreach (Participant p in participants)
+            {
+                if (p.isStudent)
+                {
+                    students.Add((p, p.Evaluation[0]));
+                }
+            }
+            students.Sort(CompareStudents);
+
+            return students;
+        }
+
+        public static int CompareStudents((Participant, double) a, (Participant, double) b)
+        {
+            return a.Item2.CompareTo(b.Item2);
         }
     }
 }

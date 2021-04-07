@@ -37,7 +37,12 @@ namespace zoom_sdk_demo
         private void Add_Click(object sender, RoutedEventArgs e)
         {
             var item = (Question)(DataContext);
+
+            item.answers = new List<string>(item.answerString.Split('\n'));
+
             ((HAP_MainWindow)Application.Current.MainWindow).questions.Add(item);
+
+            Console.WriteLine(item.answers.ToString());
             Close();
         }
     }

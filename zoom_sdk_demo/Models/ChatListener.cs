@@ -32,8 +32,8 @@ namespace zoom_sdk_demo.Models
                 }
                 else
                 {
-                    Console.WriteLine("Logging response to question");
-                    HAP_MainWindow.activeQuestion.LogResponse(sdr, msg);
+                    Console.WriteLine("Logging response to question-" + msg.Substring(2).Trim());
+                    HAP_MainWindow.activeQuestion.LogResponse(sdr, msg.Substring(2).Trim());
                 }
             }
 
