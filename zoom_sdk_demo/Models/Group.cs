@@ -25,7 +25,7 @@ namespace zoom_sdk_demo.Models
         public string last_groupID { get; set; } = "";
 
         // Substitute for enum, 0 = Hetero, 1 = Homo, 2 = Random
-        public int groupType { get; set; } = 0;
+        public int groupType { get; set; } = 2;
 
         public void getGroups()
         {
@@ -97,7 +97,7 @@ namespace zoom_sdk_demo.Models
 
                 if (i % groupSize == 0)
                 {
-                    group.Name = "Group " + groupCount.ToString();
+                    group.Name = "Room " + groupCount.ToString();
                     groups.Add(group);
                     groupCount++;
                     group = new Group();
@@ -116,34 +116,46 @@ namespace zoom_sdk_demo.Models
 
         public void GroupHeterogeneous()
         {
+            
             var students = ParticipantManager.instance.GetSortedStudents();
-            int numGroups = students.Count / groupSize;
-            if (students.Count % groupSize != 0) numGroups++;
+            
+            int numGroups = 1 + students.Count / groupSize;
+            
+            if (students.Count % groupSize == 0) numGroups--;
 
-            int groupCount = 0;
-            Group group = new Group();
-            for (int i = 0; groupCount < numGroups;)
+
+            for (int i = 0; i < numGroups; i++)
             {
-                // Coppied from above code
-                if ((i * groupSize + groupCount) >= students.Count) break;
-                group.Participants_in_group.Add(students[(i * groupSize + groupCount)].Item1);
-                i++;
-
-                if (i == groupSize)
-                {
-                    i = 0;
-                    group.Name = "Group " + (groupCount + 1).ToString();
-                    groups.Add(group);
-                    groupCount++;
-                    group = new Group();
-                    continue;
-                }
-
+                groups.Add( new Group());
+                groups[i].Name = "Room " + (i + 1);
             }
 
-            group.Name = "Group " + (groupCount + 1).ToString();
-            groups.Add(group);
+            for (int i = 0; i < students.Count; i++)
+            {
+                groups[i % numGroups].Participants_in_group.Add(students[i].Item1);
+            }
 
+            //Really dumb code destined to fail
+            //Group group = new Group();
+            //for (int i = 0; groupCount < numGroups;)
+            //{
+            //    // Coppied from above code
+            //    if ((i * groupSize + groupCount) >= students.Count) break;
+            //    group.Participants_in_group.Add(students[(i * groupSize + groupCount)].Item1);
+            //    i++;
+
+            //    if (i == groupSize)
+            //    {
+            //        i = 0;
+            //        group.Name = "Group " + (groupCount + 1).ToString();
+            //        groups.Add(group);
+            //        groupCount++;
+            //        if ((i * groupSize + groupCount) < students.Count) group = new Group(); ;
+                    
+            //        continue;
+            //    }
+
+            //}
         }
 
 

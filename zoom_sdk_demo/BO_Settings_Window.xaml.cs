@@ -128,5 +128,20 @@ namespace zoom_sdk_demo
             wind.value = (uint)windowHandle;
             ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().GetMeetingShareController().StartAppShare(wind);
         }
+
+        private void RadioButton_Checked_1(object sender, RoutedEventArgs e)
+        {
+            GroupManager.instance.groupType = 0;
+        }
+
+        private void RadioButton_Checked_2(object sender, RoutedEventArgs e)
+        {
+            GroupManager.instance.groupType = 1;
+        }
+
+        private void RadioButton_Checked_3(object sender, RoutedEventArgs e)
+        {
+            GroupManager.instance.groupType = 2;
+        }
     }
 }
