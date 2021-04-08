@@ -77,7 +77,7 @@ namespace zoom_sdk_demo
                                            .ToList();
 
             //Remove any question in list that has an empty answer and question
-            questions = questions.Where(q => (q.question != "") && (q.answerString != "")).ToList();
+            questions = questions.Where(q => (q.question != "") || (q.answerString != "")).ToList();
             //Add the list of quesitons to the observable collection
             questions.ForEach(((HAP_MainWindow)System.Windows.Application.Current.MainWindow).questions.Add);
         }
@@ -93,7 +93,7 @@ namespace zoom_sdk_demo
         {
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Title = "Add Image to Quesiton";
-            dialog.Filter = "Image Files(*.BMP; *.JPG; *.GIF; *.PNG)| *.BMP; *.JPG; *.GIF; *.PNG | All files(*.*) | *.*";
+            dialog.Filter = "Image Files(*.BMP, *.JPG, *.GIF, *.PNG)| *.BMP; *.JPG; *.GIF; *.PNG; *.png; *.jpeg | All files(*.*) | *.*";
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 image_filepath.Text = dialog.FileName;
