@@ -23,9 +23,9 @@
     Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Margin="0,0,25,0" FontSize="14" >-</Button>
 
                 <TextBlock FontWeight="Bold" Margin="0,0,10,0" FontSize="14" Text="Group Type" VerticalAlignment="Center"></TextBlock>
-                <RadioButton Checked="RadioButton_Checked_1">Heterogenous</RadioButton>
-                <RadioButton Checked="RadioButton_Checked_2">Homogenous</RadioButton>
-                <RadioButton Checked="RadioButton_Checked_3" IsChecked="True">Random</RadioButton>
+                <RadioButton Checked="RadioButton_Checked_1" Margin="5,0">Varied Skill Level</RadioButton>
+                <RadioButton Checked="RadioButton_Checked_2" Margin="5,0">Similar Skill Level</RadioButton>
+                <RadioButton Checked="RadioButton_Checked_3" IsChecked="True" Margin="5,0">Random</RadioButton>
 
                 <Button HorizontalAlignment="Right" HorizontalContentAlignment="Right" Click="update_click">Update</Button>
             </StackPanel>
@@ -35,7 +35,7 @@
         <StackPanel Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Horizontal">
             <Button Margin="5" Click="cancel_click">Cancel</Button>
             <Button Margin="5" Click="ShareGroup_Click">Share Groups</Button>
-            <Button Margin="5" Click="StartBO_Click">Start The BO Room</Button>
+            <Button Margin="5" Click="StartBO_Click">Start Breakout Room</Button>
         </StackPanel>
 
 

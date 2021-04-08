@@ -9,15 +9,15 @@ namespace zoom_sdk_demo.Models
 {
     public static class GlobalVar
     {
-        public const string default_note = "Write your thoughts here on this participant";
+        public const string default_note = "Write your thoughts here on ";
     }
 
     public class Participant
     {
         public int ID { get; set; }
-        public string Name { get; set; }
+        public string Name { get; set; } = "";
         //TODO; persoanlize note message. 
-        public string Notes { get; set; } = GlobalVar.default_note;
+        public string Notes { get; set; } = GlobalVar.default_note ;
 
         // TODO: Distinguish teachers from students
         public bool isStudent = true;
