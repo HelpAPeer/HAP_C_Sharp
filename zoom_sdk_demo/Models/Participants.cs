@@ -9,7 +9,7 @@ namespace zoom_sdk_demo.Models
 {
     public static class GlobalVar
     {
-        public const string default_note = "Write your thoughts here on ";
+        public const string default_note = "Write your thoughts here on selected particiapnt";
     }
 
     public class Participant
