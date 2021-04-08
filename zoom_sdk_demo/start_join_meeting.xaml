@@ -5,20 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:zoom_sdk_demo"
         mc:Ignorable="d"
-        Title="start_join_meeting" Height="348" Width="564"
-        Closing="Wnd_Closing">
+        Title="start_join_meeting" Height="450" Width="700"
+        Closing="Wnd_Closing"
+        xmlns:ui="http://schemas.modernwpf.com/2019"
+        ui:WindowHelper.UseModernWindowStyle="True"
+        >
     <!--xmlns:ui="http://schemas.modernwpf.com/2019"
     ui:WindowHelper.UseModernWindowStyle="True">-->
-    <Grid Height="348" Margin="0,0,0,-78" HorizontalAlignment="Left" Width="0">
-        <!--<Label x:Name="label_UserName" Content="UserName" HorizontalAlignment="Left" Margin="32,21,-132,0" VerticalAlignment="Top" Width="100"/>-->
-        <!--<Label x:Name="label_UserID" Content="UserID(start meeting)" HorizontalAlignment="Left" Margin="32,66,-170,0" VerticalAlignment="Top" Width="138"/>-->
-        <Label x:Name="label_meetingNumber" Content="MeetingNumber" HorizontalAlignment="Left" Margin="32,159,-145,0" VerticalAlignment="Top" Width="113"/>
-        <!--<TextBox x:Name="textBox_username_api" HorizontalAlignment="Left" Height="26" Margin="191,21,-364,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="173" Text="HAP" TextChanged="textBox_username_api_TextChanged"/>-->
-        <!--<TextBox x:Name="textBox_userid_api" HorizontalAlignment="Left" Height="26" Margin="191,68,-507,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="316"/>-->
-        <TextBox x:Name="textBox_meetingnumber_api" HorizontalAlignment="Left" Height="26" Margin="191,159,-364,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="173"  Text="974 2114 4585"/>
-        <!--<Button x:Name="button_start_api" Content="Start" HorizontalAlignment="Left" Height="44" Margin="57,203,-199,0" VerticalAlignment="Top" Width="142" Click="button_start_api_Click"/>-->
-        <Button x:Name="button_join_api" Content="Join" HorizontalAlignment="Left" Height="44" Margin="317,203,-459,0" VerticalAlignment="Top" Width="142" Click="button_join_api_Click"/>
-        <!--<Label x:Name="label_AccessToken" Content="AccessToken" HorizontalAlignment="Left" Margin="32,115,-145,0" VerticalAlignment="Top" Width="113"/>
-        <TextBox x:Name="textBox_AccessToken" HorizontalAlignment="Left" Height="26" Margin="191,115,-507,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="316"/>-->
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <DockPanel Grid.Column="0" Margin="10" LastChildFill="False">
+            <TextBlock DockPanel.Dock="Top" FontFamily="Roc Grotesk" Margin="0,0,0,10" FontSize="20" Text="Join Your Meeting"/>
+            <Label DockPanel.Dock="Top" x:Name="label_meetingNumber" Content="Meeting Number" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="151"  />
+            <TextBox DockPanel.Dock="Top" x:Name="textBox_meetingnumber_api" HorizontalAlignment="Left" Height="26" TextWrapping="Wrap" VerticalAlignment="Top" Width="173"  Text="974 2114 4585"/>
+            <Label Margin="0,10,0,0"  DockPanel.Dock="Top" x:Name="label_meetingPass" Content="Meeting Password" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="151"  />
+            <PasswordBox DockPanel.Dock="Top" x:Name="textBox_meetingPass_api" HorizontalAlignment="Left"   Width="173"  Password="PITCH"/>
+
+            <Button DockPanel.Dock="Top" x:Name="button_join_api" Content="Start"  Margin="10"  HorizontalAlignment="Right" Height="31" VerticalAlignment="Top" Width="99" Click="button_join_api_Click"/>
+            <StackPanel DockPanel.Dock="Bottom" HorizontalAlignment="Left">
+                <Button Margin="10" Content="Quiz Setting" Click="QuizSetting_Click"/>
+                <Button Content="Breakout Room Setting"/>
+            </StackPanel>
+        </DockPanel>
+
+        <Image Grid.Column="1"  x:Name="SlideShow" Source="Assets/Slideshow/HelpAPeer_Logo.jpg"></Image>
     </Grid>
 </Window>
