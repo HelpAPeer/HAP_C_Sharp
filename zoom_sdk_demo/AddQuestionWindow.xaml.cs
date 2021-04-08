@@ -71,9 +71,15 @@ namespace zoom_sdk_demo
             //
 
             // We need to skip the header file in this case
-            File.ReadAllLines(filename).Skip(1)
+
+            List<Question> questions = File.ReadAllLines(filename).Skip(1)
                                            .Select(v => Question.FromCsv(v))
                                            .ToList();
+
+            //Remove any question in list that has an empty answer and question
+            questions = questions.Where(q => (q.question != "") && (q.answerString != "")).ToList();
+            //Add the list of quesitons to the observable collection
+            questions.ForEach(((HAP_MainWindow)System.Windows.Application.Current.MainWindow).questions.Add);
         }
 
         private void Answer_textbox_TextChanged(object sender, TextChangedEventArgs e)
@@ -81,16 +87,16 @@ namespace zoom_sdk_demo
 
         }
 
- 
+
 
         private void Add_image_click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Title = "Add Image to Quesiton";
-            dialog.Filter = "Image Files(*.BMP; *.JPG; *.GIF)| *.BMP; *.JPG; *.GIF | All files(*.*) | *.*";
+            dialog.Filter = "Image Files(*.BMP; *.JPG; *.GIF; *.PNG)| *.BMP; *.JPG; *.GIF; *.PNG | All files(*.*) | *.*";
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                image_filepath.Text= dialog.FileName;
+                image_filepath.Text = dialog.FileName;
             }
             else
             {

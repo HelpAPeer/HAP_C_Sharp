@@ -55,12 +55,17 @@ namespace zoom_sdk_demo.Models
             }
         }
 
-        public static Question FromCsv(string csvLine) {
+        public static Question FromCsv(string csvLine)
+        {
             string[] values = csvLine.Split(',');
             Question q = new Question();
-            q.question = values[0];
-            q.answerString = values[1];
+
+            //Check if question is null
        
+            q.question = values[0];
+
+            q.answerString = values[1];
+
             return q;
         }
     }
