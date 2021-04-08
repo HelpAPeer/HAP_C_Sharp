@@ -13,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using zoom_sdk_demo.Models;
-
+using System.IO;
 
 namespace zoom_sdk_demo
 {
@@ -70,6 +70,14 @@ namespace zoom_sdk_demo
             // Import questions from CSV into file
             //
 
+            // We need to skip the header file in this case
+            File.ReadAllLines(filename).Skip(1)
+                                           .Select(v => Question.FromCsv(v))
+                                           .ToList();
+        }
+
+        private void Answer_textbox_TextChanged(object sender, TextChangedEventArgs e)
+        {
 
         }
     }
