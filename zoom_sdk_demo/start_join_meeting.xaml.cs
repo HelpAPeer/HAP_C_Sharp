@@ -1,8 +1,11 @@
 ﻿using System;
 using System.ComponentModel; // CancelEventArgs
+using System.Windows.Forms;
 using System.Windows;
+using System.IO;
 using zoom_sdk_demo.Models;
 using ZOOM_SDK_DOTNET_WRAP;
+using System.Windows.Media.Imaging;
 
 namespace zoom_sdk_demo
 {
@@ -12,9 +15,32 @@ namespace zoom_sdk_demo
     public partial class start_join_meeting : Window
     {
         HAP_MainWindow hAP_MainWindow = new HAP_MainWindow();
+        private Timer timer1;
+        private int loop = 0;
+
         public start_join_meeting()
         {
             InitializeComponent();
+            Random random = new Random();  // Only do this once
+            //string[] images = Directory.GetFiles(@".\Assets\SlideShow\", "*.*");
+            //string[] images = Directory.GetFiles(@"ms-appx:///Assets/SlideShow/", "*.*");
+            InitTimer();
+
+        }
+
+        public void InitTimer()
+        {
+            timer1 = new Timer();
+            timer1.Tick += new EventHandler(timer1_Tick);
+            timer1.Interval = 2000; // in miliseconds
+            timer1.Start();
+        }
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            string[] images = { @"/Assets/Slideshow/HelpAPeer_Poster.png", @"/Assets/Slideshow/HelpAPeer_Logo.jpg" };
+            int index = loop % images.Length;
+            SlideShow.Source = new BitmapImage(new Uri(images[index], UriKind.Relative));
+            loop++;
         }
 
         //ZOOM_SDK_DOTNET_WRAP.onMeetingStatusChanged

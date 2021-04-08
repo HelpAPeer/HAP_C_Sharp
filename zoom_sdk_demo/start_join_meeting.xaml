@@ -12,7 +12,7 @@
         >
     <!--xmlns:ui="http://schemas.modernwpf.com/2019"
     ui:WindowHelper.UseModernWindowStyle="True">-->
-    <Grid HorizontalAlignment="Left" >
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="2*"/>
@@ -30,5 +30,7 @@
                 <Button Content="Breakout Room Setting"/>
             </StackPanel>
         </DockPanel>
+
+        <Image Grid.Column="1"  x:Name="SlideShow" Source="Assets/Slideshow/HelpAPeer_Logo.jpg"></Image>
     </Grid>
 </Window>
