@@ -226,5 +226,11 @@ namespace zoom_sdk_demo
         {
 
         }
+
+        private void QuizSetting_Click(object sender, RoutedEventArgs e)
+        {
+            var addQuestionWindow = new AddQuestionWindow();
+            addQuestionWindow.ShowDialog();
+        }
     }
 }

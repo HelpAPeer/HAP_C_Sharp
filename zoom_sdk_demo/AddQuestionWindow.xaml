@@ -9,20 +9,26 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="0.25*"/>
-        </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"> Enter the Question</TextBlock>
-        <TextBlock Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Enter the Answer"/>
-        <TextBox Margin="10" Grid.Row="0"  Text="{Binding Path=question, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"></TextBox>
-        <TextBox Name="Answer_textbox" Text="{Binding Path=answerString, UpdateSourceTrigger=PropertyChanged}" Margin="10" Grid.Row="1" Grid.Column="1"></TextBox>
-        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" >
-            <Button Margin="5" Click="Add_Click">Add</Button>
-            <Button Click="Cancel_Click" Margin="5">Cancel</Button>
-        </StackPanel>
+
+        <DockPanel Grid.Column="0" LastChildFill="False">
+            <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Center"> Enter the Question</TextBlock>
+            <TextBox DockPanel.Dock="Top" Text="{Binding Path=question, UpdateSourceTrigger=PropertyChanged}" Height="97" Margin="10,0,9.8,0" />
+            <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Enter the Answer"/>
+            <TextBox  DockPanel.Dock="Top" Name="Answer_textbox" Text="{Binding Path=answerString, UpdateSourceTrigger=PropertyChanged}" Margin="10"></TextBox>
+
+            <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Click="Cancel_Click" Margin="5">Cancel</Button>
+                <Button Margin="5" Click="Add_Click">Add</Button>
+            </StackPanel>
+        </DockPanel>
+
+        <DockPanel Grid.Column="1">
+            <Button DockPanel.Dock="Top" Content="+ Import Questions" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="10" Click="import_Questions_click"/>
+        </DockPanel>
+
+
+
     </Grid>
 </Window>

@@ -26,7 +26,7 @@
 
             <Button DockPanel.Dock="Top" x:Name="button_join_api" Content="Start"  Margin="10"  HorizontalAlignment="Right" Height="31" VerticalAlignment="Top" Width="99" Click="button_join_api_Click"/>
             <StackPanel DockPanel.Dock="Bottom" HorizontalAlignment="Left">
-                <Button Margin="10" Content="Quiz Setting"/>
+                <Button Margin="10" Content="Quiz Setting" Click="QuizSetting_Click"/>
                 <Button Content="Breakout Room Setting"/>
             </StackPanel>
         </DockPanel>
