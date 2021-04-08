@@ -173,7 +173,7 @@
                 </Border>
                 <DockPanel   Grid.Column="1" Margin="15">
                         <TextBlock DockPanel.Dock="Top" Margin="5" HorizontalAlignment="Left"  Width="130">Participant Notes</TextBlock>
-                        <TextBox Name="NoteTextBox"  AcceptsReturn="True" DockPanel.Dock="Bottom" TextWrapping="Wrap" GotKeyboardFocus="TextBox_GotKeyboardFocus" Text="Select particpant &amp; Type note here..." TextChanged="NoteTextBox_TextChanged" VerticalScrollBarVisibility="Hidden" />
+                        <TextBox Name="NoteTextBox"  AcceptsReturn="True" DockPanel.Dock="Bottom" TextWrapping="Wrap" GotKeyboardFocus="TextBox_GotKeyboardFocus" Text="Select participant &amp; Type note here..." TextChanged="NoteTextBox_TextChanged" VerticalScrollBarVisibility="Hidden" />
                     </DockPanel>
               
                     <DockPanel Grid.Column="0" Margin="15">
