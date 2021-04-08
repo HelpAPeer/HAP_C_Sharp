@@ -80,5 +80,22 @@ namespace zoom_sdk_demo
         {
 
         }
+
+ 
+
+        private void Add_image_click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Title = "Add Image to Quesiton";
+            dialog.Filter = "Image Files(*.BMP; *.JPG; *.GIF)| *.BMP; *.JPG; *.GIF | All files(*.*) | *.*";
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                image_filepath.Text= dialog.FileName;
+            }
+            else
+            {
+                return;
+            }
+        }
     }
 }

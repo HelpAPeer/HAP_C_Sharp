@@ -15,9 +15,12 @@
         <DockPanel Grid.Column="0" LastChildFill="False">
             <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Center"> Enter the Question</TextBlock>
             <TextBox DockPanel.Dock="Top" Text="{Binding Path=question, UpdateSourceTrigger=PropertyChanged}" Height="97" Margin="10,0,9.8,0" AcceptsReturn="True"/>
-            <TextBlock Margin="10"  DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Enter the Answer"/>
+            <TextBlock Margin="10,16,10,0"  DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Enter the Answer"/>
             <TextBox  DockPanel.Dock="Top" Name="Answer_textbox" Text="{Binding Path=answerString, UpdateSourceTrigger=PropertyChanged}" Margin="10,10,9.8,10" TextChanged="Answer_textbox_TextChanged" TextWrapping="Wrap"
 AcceptsReturn="True" Height="74" ></TextBox>
+
+            <Button DockPanel.Dock="Top" HorizontalAlignment="Center" Content="Add an Image to Question" Click="Add_image_click"/>
+            <TextBlock DockPanel.Dock="Top" Text="{Binding Path=imagePath, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" x:Name="image_filepath"/>
 
             <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button Click="Cancel_Click" Margin="5">Cancel</Button>
