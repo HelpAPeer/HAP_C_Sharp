@@ -93,7 +93,7 @@ namespace zoom_sdk_demo
         {
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Title = "Add Image to Quesiton";
-            dialog.Filter = "Image Files(*.BMP, *.JPG, *.GIF, *.PNG)| *.BMP; *.JPG; *.GIF; *.PNG; *.png; *.jpeg | All files(*.*) | *.*";
+            dialog.Filter = "Image Files(*.BMP, *.JPG, *.GIF, *.PNG)| *.BMP; *.JPG; *.GIF; *.PNG; *.png; *.JPEG | All files(*.*) | *.*";
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 image_filepath.Text = dialog.FileName;
