@@ -175,8 +175,8 @@ namespace zoom_sdk_demo
 
             param.userType = ZOOM_SDK_DOTNET_WRAP.SDKUserType.SDK_UT_NORMALUSER;
             ZOOM_SDK_DOTNET_WRAP.JoinParam4NormalUser join_api_param = new ZOOM_SDK_DOTNET_WRAP.JoinParam4NormalUser();
-            //join_api_param.
-            join_api_param.meetingNumber = UInt64.Parse(textBox_meetingnumber_api.Text.Replace(" ", "")); ;
+            join_api_param.meetingNumber = UInt64.Parse(textBox_meetingnumber_api.Text.Replace(" ", ""));
+            join_api_param.psw = textBox_meetingPass_api.Password;
             param.normaluserJoin = join_api_param;
 
 
@@ -196,5 +196,9 @@ namespace zoom_sdk_demo
             System.Windows.Application.Current.Shutdown();
         }
 
+        private void textBox_meetingPass_api_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+
+        }
     }
 }
