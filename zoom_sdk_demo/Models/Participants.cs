@@ -17,7 +17,7 @@ namespace zoom_sdk_demo.Models
         public int ID { get; set; }
         public string Name { get; set; } = "";
         //TODO; persoanlize note message. 
-        public string Notes { get; set; } = GlobalVar.default_note ;
+        public string Notes { get; set; } = GlobalVar.default_note;
 
         // TODO: Distinguish teachers from students
         public bool isStudent = true;
@@ -25,7 +25,36 @@ namespace zoom_sdk_demo.Models
         // Index 0 is always Evaluations from quizzes for now
         public List<double> Evaluation = new List<double>();
 
-        public double Evaluate(ObservableCollection<Question> questions )
+        public bool isParticpantStudent()
+        {
+
+            ZOOM_SDK_DOTNET_WRAP.IUserInfoDotNetWrap user = ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().
+                    GetMeetingParticipantsController().GetUserByUserID((uint)this.ID);
+
+            if (user.IsMySelf())
+            {
+                this.isStudent = false;
+                return false;
+            }
+
+            if (user.IsHost())
+            {
+                this.isStudent = false;
+                return false;
+            }
+
+            if (user.GetUserRole() == ZOOM_SDK_DOTNET_WRAP.UserRole.USERROLE_COHOST)
+            {
+                this.isStudent = false;
+                return false;
+
+            }
+
+            this.isStudent = true;
+            return true;
+        }
+
+        public double Evaluate(ObservableCollection<Question> questions)
         {
             Console.WriteLine("Evaluating student " + Name);
 
@@ -52,7 +81,7 @@ namespace zoom_sdk_demo.Models
                 else
                 {
                     Console.WriteLine("Question is not eligable");
-                }    
+                }
             }
             if (numQ > 0)
             {
@@ -81,7 +110,7 @@ namespace zoom_sdk_demo.Models
                 Console.WriteLine(Name + " not evaluated.");
                 return 0;
             }
-            
+
         }
 
 
@@ -220,7 +249,7 @@ namespace zoom_sdk_demo.Models
             for (int i = lstUserID.GetLowerBound(0); i <= lstUserID.GetUpperBound(0); i++)
             {
                 int userid = (int)(UInt32)lstUserID.GetValue(i);
-              
+
                 ZOOM_SDK_DOTNET_WRAP.IUserInfoDotNetWrap user = ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().
             GetMeetingParticipantsController().GetUserByUserID((uint)userid);
                 Console.WriteLine("We found someone  {0}", user.GetUserNameW());
