@@ -876,6 +876,13 @@ Class ZOOM_SDK_DOTNET_WRAP.onHostChangeNotification: AutoLayout, AnsiClass, Clas
     Invoke(UInt32): PrivateScope, Public, Final, Virtual, VtableLayoutMask
     BeginInvoke(UInt32, AsyncCallback, Object): PrivateScope, Public, Final, Virtual, VtableLayoutMask
     EndInvoke(IAsyncResult): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+Class ZOOM_SDK_DOTNET_WRAP.onCoHostChangeNotification: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.MulticastDelegate
+    Void .ctor(System.Object, IntPtr): PrivateScope, Public, SpecialName, RTSpecialName
+  Methods:
+    Invoke(UInt32, Boolean(HasFieldMarshal)): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    BeginInvoke(UInt32, Boolean(HasFieldMarshal), AsyncCallback, Object): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    EndInvoke(IAsyncResult): PrivateScope, Public, Final, Virtual, VtableLayoutMask
 Class ZOOM_SDK_DOTNET_WRAP.onLowOrRaiseHandStatusChanged: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
   :System.MulticastDelegate
     Void .ctor(System.Object, IntPtr): PrivateScope, Public, SpecialName, RTSpecialName
@@ -909,11 +916,13 @@ Interface ZOOM_SDK_DOTNET_WRAP.IMeetingParticipantsControllerDotNetWrap: AutoLay
     Add_CB_onUserJoin(onUserJoin): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
     Add_CB_onUserLeft(onUserLeft): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
     Add_CB_onHostChangeNotification(onHostChangeNotification): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
+    Add_CB_onCoHostChangeNotification(onCoHostChangeNotification): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
     Add_CB_onLowOrRaiseHandStatusChanged(onLowOrRaiseHandStatusChanged): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
     Add_CB_onUserNameChanged(onUserNameChanged): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
     Remove_CB_onUserJoin(onUserJoin): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
     Remove_CB_onUserLeft(onUserLeft): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
     Remove_CB_onHostChangeNotification(onHostChangeNotification): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
+    Remove_CB_onCoHostChangeNotification(onCoHostChangeNotification): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
     Remove_CB_onLowOrRaiseHandStatusChanged(onLowOrRaiseHandStatusChanged): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
     Remove_CB_onUserNameChanged(onUserNameChanged): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
 Interface ZOOM_SDK_DOTNET_WRAP.IMeetingPhoneSupportCountryInfoDotNetWrap: AutoLayout, AnsiClass, Class, Public, ClassSemanticsMask, Abstract, BeforeFieldInit
