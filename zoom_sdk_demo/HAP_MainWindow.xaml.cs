@@ -141,6 +141,15 @@ namespace zoom_sdk_demo
             ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().GetMeetingShareController().StartAppShare(wind);
 
         }
+        private void viewresults_Click(object sender, RoutedEventArgs e)
+        {
+            Question problem = (sender as Button).DataContext as Question;
+
+            var viewresults = new QuestionResultsWindow();
+            viewresults.UpdateQuestion(problem);
+
+            viewresults.Show();
+        }
 
 
         private void SetupUpGroups_click(object sender, RoutedEventArgs e)
@@ -167,5 +176,7 @@ namespace zoom_sdk_demo
 //TODO: get list of people in the BO Group and put their name first
 
         }
+
+        
     }
 }

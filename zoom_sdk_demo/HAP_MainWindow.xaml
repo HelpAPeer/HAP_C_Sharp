@@ -39,7 +39,7 @@
                                         <TextBlock DockPanel.Dock="Top" Text="{Binding Path=question}" />
 
                                         <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" DockPanel.Dock="Bottom">
-                                            <Button Margin="5" Content="Results" ></Button>
+                                            <Button Margin="5" Content="Results" Click="viewresults_Click"></Button>
                                             <Button Margin="5" Content="Screenshare Question" Click="usequestion_Click"></Button>
                                         </StackPanel>
                                     </DockPanel>
