@@ -191,7 +191,7 @@ namespace zoom_sdk_demo
             //TODO: get list of people in the BO Group and put their name first
             // we are doing this via the group
             Console.WriteLine(group.Participants_in_group.Count);
-            for (int i = 0; i < group.Participants_in_group.Count; i++)
+            for (int i = group.Participants_in_group.Count; i-- > 0;)
             {
                 Console.WriteLine("We are here");
                 Participant person = group.Participants_in_group[i];
@@ -200,10 +200,14 @@ namespace zoom_sdk_demo
                 //It might be that notes are not updated within the observation list
 
                 Participant person_in_list = ParticipantManager.instance.participants.FirstOrDefault(j => j.ID == person.ID);
+
                 int index = ParticipantManager.instance.participants.IndexOf(person_in_list);
 
-                Console.WriteLine("Index for the particapnt we want to remove {0}", index);
-                ParticipantManager.instance.participants.Move(index, 0);
+                if (index != 0) {
+                    Console.WriteLine("Index for the particapnt we want to remove {0}", index);
+                    ParticipantManager.instance.participants.Move(index, 0);
+                }
+        
             }
 
         }
