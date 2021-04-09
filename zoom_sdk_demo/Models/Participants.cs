@@ -220,9 +220,10 @@ namespace zoom_sdk_demo.Models
             for (int i = lstUserID.GetLowerBound(0); i <= lstUserID.GetUpperBound(0); i++)
             {
                 int userid = (int)(UInt32)lstUserID.GetValue(i);
-
+              
                 ZOOM_SDK_DOTNET_WRAP.IUserInfoDotNetWrap user = ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().
             GetMeetingParticipantsController().GetUserByUserID((uint)userid);
+                Console.WriteLine("We found someone  {0}", user.GetUserNameW());
                 bool notFound = true;
                 foreach (var participant in participants)
                 {

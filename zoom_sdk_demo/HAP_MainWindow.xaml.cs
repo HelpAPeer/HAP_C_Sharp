@@ -188,7 +188,7 @@ namespace zoom_sdk_demo
             }
 
 
-            //TODO: get list of people in the BO Group and put their name first
+    
             // we are doing this via the group
             Console.WriteLine(group.Participants_in_group.Count);
             for (int i = group.Participants_in_group.Count; i-- > 0;)
@@ -202,8 +202,8 @@ namespace zoom_sdk_demo
                 Participant person_in_list = ParticipantManager.instance.participants.FirstOrDefault(j => j.ID == person.ID);
 
                 int index = ParticipantManager.instance.participants.IndexOf(person_in_list);
-
-                if (index != 0) {
+                //if index not found we return -1
+                if (index > 0) {
                     Console.WriteLine("Index for the particapnt we want to remove {0}", index);
                     ParticipantManager.instance.participants.Move(index, 0);
                 }
