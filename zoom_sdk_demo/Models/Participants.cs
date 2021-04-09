@@ -158,7 +158,9 @@ namespace zoom_sdk_demo.Models
                 if (null != (Object)user)
                 {
                     string name = user.GetUserNameW();
-                    participants.Add(new Participant { ID = (int)userid, Name = name });
+                    Participant p = new Participant { ID = (int)userid, Name = name };
+                    p.isParticpantStudent();
+                    participants.Add(p);
                     Console.Write(userid.ToString());
                     Console.Write(" ");
                     Console.WriteLine(name);
@@ -172,11 +174,16 @@ namespace zoom_sdk_demo.Models
             ZOOM_SDK_DOTNET_WRAP.IUserInfoDotNetWrap user = ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().
                   GetMeetingParticipantsController().GetUserByUserID((uint)userId);
 
-            Participant potential_host = participants.Single(i => i.ID == (int)userId);
+            Participant potential_host = participants.SingleOrDefault(i => i.ID == (int)userId);
+
             Console.WriteLine("Host Changed");
             if (potential_host.Name == user.GetUserNameW())
             {
+                int index = participants.IndexOf(potential_host);
+                //making sure the host is specified
+                participants[index].isParticpantStudent();
                 Console.WriteLine("Everthing Seems fine. Host ID did not change");
+
             }
 
 

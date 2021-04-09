@@ -120,7 +120,7 @@ namespace zoom_sdk_demo
 
         public void onHostChangeNotification(UInt32 userId)
         {
-            // might need to readdress the issue here.[IDs don't change when hosts change
+            // might need to readdress the issue here.[IDs don't change when hosts change]
             ParticipantManager.instance.hostChanged(userId);
         }
         public void onLowOrRaiseHandStatusChanged(bool bLow, UInt32 userid)
@@ -146,6 +146,10 @@ namespace zoom_sdk_demo
             ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().Add_CB_onMeetingStatusChanged(onMeetingStatusChanged);
             ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().
                 GetMeetingParticipantsController().Add_CB_onHostChangeNotification(onHostChangeNotification);
+            //TODO: add the onCoHostChangeNotification
+            //ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().
+            //   GetMeetingParticipantsController().Add_CB_onHostChangeNotification;
+
             ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().
                 GetMeetingParticipantsController().Add_CB_onLowOrRaiseHandStatusChanged(onLowOrRaiseHandStatusChanged);
             ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().
