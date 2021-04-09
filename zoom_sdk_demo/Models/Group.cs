@@ -79,7 +79,7 @@ namespace zoom_sdk_demo.Models
 
             int groupCount = 1;
 
-            var students = ParticipantManager.instance.participants.Where(p => p.isStudent);
+            IEnumerable<Participant> students = ParticipantManager.instance.participants.Where(p => p.isStudent);
             foreach (var participant in students)
             {
                 group.Participants_in_group.Add(participant);
@@ -94,7 +94,7 @@ namespace zoom_sdk_demo.Models
                 }
                 //we neeed to make sure we we are in the last count. the rest will hold the remainder of the group.
                 //Continue for the if before holds if we have exactly number of participants divisble by group size
-                if (count == ParticipantManager.instance.participants.Count)
+                if (count == students.Count())
                 {
                     group.Name = "Room " + groupCount.ToString();
                     groups.Add(group);

@@ -189,6 +189,22 @@ namespace zoom_sdk_demo.Models
 
         }
 
+        public void coHostChanged(UInt32 userId, bool isCoHost) {
+
+            ZOOM_SDK_DOTNET_WRAP.IUserInfoDotNetWrap user = ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().
+                GetMeetingParticipantsController().GetUserByUserID((uint)userId);
+
+            Participant potential_host = participants.SingleOrDefault(i => i.ID == (int)userId);
+            if (!(potential_host is null)) {
+                int index = participants.IndexOf(potential_host);
+                //if co_host than it is not a student. 
+                // if not a co-host than it is a student.but we could be myself. better to just rin the member function
+                //participants[index].isStudent = !isCoHost;
+                participants[index].isParticpantStudent();
+            }
+
+        }
+
         //This gives the array of participants to remove
         public void RemoveParticpant(Array lstUserID)
         {

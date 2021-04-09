@@ -1,11 +1,10 @@
 ﻿using System;
 using System.ComponentModel; // CancelEventArgs
-using System.Windows.Forms;
 using System.Windows;
-using System.IO;
+using System.Windows.Forms;
+using System.Windows.Media.Imaging;
 using zoom_sdk_demo.Models;
 using ZOOM_SDK_DOTNET_WRAP;
-using System.Windows.Media.Imaging;
 
 namespace zoom_sdk_demo
 {
@@ -126,7 +125,9 @@ namespace zoom_sdk_demo
 
         public void onCoHostChangeNotification(UInt32 userId, bool isCoHost)
         {
-            Console.WriteLine("Co-Host was changed");
+            Console.WriteLine("Co-Host was changed.{0} {1}", userId, isCoHost);
+            ParticipantManager.instance.coHostChanged(userId,isCoHost);
+
         }
         public void onLowOrRaiseHandStatusChanged(bool bLow, UInt32 userid)
         {
@@ -151,8 +152,8 @@ namespace zoom_sdk_demo
             ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().Add_CB_onMeetingStatusChanged(onMeetingStatusChanged);
             ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().
                 GetMeetingParticipantsController().Add_CB_onHostChangeNotification(onHostChangeNotification);
-            //TODO: add the onCoHostChangeNotification
-
+            
+            // add the onCoHostChangeNotification. this was added to the wrapper in order for this to work.
             ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().
                GetMeetingParticipantsController().Add_CB_onCoHostChangeNotification(onCoHostChangeNotification);
 
