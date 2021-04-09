@@ -213,30 +213,7 @@ namespace zoom_sdk_demo.Models
                 }
 
             }
-            //foreach (var participant in participants)
-            //{
-            //    bool notFound = true;
-            //    for (int i = lstUserID.GetLowerBound(0); i <= lstUserID.GetUpperBound(0); i++)
-            //    {
-            //        int userid = (int)(UInt32)lstUserID.GetValue(i);
-            //        ZOOM_SDK_DOTNET_WRAP.IUserInfoDotNetWrap user = ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().
-            //       GetMeetingParticipantsController().GetUserByUserID((uint)userid);
-
-            //        if ((participant.ID == userid) & (participant.Name == user.GetUserNameW()))
-            //        {
-            //            // We found a match
-            //            notFound = false;
-            //            break;
-            //        }
-
-            //    }
-            //    if (notFound)
-            //    {
-            //        //We have found the item to remove. We can stop the for leap
-            //        participants.Remove(participant);
-            //        break;
-            //    }
-            //}
+       
 
         }
         public void ChangeName(UInt32 userId, string userName)

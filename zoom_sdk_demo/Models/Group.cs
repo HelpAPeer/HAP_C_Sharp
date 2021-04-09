@@ -24,7 +24,7 @@ namespace zoom_sdk_demo.Models
         public bool joinedBO_Room { get; set; } = false;
         public string last_groupID { get; set; } = "";
 
-        // Substitute for enum, 0 = Hetero, 1 = Homo, 2 = Random
+        //TODO: Substitute for enum, 0 = Hetero, 1 = Homo, 2 = Random
         public int groupType { get; set; } = 2;
 
         public void getGroups()
@@ -52,15 +52,35 @@ namespace zoom_sdk_demo.Models
                 }
             }
 
+            // This would put the teacahers and assitants in one group
+            this.groupNonStudents();
+
         }
 
+        private void groupNonStudents()
+        {
+            var non_students = ParticipantManager.instance.participants.Where(p => !(p.isStudent));
+            Group group = new Group();
+            group.Name = "Teachers & Assistants";
+
+            foreach (var assistant in non_students)
+            {
+                group.Participants_in_group.Add(assistant);
+            }
+            if (group.Participants_in_group.Count != 0) {
+                groups.Add(group);
+            }
+
+        }
         public void GroupRandom()
         {
             Group group = new Group();
             int count = 0;
 
             int groupCount = 1;
-            foreach (var participant in ParticipantManager.instance.participants)
+
+            var students = ParticipantManager.instance.participants.Where(p => p.isStudent);
+            foreach (var participant in students)
             {
                 group.Participants_in_group.Add(participant);
                 count++;
@@ -81,6 +101,7 @@ namespace zoom_sdk_demo.Models
 
                 }
             }
+         
         }
 
         public void GroupHomogeneous()
@@ -89,7 +110,7 @@ namespace zoom_sdk_demo.Models
 
             int groupCount = 1;
             Group group = new Group();
-            for (int i = 0; i < students.Count; )
+            for (int i = 0; i < students.Count;)
             {
                 // Coppied from above code
                 group.Participants_in_group.Add(students[i].Item1);
@@ -116,17 +137,17 @@ namespace zoom_sdk_demo.Models
 
         public void GroupHeterogeneous()
         {
-            
+
             var students = ParticipantManager.instance.GetSortedStudents();
-            
+
             int numGroups = 1 + students.Count / groupSize;
-            
+
             if (students.Count % groupSize == 0) numGroups--;
 
 
             for (int i = 0; i < numGroups; i++)
             {
-                groups.Add( new Group());
+                groups.Add(new Group());
                 groups[i].Name = "Room " + (i + 1);
             }
 
@@ -151,7 +172,7 @@ namespace zoom_sdk_demo.Models
             //        groups.Add(group);
             //        groupCount++;
             //        if ((i * groupSize + groupCount) < students.Count) group = new Group(); ;
-                    
+
             //        continue;
             //    }
 
