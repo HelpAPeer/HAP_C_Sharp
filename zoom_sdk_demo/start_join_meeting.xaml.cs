@@ -123,6 +123,11 @@ namespace zoom_sdk_demo
             // might need to readdress the issue here.[IDs don't change when hosts change]
             ParticipantManager.instance.hostChanged(userId);
         }
+
+        public void onCoHostChangeNotification(UInt32 userId, bool isCoHost)
+        {
+            Console.WriteLine("Co-Host was changed");
+        }
         public void onLowOrRaiseHandStatusChanged(bool bLow, UInt32 userid)
         {
             //todo
@@ -147,10 +152,13 @@ namespace zoom_sdk_demo
             ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().
                 GetMeetingParticipantsController().Add_CB_onHostChangeNotification(onHostChangeNotification);
             //TODO: add the onCoHostChangeNotification
-            //ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().
-            //   GetMeetingParticipantsController().Add_CB_onHostChangeNotification;
 
             ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().
+               GetMeetingParticipantsController().Add_CB_onCoHostChangeNotification(onCoHostChangeNotification);
+
+      
+
+                       ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().
                 GetMeetingParticipantsController().Add_CB_onLowOrRaiseHandStatusChanged(onLowOrRaiseHandStatusChanged);
             ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().
                 GetMeetingParticipantsController().Add_CB_onUserJoin(onUserJoin);

@@ -75,6 +75,11 @@ namespace ZOOM_SDK_DOTNET_WRAP {
 			std::bind(&ParticipantsEventHandler::onHostChangeNotification,
 				&ParticipantsEventHandler::GetInst(), std::placeholders::_1);
 
+// Added by Bob
+		meetingParticipants.m_cbonCoHostChangeNotification =
+			std::bind(&ParticipantsEventHandler::onCoHostChangeNotification,
+				&ParticipantsEventHandler::GetInst(), std::placeholders::_1 , std::placeholders::_2);
+
 		meetingParticipants.m_cbonLowOrRaiseHandStatusChanged =
 			std::bind(&ParticipantsEventHandler::onLowOrRaiseHandStatusChanged,
 				&ParticipantsEventHandler::GetInst(), std::placeholders::_1, std::placeholders::_2);
