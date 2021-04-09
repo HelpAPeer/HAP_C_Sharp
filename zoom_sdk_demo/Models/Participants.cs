@@ -238,6 +238,8 @@ namespace zoom_sdk_demo.Models
             Console.WriteLine(userName);
             Participant participant_toModify = participants.Single(user => user.ID == (int)userId);
             participant_toModify.Name = userName;
+            //Changing names would modify is student category A good debuging if need be
+            participant_toModify.isParticpantStudent();
             int index = participants.IndexOf(participant_toModify);
             participants.RemoveAt(index);
             participants.Insert(index, participant_toModify);
@@ -269,7 +271,9 @@ namespace zoom_sdk_demo.Models
                     //GetMeetingParticipantsController().GetUserByUserID((UInt32)userid);
 
                     string name = user.GetUserNameW();
-                    participants.Add(new Participant { ID = userid, Name = name });
+                    Participant p = new Participant { ID = userid, Name = name };
+                    p.isParticpantStudent();
+                    participants.Add(p);
                     break;
                 }
             }
