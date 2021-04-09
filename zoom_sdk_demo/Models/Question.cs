@@ -15,7 +15,7 @@ namespace zoom_sdk_demo.Models
 
         public List<string> answers;
 
-        public IDictionary<string, (string, bool)> responses;
+        public IDictionary<string, Tuple<string, bool>> responses;
         public ISet<string> nonresponders;
 
         // Todo
@@ -28,21 +28,26 @@ namespace zoom_sdk_demo.Models
                 nonresponders.Add(p.Name);
             }
 
-            responses = new Dictionary<string, (string, bool)>();
+            responses = new Dictionary<string, Tuple<string, bool>>();
         }
 
         public void LogResponse(string student, string response)
         {
-            var eval = (response, false);
+            
             if (responses.ContainsKey(student))
             {
                 Console.WriteLine("Student " + student + " has already responded");
                 return;
             }
 
+            Tuple<string,bool> eval;
             if (answers.Contains(response)) //TODO: Add methods for regrading, both for adding more answers and for marking specific student as correct
             {
-                eval.Item2 = true;
+                eval = Tuple.Create(response, true);
+            }
+            else
+            {
+                eval = Tuple.Create(response, false);
             }
             
 
