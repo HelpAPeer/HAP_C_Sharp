@@ -39,8 +39,8 @@
                                         <TextBlock DockPanel.Dock="Top" Text="{Binding Path=question}" />
 
                                         <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" DockPanel.Dock="Bottom">
-                                            <Button Margin="5" Content="Result" Click="viewresults_Click"></Button>
-                                            <Button Margin="5" Content="Use" Click="usequestion_Click"></Button>
+                                            <Button Margin="5" Content="Results" Click="viewresults_Click"></Button>
+                                            <Button Margin="5" Content="Screenshare Question" Click="usequestion_Click"></Button>
                                         </StackPanel>
                                     </DockPanel>
                                 </Border>
@@ -169,16 +169,15 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
-                <Border Margin="10" Grid.Column="0" Background="White" CornerRadius="10">
-                    <DockPanel  Margin="10">
-                        <TextBlock DockPanel.Dock="Top">Notes</TextBlock>
-                        <TextBox Name="NoteTextBox"  AcceptsReturn="True" DockPanel.Dock="Bottom" TextWrapping="Wrap" GotKeyboardFocus="TextBox_GotKeyboardFocus" Text="Select particpant &amp; Type note here..." TextChanged="NoteTextBox_TextChanged" VerticalScrollBarVisibility="Hidden" />
-                    </DockPanel>
+                <Border Margin="10"  Grid.ColumnSpan="2" Background="White" CornerRadius="10">
                 </Border>
-
-                <Border Margin="10" Grid.Column="1" Background="White" CornerRadius="10">
-                    <DockPanel  Margin="10">
-                        <TextBlock  DockPanel.Dock="Top">Participants</TextBlock>
+                <DockPanel   Grid.Column="1" Margin="15">
+                        <TextBlock DockPanel.Dock="Top" Margin="5" HorizontalAlignment="Left"  Width="130">Participant Notes</TextBlock>
+                        <TextBox Name="NoteTextBox"  AcceptsReturn="True" DockPanel.Dock="Bottom" TextWrapping="Wrap" GotKeyboardFocus="TextBox_GotKeyboardFocus" Text="Select participant &amp; Type note here..." TextChanged="NoteTextBox_TextChanged" VerticalScrollBarVisibility="Hidden" />
+                    </DockPanel>
+              
+                    <DockPanel Grid.Column="0" Margin="15">
+                        <TextBlock  DockPanel.Dock="Top" Margin="5">Participants</TextBlock>
                         <ListBox DockPanel.Dock="Bottom" x:Name="participant_list"  ScrollViewer.VerticalScrollBarVisibility="Visible"
           ScrollViewer.CanContentScroll="False" SelectionChanged="participant_list_SelectionChanged">
 
@@ -190,7 +189,7 @@
 
                         </ListBox>
                     </DockPanel>
-                </Border>
+               
             </Grid>
         </Grid>
     </Grid>

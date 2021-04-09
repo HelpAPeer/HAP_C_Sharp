@@ -11,6 +11,8 @@ namespace zoom_sdk_demo.Models
         public String question { get; set; } = "";
         //TODO might need to change this later to an array if a question can have multiple answers
         public String answerString { get; set; } = "";
+        public String imagePath { get; set; } = "";
+
         public bool used { get; set; } = false;
 
         public List<string> answers;
@@ -49,13 +51,27 @@ namespace zoom_sdk_demo.Models
             {
                 eval = Tuple.Create(response, false);
             }
-            
+
 
             responses.Add(student, eval);
             if (nonresponders.Contains(student))
             {
                 nonresponders.Remove(student);
             }
+        }
+
+        public static Question FromCsv(string csvLine)
+        {
+            string[] values = csvLine.Split(',');
+            Question q = new Question();
+
+            //Check if question is null
+       
+            q.question = values[0];
+
+            q.answerString = values[1];
+
+            return q;
         }
     }
 }

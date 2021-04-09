@@ -80,8 +80,10 @@ namespace zoom_sdk_demo
         private void TextBox_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
             TextBox txtBox = sender as TextBox;
-            if (txtBox.Text.Contains("Write your thoughts here"))
+            if (txtBox.Text.Contains("Select participant") || txtBox.Text.Contains(GlobalVar.default_note)) {
                 txtBox.Text = string.Empty;
+            }
+                
         }
 
         private void participant_list_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -89,7 +91,11 @@ namespace zoom_sdk_demo
             var student = (Participant)e.AddedItems[0];
 
             id_lastSelected = ParticipantManager.instance.participants.IndexOf(student);
+            if (student.Notes.Equals(GlobalVar.default_note)) {
+                student.Notes += student.Name;
+            }
             NoteTextBox.Text = student.Notes;
+
         }
 
         private void NoteTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -98,6 +104,8 @@ namespace zoom_sdk_demo
             if ((ParticipantManager.instance.participants.Count != 0) && (id_lastSelected < ParticipantManager.instance.participants.Count))
             {
                 ParticipantManager.instance.participants[id_lastSelected].Notes = NoteTextBox.Text;
+
+             
 
             }
 
