@@ -13,7 +13,7 @@
             <RowDefinition Height="3*"/>
             <RowDefinition Height="0.5*"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Orientation="Vertical" >
+        <StackPanel x:Name="HeaderToHide" Grid.Row="0" Orientation="Vertical" Visibility="Visible">
             <StackPanel Margin="10"  Orientation="Horizontal" >
                 <TextBlock FontWeight="Bold" Margin="0,0,10,0" FontSize="14" VerticalAlignment="Center" > GroupSize</TextBlock>
                 <Button  BorderThickness="0"  Click="IncreaseGroupSize_Click"
