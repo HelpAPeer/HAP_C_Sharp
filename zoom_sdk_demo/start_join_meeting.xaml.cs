@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel; // CancelEventArgs
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Media.Imaging;
@@ -244,6 +245,13 @@ namespace zoom_sdk_demo
         {
             var addQuestionWindow = new AddQuestionWindow();
             addQuestionWindow.ShowDialog();
+        }
+
+        private void openWebpageClick(object sender, RoutedEventArgs e)
+        {
+            string link_to_details = "https://projects.etc.cmu.edu/help-a-peer/?page_id=467";
+            Process p = Process.Start(link_to_details);
+
         }
     }
 }
