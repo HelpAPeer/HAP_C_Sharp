@@ -123,10 +123,26 @@ namespace zoom_sdk_demo
 
         private void ShareGroup_Click(object sender, RoutedEventArgs e)
         {
+            const string stop_share = "Stop Sharing Groups";
+
             ZOOM_SDK_DOTNET_WRAP.HWNDDotNet wind = new ZOOM_SDK_DOTNET_WRAP.HWNDDotNet(); // TODO: Make more resource efficient
             IntPtr windowHandle = new WindowInteropHelper(this).Handle;
             wind.value = (uint)windowHandle;
+
+            if ((sender as Button).Content.Equals(stop_share)){
+                (sender as Button).Content = "Share Groups";
+                HeaderToHide.Visibility = Visibility.Visible;
+                ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().GetMeetingShareController().StopShare();
+                return;
+            }
+
+          
             ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().GetMeetingShareController().StartAppShare(wind);
+
+            //TODO: Need to hide the top part
+            HeaderToHide.Visibility = Visibility.Collapsed;
+            (sender as Button).Content = stop_share;
+
         }
 
         private void RadioButton_Checked_1(object sender, RoutedEventArgs e)
