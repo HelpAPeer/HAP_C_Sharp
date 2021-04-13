@@ -25,6 +25,12 @@ namespace zoom_sdk_demo.Models
         // Index 0 is always Evaluations from quizzes for now
         public List<double> Evaluation = new List<double>();
 
+        // Override of ToString for data export
+        public override string ToString()
+        {
+            return Name;
+        }
+
         public double Evaluate(ObservableCollection<Question> questions )
         {
             Console.WriteLine("Evaluating student " + Name);

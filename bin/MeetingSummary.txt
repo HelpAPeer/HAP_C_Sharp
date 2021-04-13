@@ -1,0 +1,49 @@
+Please join Zoom meeting in progress
+4/12/2021 11:11:21 AM
+
+
+================================
+Participants List and Notes
+================================
+Ryan Eckert
+Write your thoughts here on 
+
+------------------------
+Ebrahim Karam
+Write your thoughts here on 
+
+------------------------
+Karen Xu (she/her)
+Write your thoughts here on 
+
+------------------------
+Hanhui Lu
+Write your thoughts here on 
+
+------------------------
+HelpA Peer
+Write your thoughts here on 
+
+------------------------
+================================
+Saved Group Configurations
+================================
+================================
+Quiz Results
+================================
+This is a question!
+Yes or no?
+
+Karen Xu (she/her) 	| Incorrect 	| no
+Ryan Eckert 	| Correct 	| yes
+Ebrahim Karam 	| Correct 	| yes
+Hanhui Lu 	| Incorrect 	| no
+
+------------------------
+How is the weather today?
+
+Ryan Eckert 	| Incorrect 	| clear
+Ebrahim Karam 	| Incorrect 	| grey
+Hanhui Lu 	| Incorrect 	| Good
+
+------------------------

@@ -38,6 +38,7 @@ namespace zoom_sdk_demo
         public static Question activeQuestion = null;
 
         ChatListener chat = new ChatListener();
+        SummaryExport summary = new SummaryExport();
 
         public HAP_MainWindow()
         {
@@ -75,6 +76,9 @@ namespace zoom_sdk_demo
             //SetParent(firstHwd.value,);
 
             SendMessage((System.IntPtr)firstHwd.value, WM_SYSCOMMAND, SC_MAXIMIZE, 0);
+
+            //Use this opportunity to set up Summary Export
+            summary.SetMeetingInfo(CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().GetMeetingInfo().GetInviteEmailTitle(), DateTime.Now, questions);
 
         }
         private void TextBox_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
@@ -163,6 +167,7 @@ namespace zoom_sdk_demo
         {
             //LeaveMeetingCmd ID = LeaveMeetingCmd.END_MEETING;
             //CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().Leave(ID);
+            summary.WriteSummary();
             System.Windows.Application.Current.Shutdown();
         }
 
