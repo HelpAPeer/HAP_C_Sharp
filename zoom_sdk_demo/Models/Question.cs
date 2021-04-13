@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,14 +36,14 @@ namespace zoom_sdk_demo.Models
 
         public void LogResponse(string student, string response)
         {
-            
+
             if (responses.ContainsKey(student))
             {
                 Console.WriteLine("Student " + student + " has already responded");
                 return;
             }
 
-            Tuple<string,bool> eval;
+            Tuple<string, bool> eval;
             if (answers.Contains(response)) //TODO: Add methods for regrading, both for adding more answers and for marking specific student as correct
             {
                 eval = Tuple.Create(response, true);
@@ -66,12 +67,21 @@ namespace zoom_sdk_demo.Models
             Question q = new Question();
 
             //Check if question is null
-       
+
             q.question = values[0];
 
             q.answerString = values[1];
 
             return q;
         }
+    }
+
+
+    //Created a quesiton maanger
+    public sealed class QuestionManager
+    {
+        public static QuestionManager instance = new QuestionManager();
+        private QuestionManager() { }
+        public ObservableCollection<Question> questions = new ObservableCollection<Question>();
     }
 }

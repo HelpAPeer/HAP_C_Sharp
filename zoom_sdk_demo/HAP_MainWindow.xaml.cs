@@ -25,7 +25,7 @@ namespace zoom_sdk_demo
     /// 
     public partial class HAP_MainWindow : Window
     {
-        public ObservableCollection<Question> questions;
+        //public ObservableCollection<Question> questions;
         public int id_lastSelected = 0;
 
         [System.Runtime.InteropServices.DllImport("user32.dll")]
@@ -51,10 +51,10 @@ namespace zoom_sdk_demo
             }
 
 
-            questions = new ObservableCollection<Question>();
+            //questions = new ObservableCollection<Question>();
             InitializeComponent();
             //embedZoom();
-            questions_list.ItemsSource = questions;
+            questions_list.ItemsSource = QuestionManager.instance.questions;
             participant_list.ItemsSource = ParticipantManager.instance.participants;
             groups_list.ItemsSource = GroupManager.instance.groups;
 

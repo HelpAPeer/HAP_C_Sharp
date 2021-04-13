@@ -1,19 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Forms;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using zoom_sdk_demo.Models;
-using System.IO;
 
 namespace zoom_sdk_demo
 {
@@ -26,6 +18,7 @@ namespace zoom_sdk_demo
         {
             DataContext = new Question();
             InitializeComponent();
+            questions_list.ItemsSource = QuestionManager.instance.questions;
         }
 
 
@@ -43,7 +36,8 @@ namespace zoom_sdk_demo
 
             item.answers = new List<string>(item.answerString.Split('\n'));
 
-            ((HAP_MainWindow)System.Windows.Application.Current.MainWindow).questions.Add(item);
+            //((HAP_MainWindow)System.Windows.Application.Current.MainWindow).questions.Add(item);
+            QuestionManager.instance.questions.Add(item);
 
             Console.WriteLine(item.answers.ToString());
             Close();
@@ -79,7 +73,7 @@ namespace zoom_sdk_demo
             //Remove any question in list that has an empty answer and question
             questions = questions.Where(q => (q.question != "") || (q.answerString != "")).ToList();
             //Add the list of quesitons to the observable collection
-            questions.ForEach(((HAP_MainWindow)System.Windows.Application.Current.MainWindow).questions.Add);
+            questions.ForEach(QuestionManager.instance.questions.Add);
         }
 
         private void Answer_textbox_TextChanged(object sender, TextChangedEventArgs e)
