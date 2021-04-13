@@ -12,11 +12,11 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <DockPanel Grid.Column="1" LastChildFill="False">
+        <DockPanel x:Name="Specified_Question" Grid.Column="1" LastChildFill="False">
             <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Center"> Enter the Question</TextBlock>
-            <TextBox DockPanel.Dock="Top" Text="{Binding Path=question, UpdateSourceTrigger=PropertyChanged}" Height="97" Margin="10,0,9.8,0" AcceptsReturn="True"/>
+            <TextBox DockPanel.Dock="Top" Text="{Binding Path=question, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Height="97" Margin="10,0,9.8,0" AcceptsReturn="True"/>
             <TextBlock Margin="10,16,10,0"  DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Enter the Answer"/>
-            <TextBox  DockPanel.Dock="Top" Name="Answer_textbox" Text="{Binding Path=answerString, UpdateSourceTrigger=PropertyChanged}" Margin="10,10,9.8,10" TextChanged="Answer_textbox_TextChanged" TextWrapping="Wrap"
+            <TextBox  DockPanel.Dock="Top" Name="Answer_textbox" Text="{Binding Path=answerString, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="10,10,9.8,10" TextChanged="Answer_textbox_TextChanged" TextWrapping="Wrap"
 AcceptsReturn="True" Height="74" ></TextBox>
 
             <Button DockPanel.Dock="Top" HorizontalAlignment="Center" Content="Add an Image to Question" Click="Add_image_click"/>
@@ -30,7 +30,7 @@ AcceptsReturn="True" Height="74" ></TextBox>
 
         <DockPanel Grid.Column="0">
             <Button DockPanel.Dock="Top" Content="+ Import Questions" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="10" Click="import_Questions_click"/>
-            <ListView  x:Name="questions_list" Width="Auto" DockPanel.Dock="Top" ItemsSource="{Binding}" SelectionMode="Single" >
+            <ListView  x:Name="questions_list" Width="Auto" DockPanel.Dock="Top" ItemsSource="{Binding}" SelectionMode="Single" SelectionChanged="questions_list_SelectionChanged">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>

@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Windows;
 using System.Windows.Controls;
+using System.Windows;
 using System.Windows.Forms;
 using zoom_sdk_demo.Models;
 
@@ -94,6 +94,17 @@ namespace zoom_sdk_demo
             {
                 return;
             }
+        }
+
+        private void questions_list_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //Resource
+            //https://stackoverflow.com/questions/34314339/display-selected-listbox-items-data-in-wpf
+            System.Windows.Controls.ListView lb = sender as System.Windows.Controls.ListView;
+            Question quesiton = (Question)lb.SelectedItem;
+            Console.WriteLine(quesiton.question);
+            DataContext = quesiton;
+ 
         }
     }
 }
