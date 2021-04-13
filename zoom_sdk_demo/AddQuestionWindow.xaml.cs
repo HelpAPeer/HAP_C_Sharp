@@ -35,8 +35,6 @@ namespace zoom_sdk_demo
             var item = (Question)(DataContext);
 
             item.answers = new List<string>(item.answerString.Split('\n'));
-
-            //((HAP_MainWindow)System.Windows.Application.Current.MainWindow).questions.Add(item);
             QuestionManager.instance.questions.Add(item);
 
             Console.WriteLine(item.answers.ToString());

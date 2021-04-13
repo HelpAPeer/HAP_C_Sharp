@@ -116,7 +116,8 @@ namespace zoom_sdk_demo
         private void Add_Question_Click(object sender, RoutedEventArgs e)
         {
             var addQuestionWindow = new AddQuestionWindow();
-            addQuestionWindow.ShowDialog();
+            //this was ShowDialog before. Which froze all the other windows
+            addQuestionWindow.Show();
 
         }
 
@@ -158,7 +159,9 @@ namespace zoom_sdk_demo
         {
 
             var bo_Settings_Window = new BO_Settings_Window();
-            bo_Settings_Window.ShowDialog();
+            //bo_Settings_Window.ShowDialog();
+
+            bo_Settings_Window.Show();
         }
 
         void Wnd_Closing(object sender, CancelEventArgs e)
@@ -188,7 +191,7 @@ namespace zoom_sdk_demo
             }
 
 
-    
+
             // we are doing this via the group
             Console.WriteLine(group.Participants_in_group.Count);
             for (int i = group.Participants_in_group.Count; i-- > 0;)
@@ -203,11 +206,12 @@ namespace zoom_sdk_demo
 
                 int index = ParticipantManager.instance.participants.IndexOf(person_in_list);
                 //if index not found we return -1
-                if (index > 0) {
+                if (index > 0)
+                {
                     Console.WriteLine("Index for the particapnt we want to remove {0}", index);
                     ParticipantManager.instance.participants.Move(index, 0);
                 }
-        
+
             }
 
         }

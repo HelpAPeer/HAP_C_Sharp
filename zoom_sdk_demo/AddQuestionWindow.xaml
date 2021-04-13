@@ -30,7 +30,7 @@ AcceptsReturn="True" Height="74" ></TextBox>
 
         <DockPanel Grid.Column="0">
             <Button DockPanel.Dock="Top" Content="+ Import Questions" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="10" Click="import_Questions_click"/>
-            <ListView  x:Name="questions_list" Width="Auto" DockPanel.Dock="Top" ItemsSource="{Binding}" >
+            <ListView  x:Name="questions_list" Width="Auto" DockPanel.Dock="Top" ItemsSource="{Binding}" SelectionMode="Single" >
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
