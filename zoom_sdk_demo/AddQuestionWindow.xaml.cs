@@ -106,5 +106,15 @@ namespace zoom_sdk_demo
             DataContext = quesiton;
  
         }
+
+    
+
+        private void New_Question_Click(object sender, RoutedEventArgs e)
+        {
+            Question question = new Question();
+            QuestionManager.instance.questions.Add(question);
+            questions_list.SelectedItem = question;
+
+        }
     }
 }

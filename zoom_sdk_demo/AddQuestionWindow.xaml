@@ -28,7 +28,7 @@ AcceptsReturn="True" Height="74" ></TextBox>
             </StackPanel>
         </DockPanel>
 
-        <DockPanel Grid.Column="0">
+        <DockPanel Grid.Column="0" LastChildFill="False">
             <Button DockPanel.Dock="Top" Content="+ Import Questions" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="10" Click="import_Questions_click"/>
             <ListView  x:Name="questions_list" Width="Auto" DockPanel.Dock="Top" ItemsSource="{Binding}" SelectionMode="Single" SelectionChanged="questions_list_SelectionChanged">
                 <ListView.ItemContainerStyle>
@@ -48,6 +48,9 @@ AcceptsReturn="True" Height="74" ></TextBox>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <Button Margin="10" HorizontalAlignment="Center" DockPanel.Dock="Bottom" Content=" + New Question" Click="New_Question_Click"/> 
+
+
         </DockPanel>
 
 
