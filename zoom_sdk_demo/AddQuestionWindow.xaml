@@ -16,7 +16,7 @@
             <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Center"> Enter the Question</TextBlock>
             <TextBox DockPanel.Dock="Top" Text="{Binding Path=question, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Height="97" Margin="10,0,9.8,0" AcceptsReturn="True"/>
             <TextBlock Margin="10,16,10,0"  DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Enter the Answer"/>
-            <TextBox  DockPanel.Dock="Top" Name="Answer_textbox" Text="{Binding Path=answerString, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="10,10,9.8,10" TextChanged="Answer_textbox_TextChanged" TextWrapping="Wrap"
+            <TextBox  DockPanel.Dock="Top" Name="Answer_textbox" Text="{Binding Path=answerString, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="10,10,9.8,10" TextWrapping="Wrap"
 AcceptsReturn="True" Height="74" ></TextBox>
 
             <Button DockPanel.Dock="Top" HorizontalAlignment="Center" Content="Add an Image to Question" Click="Add_image_click"/>
@@ -24,7 +24,7 @@ AcceptsReturn="True" Height="74" ></TextBox>
 
             <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button Click="Delete_Click" Margin="5">Delete</Button>
-                <Button Margin="5" Click="Add_Click">Add</Button>
+                <Button Margin="5" Click="Finish_Click">Finish</Button>
             </StackPanel>
         </DockPanel>
 
@@ -48,7 +48,7 @@ AcceptsReturn="True" Height="74" ></TextBox>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Button Margin="10" HorizontalAlignment="Center" DockPanel.Dock="Bottom" Content=" + New Question" Click="New_Question_Click"/> 
+            <Button Margin="10" HorizontalAlignment="Center" DockPanel.Dock="Bottom" Content=" + New Question" Click="New_Question_Click"/>
 
 
         </DockPanel>

@@ -23,23 +23,6 @@ namespace zoom_sdk_demo
 
 
 
-
-
-
-
-        private void Add_Click(object sender, RoutedEventArgs e)
-        {
-            var item = (Question)(DataContext);
-
-            item.answers = new List<string>(item.answerString.Split('\n'));
-            QuestionManager.instance.questions.Add(item);
-
-            Console.WriteLine(item.answers.ToString());
-            Close();
-        }
-
-
-
         private void import_Questions_click(object sender, RoutedEventArgs e)
         {
             //TODO: open file dialog to get CSV
@@ -71,10 +54,7 @@ namespace zoom_sdk_demo
             questions.ForEach(QuestionManager.instance.questions.Add);
         }
 
-        private void Answer_textbox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
+ 
 
 
 
@@ -125,6 +105,11 @@ namespace zoom_sdk_demo
             DataContext = new Question();
             //We might need to change the selected item to something else
 
+        }
+
+        private void Finish_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }
