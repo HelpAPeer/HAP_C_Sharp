@@ -23,10 +23,7 @@ namespace zoom_sdk_demo
 
 
 
-        private void Cancel_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
+
 
 
 
@@ -102,18 +99,31 @@ namespace zoom_sdk_demo
             //https://stackoverflow.com/questions/34314339/display-selected-listbox-items-data-in-wpf
             System.Windows.Controls.ListView lb = sender as System.Windows.Controls.ListView;
             Question quesiton = (Question)lb.SelectedItem;
-            Console.WriteLine(quesiton.question);
-            DataContext = quesiton;
- 
+            if (!(quesiton is null))
+            {
+                Console.WriteLine(quesiton.question);
+                DataContext = quesiton;
+            }
+
         }
 
-    
+
 
         private void New_Question_Click(object sender, RoutedEventArgs e)
         {
             Question question = new Question();
             QuestionManager.instance.questions.Add(question);
             questions_list.SelectedItem = question;
+
+        }
+
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            Question question = (Question)questions_list.SelectedItem;
+            questions_list.SelectedIndex = -1;
+            QuestionManager.instance.questions.Remove(question);
+            DataContext = new Question();
+            //We might need to change the selected item to something else
 
         }
     }

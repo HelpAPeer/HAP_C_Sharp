@@ -23,7 +23,7 @@ AcceptsReturn="True" Height="74" ></TextBox>
             <TextBlock DockPanel.Dock="Top" Text="{Binding Path=imagePath, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" x:Name="image_filepath"/>
 
             <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Click="Cancel_Click" Margin="5">Cancel</Button>
+                <Button Click="Delete_Click" Margin="5">Delete</Button>
                 <Button Margin="5" Click="Add_Click">Add</Button>
             </StackPanel>
         </DockPanel>
