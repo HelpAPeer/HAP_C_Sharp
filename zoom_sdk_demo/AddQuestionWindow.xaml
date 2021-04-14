@@ -30,7 +30,7 @@ AcceptsReturn="True" Height="74" ></TextBox>
 
         <DockPanel Grid.Column="0" LastChildFill="False">
             <Button DockPanel.Dock="Top" Content="+ Import Questions" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="10" Click="import_Questions_click"/>
-            <ListView  x:Name="questions_list" Width="Auto" DockPanel.Dock="Top" ItemsSource="{Binding}" SelectionMode="Single" SelectionChanged="questions_list_SelectionChanged">
+            <ListView  x:Name="questions_list" DockPanel.Dock="Top" ItemsSource="{Binding}" SelectionMode="Single" SelectionChanged="questions_list_SelectionChanged">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -39,9 +39,9 @@ AcceptsReturn="True" Height="74" ></TextBox>
 
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Border Background="#D9D9D9" CornerRadius="10">
-                            <DockPanel Margin="5">
-                                <TextBlock DockPanel.Dock="Top" Text="{Binding Path=question}" TextTrimming="WordEllipsis" />
+                        <Border Background="#D9D9D9" CornerRadius="10" Margin="5">
+                            <DockPanel Margin="5" Width="100">
+                                <TextBlock DockPanel.Dock="Top" Text="{Binding Path=question}" TextTrimming="WordEllipsis" TextWrapping="NoWrap" />
 
                             </DockPanel>
                         </Border>

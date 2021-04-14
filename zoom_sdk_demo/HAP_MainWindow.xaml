@@ -24,7 +24,7 @@
                 <DockPanel LastChildFill="False" Background="White">
                     <Button Click="Add_Question_Click" Margin="5" Padding="5,2" DockPanel.Dock="Top" HorizontalAlignment="Right" Content="+" FontSize="24">
                     </Button>
-                    <ListView  x:Name="questions_list" Width="Auto" DockPanel.Dock="Top" ItemsSource="{Binding}" >
+                    <ListView  x:Name="questions_list"  DockPanel.Dock="Top" ItemsSource="{Binding}" >
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
                                 <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -36,7 +36,7 @@
                                 <Border Background="#D9D9D9" CornerRadius="10">
                                     <DockPanel Margin="5">
                                         <!--<TextBlock DockPanel.Dock="Top">Question 1</TextBlock>-->
-                                        <TextBlock DockPanel.Dock="Top" Text="{Binding Path=question}" />
+                                        <TextBlock DockPanel.Dock="Top" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" Text="{Binding Path=question}" />
 
                                         <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" DockPanel.Dock="Bottom">
                                             <Button Margin="5" Content="Results" Click="viewresults_Click"></Button>
@@ -172,24 +172,24 @@
                 <Border Margin="10"  Grid.ColumnSpan="2" Background="White" CornerRadius="10">
                 </Border>
                 <DockPanel   Grid.Column="1" Margin="15">
-                        <TextBlock DockPanel.Dock="Top" Margin="5" HorizontalAlignment="Left"  Width="130">Participant Notes</TextBlock>
-                        <TextBox Name="NoteTextBox"  AcceptsReturn="True" DockPanel.Dock="Bottom" TextWrapping="Wrap" GotKeyboardFocus="TextBox_GotKeyboardFocus" Text="Select participant &amp; Type note here..." TextChanged="NoteTextBox_TextChanged" VerticalScrollBarVisibility="Hidden" />
-                    </DockPanel>
-              
-                    <DockPanel Grid.Column="0" Margin="15">
-                        <TextBlock  DockPanel.Dock="Top" Margin="5">Participants</TextBlock>
-                        <ListBox DockPanel.Dock="Bottom" x:Name="participant_list"  ScrollViewer.VerticalScrollBarVisibility="Visible"
+                    <TextBlock DockPanel.Dock="Top" Margin="5" HorizontalAlignment="Left"  Width="130">Participant Notes</TextBlock>
+                    <TextBox Name="NoteTextBox"  AcceptsReturn="True" DockPanel.Dock="Bottom" TextWrapping="Wrap" GotKeyboardFocus="TextBox_GotKeyboardFocus" Text="Select participant &amp; Type note here..." TextChanged="NoteTextBox_TextChanged" VerticalScrollBarVisibility="Hidden" />
+                </DockPanel>
+
+                <DockPanel Grid.Column="0" Margin="15">
+                    <TextBlock  DockPanel.Dock="Top" Margin="5">Participants</TextBlock>
+                    <ListBox DockPanel.Dock="Bottom" x:Name="participant_list"  ScrollViewer.VerticalScrollBarVisibility="Visible"
           ScrollViewer.CanContentScroll="False" SelectionChanged="participant_list_SelectionChanged">
 
-                            <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Name}"/>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
 
-                        </ListBox>
-                    </DockPanel>
-               
+                    </ListBox>
+                </DockPanel>
+
             </Grid>
         </Grid>
     </Grid>
