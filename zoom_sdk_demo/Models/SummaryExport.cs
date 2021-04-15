@@ -13,7 +13,7 @@ namespace zoom_sdk_demo.Models
     {
         public static SummaryExport instance;
 
-        public List<Group[]> groupings;
+        public List<Group[]> groupings = new List<Group[]>();
         public ObservableCollection<Question> questions;
 
 
@@ -25,7 +25,6 @@ namespace zoom_sdk_demo.Models
 
         public SummaryExport()
         {
-            groupings = new List<Group[]>();
             instance = this;
         }
 
