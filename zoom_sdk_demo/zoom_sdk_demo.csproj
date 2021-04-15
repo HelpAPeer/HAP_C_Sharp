@@ -115,6 +115,7 @@
     <Compile Include="Models\Group.cs" />
     <Compile Include="Models\Participants.cs" />
     <Compile Include="Models\Question.cs" />
+    <Compile Include="Models\SummaryExport.cs" />
     <Compile Include="QuestionResultsWindow.xaml.cs">
       <DependentUpon>QuestionResultsWindow.xaml</DependentUpon>
     </Compile>

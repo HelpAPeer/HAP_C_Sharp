@@ -34,6 +34,7 @@
 
         <StackPanel Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Horizontal">
             <Button Margin="5" Click="cancel_click">Cancel</Button>
+            <Button Margin="5" Click="save_click">Save Groupings</Button>
             <Button Margin="5" Click="ShareGroup_Click">Share Groups</Button>
             <Button Margin="5" Click="StartBO_Click">Start Breakout Room</Button>
         </StackPanel>

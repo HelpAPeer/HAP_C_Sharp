@@ -159,5 +159,10 @@ namespace zoom_sdk_demo
         {
             GroupManager.instance.groupType = 2;
         }
+
+        private void save_click(object sender, RoutedEventArgs e)
+        {
+            SummaryExport.instance.SaveGroups(GroupManager.instance.groups);
+        }
     }
 }
