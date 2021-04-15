@@ -12,24 +12,45 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <DockPanel Grid.Column="0" LastChildFill="False">
+        <DockPanel x:Name="Specified_Question" Grid.Column="1" LastChildFill="False">
             <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Center"> Enter the Question</TextBlock>
-            <TextBox DockPanel.Dock="Top" Text="{Binding Path=question, UpdateSourceTrigger=PropertyChanged}" Height="97" Margin="10,0,9.8,0" AcceptsReturn="True"/>
+            <TextBox DockPanel.Dock="Top" Text="{Binding Path=question, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Height="97" Margin="10,0,9.8,0" AcceptsReturn="True"/>
             <TextBlock Margin="10,16,10,0"  DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Enter the Answer"/>
-            <TextBox  DockPanel.Dock="Top" Name="Answer_textbox" Text="{Binding Path=answerString, UpdateSourceTrigger=PropertyChanged}" Margin="10,10,9.8,10" TextChanged="Answer_textbox_TextChanged" TextWrapping="Wrap"
+            <TextBox  DockPanel.Dock="Top" Name="Answer_textbox" Text="{Binding Path=answerString, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="10,10,9.8,10" TextWrapping="Wrap"
 AcceptsReturn="True" Height="74" ></TextBox>
 
             <Button DockPanel.Dock="Top" HorizontalAlignment="Center" Content="Add an Image to Question" Click="Add_image_click"/>
-            <TextBlock DockPanel.Dock="Top" Text="{Binding Path=imagePath, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" x:Name="image_filepath"/>
+            <TextBlock DockPanel.Dock="Top" Text="{Binding Path=imagePath, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextWrapping="Wrap" x:Name="image_filepath"/>
 
             <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Click="Cancel_Click" Margin="5">Cancel</Button>
-                <Button Margin="5" Click="Add_Click">Add</Button>
+                <Button Click="Delete_Click" Margin="5">Delete</Button>
+                <Button Margin="5" Click="Finish_Click">Finish</Button>
             </StackPanel>
         </DockPanel>
 
-        <DockPanel Grid.Column="1">
+        <DockPanel Grid.Column="0" LastChildFill="False">
             <Button DockPanel.Dock="Top" Content="+ Import Questions" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="10" Click="import_Questions_click"/>
+            <ListView  x:Name="questions_list" DockPanel.Dock="Top" ItemsSource="{Binding}" SelectionMode="Single" SelectionChanged="questions_list_SelectionChanged">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Background="#D9D9D9" CornerRadius="10" Margin="5">
+                            <DockPanel Margin="5" Width="100">
+                                <TextBlock DockPanel.Dock="Top" Text="{Binding Path=question}" TextTrimming="WordEllipsis" TextWrapping="NoWrap" />
+
+                            </DockPanel>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button Margin="10" HorizontalAlignment="Center" DockPanel.Dock="Bottom" Content=" + New Question" Click="New_Question_Click"/>
+
+
         </DockPanel>
 
 

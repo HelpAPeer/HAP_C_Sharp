@@ -25,7 +25,7 @@ namespace zoom_sdk_demo
     /// 
     public partial class HAP_MainWindow : Window
     {
-        public ObservableCollection<Question> questions;
+        //public ObservableCollection<Question> questions;
         public int id_lastSelected = 0;
 
         [System.Runtime.InteropServices.DllImport("user32.dll")]
@@ -35,8 +35,10 @@ namespace zoom_sdk_demo
         private const int WM_SYSCOMMAND = 0x112;
         private const int SC_MAXIMIZE = 0xF030;
 
-        public static Question activeQuestion = null;
+        //public static Question activeQuestion = null;
 
+        //public Question activeQuestion = null;
+        
         ChatListener chat = new ChatListener();
         SummaryExport summary;
 
@@ -52,10 +54,10 @@ namespace zoom_sdk_demo
             }
 
 
-            questions = new ObservableCollection<Question>();
+            //questions = new ObservableCollection<Question>();
             InitializeComponent();
             //embedZoom();
-            questions_list.ItemsSource = questions;
+            questions_list.ItemsSource = QuestionManager.instance.questions;
             participant_list.ItemsSource = ParticipantManager.instance.participants;
             groups_list.ItemsSource = GroupManager.instance.groups;
             summary = new SummaryExport();
@@ -121,7 +123,8 @@ namespace zoom_sdk_demo
         private void Add_Question_Click(object sender, RoutedEventArgs e)
         {
             var addQuestionWindow = new AddQuestionWindow();
-            addQuestionWindow.ShowDialog();
+            //this was ShowDialog before. Which froze all the other windows
+            addQuestionWindow.Show();
 
         }
 
@@ -131,7 +134,7 @@ namespace zoom_sdk_demo
         {
             Question problem = (sender as Button).DataContext as Question;
 
-            activeQuestion = problem;
+            QuestionManager.instance.activeQuestion = problem;
 
             var showquestion = new ShowQuestionWindow(); // TODO: Make more resource efficient
             showquestion.UpdateQuestion(problem);
@@ -163,7 +166,9 @@ namespace zoom_sdk_demo
         {
 
             var bo_Settings_Window = new BO_Settings_Window();
-            bo_Settings_Window.ShowDialog();
+            //bo_Settings_Window.ShowDialog();
+
+            bo_Settings_Window.Show();
         }
 
         void Wnd_Closing(object sender, CancelEventArgs e)
@@ -194,7 +199,7 @@ namespace zoom_sdk_demo
             }
 
 
-    
+
             // we are doing this via the group
             Console.WriteLine(group.Participants_in_group.Count);
             for (int i = group.Participants_in_group.Count; i-- > 0;)
@@ -209,11 +214,12 @@ namespace zoom_sdk_demo
 
                 int index = ParticipantManager.instance.participants.IndexOf(person_in_list);
                 //if index not found we return -1
-                if (index > 0) {
+                if (index > 0)
+                {
                     Console.WriteLine("Index for the particapnt we want to remove {0}", index);
                     ParticipantManager.instance.participants.Move(index, 0);
                 }
-        
+
             }
 
         }
