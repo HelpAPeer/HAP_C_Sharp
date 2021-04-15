@@ -36,7 +36,7 @@
                                 <Border Background="#D9D9D9" CornerRadius="10">
                                     <DockPanel Margin="5">
                                         <!--<TextBlock DockPanel.Dock="Top">Question 1</TextBlock>-->
-                                        <TextBlock DockPanel.Dock="Top" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" Text="{Binding Path=question}" />
+                                        <TextBlock DockPanel.Dock="Top" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" Text="{Binding Path=question, FallbackValue='Question'}" />
 
                                         <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" DockPanel.Dock="Bottom">
                                             <Button Margin="5" Content="Results" Click="viewresults_Click"></Button>

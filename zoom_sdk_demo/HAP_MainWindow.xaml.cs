@@ -35,8 +35,10 @@ namespace zoom_sdk_demo
         private const int WM_SYSCOMMAND = 0x112;
         private const int SC_MAXIMIZE = 0xF030;
 
-        public static Question activeQuestion = null;
+        //public static Question activeQuestion = null;
 
+        public Question activeQuestion = null;
+        
         ChatListener chat = new ChatListener();
 
         public HAP_MainWindow()

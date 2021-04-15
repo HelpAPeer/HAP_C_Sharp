@@ -16,13 +16,14 @@ namespace zoom_sdk_demo.Models
 
         public bool used { get; set; } = false;
 
-        public List<string> answers;
+        public List<string> answers { get; set; } = new List<string>();
 
-        public IDictionary<string, Tuple<string, bool>> responses;
-        public ISet<string> nonresponders;
+        public IDictionary<string, Tuple<string, bool>> responses { get; set; } = new Dictionary<string, Tuple<string, bool>>();
+        public ISet<string> nonresponders { get; set; }
 
         // Todo
 
+        //This isn't alwsys called as such
         public Question()
         {
             nonresponders = new HashSet<string>();
@@ -36,6 +37,7 @@ namespace zoom_sdk_demo.Models
 
         public void LogResponse(string student, string response)
         {
+            Console.WriteLine("We are loggin response");
 
             if (responses.ContainsKey(student))
             {
