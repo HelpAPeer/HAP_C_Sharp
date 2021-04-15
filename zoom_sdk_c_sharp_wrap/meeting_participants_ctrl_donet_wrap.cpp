@@ -36,6 +36,13 @@ namespace ZOOM_SDK_DOTNET_WRAP {
 				CMeetingParticipantsControllerDotNetWrap::Instance->procHostChangeNotification(userId);
 		}
 
+		//Added by BOb
+		void onCoHostChangeNotification(unsigned int userId, bool isCoHost)
+		{
+			if (CMeetingParticipantsControllerDotNetWrap::Instance)
+				CMeetingParticipantsControllerDotNetWrap::Instance->procCoHostChangeNotification(userId,isCoHost);
+		}
+
 		void onLowOrRaiseHandStatusChanged(bool bLow, unsigned int userId)
 		{
 			if (CMeetingParticipantsControllerDotNetWrap::Instance)
@@ -68,6 +75,11 @@ namespace ZOOM_SDK_DOTNET_WRAP {
 			std::bind(&ParticipantsEventHandler::onHostChangeNotification,
 				&ParticipantsEventHandler::GetInst(), std::placeholders::_1);
 
+// Added by Bob
+		meetingParticipants.m_cbonCoHostChangeNotification =
+			std::bind(&ParticipantsEventHandler::onCoHostChangeNotification,
+				&ParticipantsEventHandler::GetInst(), std::placeholders::_1 , std::placeholders::_2);
+
 		meetingParticipants.m_cbonLowOrRaiseHandStatusChanged =
 			std::bind(&ParticipantsEventHandler::onLowOrRaiseHandStatusChanged,
 				&ParticipantsEventHandler::GetInst(), std::placeholders::_1, std::placeholders::_2);
@@ -89,6 +101,12 @@ namespace ZOOM_SDK_DOTNET_WRAP {
 	void CMeetingParticipantsControllerDotNetWrap::procHostChangeNotification(unsigned int userId)
 	{
 		event_onHostChangeNotification(userId);
+	}
+
+//Added by bob
+	void CMeetingParticipantsControllerDotNetWrap:: procCoHostChangeNotification(unsigned int userId, bool isCoHost)
+	{
+		event_onCoHostChangeNotification(userId,isCoHost);
 	}
 
 	void CMeetingParticipantsControllerDotNetWrap::procLowOrRaiseHandStatusChanged(bool lower, unsigned int userId)

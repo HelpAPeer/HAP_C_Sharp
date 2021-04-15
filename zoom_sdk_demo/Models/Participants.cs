@@ -17,13 +17,42 @@ namespace zoom_sdk_demo.Models
         public int ID { get; set; }
         public string Name { get; set; } = "";
         //TODO; persoanlize note message. 
-        public string Notes { get; set; } = GlobalVar.default_note ;
+        public string Notes { get; set; } = GlobalVar.default_note;
 
         // TODO: Distinguish teachers from students
         public bool isStudent = true;
 
         // Index 0 is always Evaluations from quizzes for now
         public List<double> Evaluation = new List<double>();
+
+        public bool isParticpantStudent()
+        {
+
+            ZOOM_SDK_DOTNET_WRAP.IUserInfoDotNetWrap user = ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().
+                    GetMeetingParticipantsController().GetUserByUserID((uint)this.ID);
+
+            if (user.IsMySelf())
+            {
+                this.isStudent = false;
+                return false;
+            }
+
+            if (user.IsHost())
+            {
+                this.isStudent = false;
+                return false;
+            }
+
+            if (user.GetUserRole() == ZOOM_SDK_DOTNET_WRAP.UserRole.USERROLE_COHOST)
+            {
+                this.isStudent = false;
+                return false;
+
+            }
+
+            this.isStudent = true;
+            return true;
+        }
 
         // Override of ToString for data export
         public override string ToString()
@@ -58,7 +87,7 @@ namespace zoom_sdk_demo.Models
                 else
                 {
                     Console.WriteLine("Question is not eligable");
-                }    
+                }
             }
             if (numQ > 0)
             {
@@ -87,7 +116,7 @@ namespace zoom_sdk_demo.Models
                 Console.WriteLine(Name + " not evaluated.");
                 return 0;
             }
-            
+
         }
 
 
@@ -135,7 +164,9 @@ namespace zoom_sdk_demo.Models
                 if (null != (Object)user)
                 {
                     string name = user.GetUserNameW();
-                    participants.Add(new Participant { ID = (int)userid, Name = name });
+                    Participant p = new Participant { ID = (int)userid, Name = name };
+                    p.isParticpantStudent();
+                    participants.Add(p);
                     Console.Write(userid.ToString());
                     Console.Write(" ");
                     Console.WriteLine(name);
@@ -149,13 +180,34 @@ namespace zoom_sdk_demo.Models
             ZOOM_SDK_DOTNET_WRAP.IUserInfoDotNetWrap user = ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().
                   GetMeetingParticipantsController().GetUserByUserID((uint)userId);
 
-            Participant potential_host = participants.Single(i => i.ID == (int)userId);
+            Participant potential_host = participants.SingleOrDefault(i => i.ID == (int)userId);
+
             Console.WriteLine("Host Changed");
             if (potential_host.Name == user.GetUserNameW())
             {
+                int index = participants.IndexOf(potential_host);
+                //making sure the host is specified
+                participants[index].isParticpantStudent();
                 Console.WriteLine("Everthing Seems fine. Host ID did not change");
+
             }
 
+
+        }
+
+        public void coHostChanged(UInt32 userId, bool isCoHost) {
+
+            ZOOM_SDK_DOTNET_WRAP.IUserInfoDotNetWrap user = ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().
+                GetMeetingParticipantsController().GetUserByUserID((uint)userId);
+
+            Participant potential_host = participants.SingleOrDefault(i => i.ID == (int)userId);
+            if (!(potential_host is null)) {
+                int index = participants.IndexOf(potential_host);
+                //if co_host than it is not a student. 
+                // if not a co-host than it is a student.but we could be myself. better to just rin the member function
+                //participants[index].isStudent = !isCoHost;
+                participants[index].isParticpantStudent();
+            }
 
         }
 
@@ -183,30 +235,7 @@ namespace zoom_sdk_demo.Models
                 }
 
             }
-            //foreach (var participant in participants)
-            //{
-            //    bool notFound = true;
-            //    for (int i = lstUserID.GetLowerBound(0); i <= lstUserID.GetUpperBound(0); i++)
-            //    {
-            //        int userid = (int)(UInt32)lstUserID.GetValue(i);
-            //        ZOOM_SDK_DOTNET_WRAP.IUserInfoDotNetWrap user = ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().
-            //       GetMeetingParticipantsController().GetUserByUserID((uint)userid);
-
-            //        if ((participant.ID == userid) & (participant.Name == user.GetUserNameW()))
-            //        {
-            //            // We found a match
-            //            notFound = false;
-            //            break;
-            //        }
-
-            //    }
-            //    if (notFound)
-            //    {
-            //        //We have found the item to remove. We can stop the for leap
-            //        participants.Remove(participant);
-            //        break;
-            //    }
-            //}
+       
 
         }
         public void ChangeName(UInt32 userId, string userName)
@@ -215,6 +244,8 @@ namespace zoom_sdk_demo.Models
             Console.WriteLine(userName);
             Participant participant_toModify = participants.Single(user => user.ID == (int)userId);
             participant_toModify.Name = userName;
+            //Changing names would modify is student category A good debuging if need be
+            participant_toModify.isParticpantStudent();
             int index = participants.IndexOf(participant_toModify);
             participants.RemoveAt(index);
             participants.Insert(index, participant_toModify);
@@ -229,6 +260,7 @@ namespace zoom_sdk_demo.Models
 
                 ZOOM_SDK_DOTNET_WRAP.IUserInfoDotNetWrap user = ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().
             GetMeetingParticipantsController().GetUserByUserID((uint)userid);
+                Console.WriteLine("We found someone  {0}", user.GetUserNameW());
                 bool notFound = true;
                 foreach (var participant in participants)
                 {
@@ -245,7 +277,9 @@ namespace zoom_sdk_demo.Models
                     //GetMeetingParticipantsController().GetUserByUserID((UInt32)userid);
 
                     string name = user.GetUserNameW();
-                    participants.Add(new Participant { ID = userid, Name = name });
+                    Participant p = new Participant { ID = userid, Name = name };
+                    p.isParticpantStudent();
+                    participants.Add(p);
                     break;
                 }
             }

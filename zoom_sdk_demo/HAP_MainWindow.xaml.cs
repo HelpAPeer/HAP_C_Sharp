@@ -38,7 +38,7 @@ namespace zoom_sdk_demo
         public static Question activeQuestion = null;
 
         ChatListener chat = new ChatListener();
-        SummaryExport summary = new SummaryExport();
+        SummaryExport summary;
 
         public HAP_MainWindow()
         {
@@ -58,6 +58,7 @@ namespace zoom_sdk_demo
             questions_list.ItemsSource = questions;
             participant_list.ItemsSource = ParticipantManager.instance.participants;
             groups_list.ItemsSource = GroupManager.instance.groups;
+            summary = new SummaryExport();
 
         }
 
@@ -84,10 +85,11 @@ namespace zoom_sdk_demo
         private void TextBox_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
             TextBox txtBox = sender as TextBox;
-            if (txtBox.Text.Contains("Select participant") || txtBox.Text.Contains(GlobalVar.default_note)) {
+            if (txtBox.Text.Contains("Select participant") || txtBox.Text.Contains(GlobalVar.default_note))
+            {
                 txtBox.Text = string.Empty;
             }
-                
+
         }
 
         private void participant_list_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -95,7 +97,8 @@ namespace zoom_sdk_demo
             var student = (Participant)e.AddedItems[0];
 
             id_lastSelected = ParticipantManager.instance.participants.IndexOf(student);
-            if (student.Notes.Equals(GlobalVar.default_note)) {
+            if (student.Notes.Equals(GlobalVar.default_note))
+            {
                 student.Notes += student.Name;
             }
             NoteTextBox.Text = student.Notes;
@@ -109,7 +112,7 @@ namespace zoom_sdk_demo
             {
                 ParticipantManager.instance.participants[id_lastSelected].Notes = NoteTextBox.Text;
 
-             
+
 
             }
 
@@ -176,12 +179,46 @@ namespace zoom_sdk_demo
             Group group = (sender as Button).DataContext as Group;
 
             ZOOM_SDK_DOTNET_WRAP.IMeetingBreakoutRoomsControllerDotNetWrap BO_controller = ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().GetMeetingBreakoutRoomsController();
-            BO_controller.JoinBreakoutRoom(group.group_ID);
+            if (group.group_ID != "")
+            {
+                //We need to leave an y breakout rooms that we might be in
+                if (GroupManager.instance.last_groupID != "")
+                {
+                    BO_controller.LeaveBreakoutRoom();
+                    //TODO: wait for in meeting status then we can call Join Breakout room
+                }
+                GroupManager.instance.joinedBO_Room = true;
+                BO_controller.JoinBreakoutRoom(group.group_ID);
+                GroupManager.instance.last_groupID = group.group_ID;
+                (sender as Button).Content = "Joined";
+            }
 
-//TODO: get list of people in the BO Group and put their name first
+
+    
+            // we are doing this via the group
+            Console.WriteLine(group.Participants_in_group.Count);
+            for (int i = group.Participants_in_group.Count; i-- > 0;)
+            {
+                Console.WriteLine("We are here");
+                Participant person = group.Participants_in_group[i];
+
+                // above is working
+                //It might be that notes are not updated within the observation list
+
+                Participant person_in_list = ParticipantManager.instance.participants.FirstOrDefault(j => j.ID == person.ID);
+
+                int index = ParticipantManager.instance.participants.IndexOf(person_in_list);
+                //if index not found we return -1
+                if (index > 0) {
+                    Console.WriteLine("Index for the particapnt we want to remove {0}", index);
+                    ParticipantManager.instance.participants.Move(index, 0);
+                }
+        
+            }
 
         }
-
-        
     }
+
+
 }
+

@@ -11,6 +11,8 @@ namespace zoom_sdk_demo.Models
 
     class SummaryExport
     {
+        public static SummaryExport instance;
+
         public List<Group[]> groupings;
         public ObservableCollection<Question> questions;
 
@@ -24,6 +26,7 @@ namespace zoom_sdk_demo.Models
         public SummaryExport()
         {
             groupings = new List<Group[]>();
+            instance = this;
         }
 
         public void SetMeetingInfo(string meetingName, DateTime start, ObservableCollection<Question> q)
@@ -76,7 +79,7 @@ namespace zoom_sdk_demo.Models
             output.AppendLine(sectionDivider);
             for (int i = 0; i < groupings.Count;i++)
             {
-                output.Append("Group Confiruation "); output.AppendLine((i+1).ToString());
+                output.Append("Group Configuration "); output.AppendLine((i+1).ToString());
                 foreach (Group g in groupings[i])
                 {
                     output.Append(g.Name); output.Append(": "); output.AppendLine(String.Join<Participant>(", ", g.Participants_in_group));
