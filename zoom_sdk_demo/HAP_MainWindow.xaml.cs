@@ -37,7 +37,7 @@ namespace zoom_sdk_demo
 
         //public static Question activeQuestion = null;
 
-        public Question activeQuestion = null;
+        //public Question activeQuestion = null;
         
         ChatListener chat = new ChatListener();
 
@@ -129,7 +129,7 @@ namespace zoom_sdk_demo
         {
             Question problem = (sender as Button).DataContext as Question;
 
-            activeQuestion = problem;
+            QuestionManager.instance.activeQuestion = problem;
 
             var showquestion = new ShowQuestionWindow(); // TODO: Make more resource efficient
             showquestion.UpdateQuestion(problem);

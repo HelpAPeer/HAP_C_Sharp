@@ -33,6 +33,7 @@ namespace zoom_sdk_demo.Models
             }
 
             responses = new Dictionary<string, Tuple<string, bool>>();
+            answers = new List<string>();
         }
 
         public void LogResponse(string student, string response)
@@ -85,5 +86,6 @@ namespace zoom_sdk_demo.Models
         public static QuestionManager instance = new QuestionManager();
         private QuestionManager() { }
         public ObservableCollection<Question> questions = new ObservableCollection<Question>();
+        public Question activeQuestion = null;
     }
 }
