@@ -20,7 +20,7 @@
 AcceptsReturn="True" Height="74" ></TextBox>
 
             <Button DockPanel.Dock="Top" HorizontalAlignment="Center" Content="Add an Image to Question" Click="Add_image_click"/>
-            <TextBlock DockPanel.Dock="Top" Text="{Binding Path=imagePath, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" x:Name="image_filepath"/>
+            <TextBlock DockPanel.Dock="Top" Text="{Binding Path=imagePath, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextWrapping="Wrap" x:Name="image_filepath"/>
 
             <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button Click="Delete_Click" Margin="5">Delete</Button>
