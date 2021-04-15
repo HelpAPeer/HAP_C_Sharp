@@ -5,13 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:zoom_sdk_demo"
         mc:Ignorable="d"
+        SizeToContent="Width"
         Title="ShowQuestionWindow" Height="360" Width="640">
+    <Viewbox Stretch="Uniform" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
     <Grid>
-        <StackPanel HorizontalAlignment="Center"  VerticalAlignment="Center"> 
-            <TextBlock x:Name="QuestionText" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24pt" Text="{Binding Path=question}"></TextBlock>
+        <StackPanel HorizontalAlignment="Center"  VerticalAlignment="Center">
+                <TextBlock x:Name="QuestionText" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20pt" Text="{Binding Path=question ,FallbackValue='Question Text is here'}"></TextBlock>
             <TextBlock x:Name="ReminderText" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12" Foreground="DarkGray">Use characters !~ to log question results.</TextBlock>
+            <Image Source="{Binding Path=imagePath}" Width="320" Stretch="Uniform" />
         </StackPanel>
         
         
     </Grid>
+    </Viewbox>
 </Window>
