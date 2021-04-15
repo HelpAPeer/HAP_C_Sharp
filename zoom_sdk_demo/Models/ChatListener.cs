@@ -26,14 +26,18 @@ namespace zoom_sdk_demo.Models
 
             if (msg.StartsWith(trigger))
             {
-                if (HAP_MainWindow.activeQuestion == null)
+                //this might be causing problems
+                if (QuestionManager.instance.activeQuestion == null)
                 {
                     Console.WriteLine("Question not active");
                 }
                 else
                 {
-                    Console.WriteLine("Logging response to question-" + msg.Substring(2).Trim());
-                    HAP_MainWindow.activeQuestion.LogResponse(sdr, msg.Substring(2).Trim());
+                    string response = msg.Trim().Substring(2).Trim();
+                    Console.WriteLine("Logging response to question-" + response);
+
+                    QuestionManager.instance.activeQuestion.LogResponse(sdr, response);
+                    //HAP_MainWindow.activeQuestion.LogResponse(sdr, response);
                 }
             }
 
