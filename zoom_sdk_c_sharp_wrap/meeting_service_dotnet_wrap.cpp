@@ -521,4 +521,12 @@ namespace ZOOM_SDK_DOTNET_WRAP {
 
 		return CMeetingLiveStreamControllerDotNetWrap::Instance;
 	}
+
+		IMeetingBOControllerDotNetWrap^ CMeetingServiceDotNetWrap::GetMeetingBOController()
+	{
+		if (CMeetingBOControllerDotNetWrap::Instance)
+			CMeetingBOControllerDotNetWrap::Instance->BindEvent();
+
+		return CMeetingBOControllerDotNetWrap::Instance;
+	}
 }
