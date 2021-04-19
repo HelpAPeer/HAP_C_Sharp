@@ -2,6 +2,7 @@
 using namespace System;
 using namespace System::Windows;
 #include "zoom_sdk_dotnet_wrap_def.h"
+#include "h/meeting_service_components/meeting_breakout_rooms_interface_v2.h"
 namespace ZOOM_SDK_DOTNET_WRAP
 {
 public interface class IBOCreatorDotNet
