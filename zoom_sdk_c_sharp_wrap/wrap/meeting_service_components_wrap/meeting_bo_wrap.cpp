@@ -1,9 +1,11 @@
 #include "stdafx.h"
 #include "meeting_bo_wrap.h"
 #include "../meeting_service_wrap.h"
+
 BEGIN_ZOOM_SDK_NAMESPACE
-IMeetingBOController* InitIMeetingBOControllerFunc(IMeetingBOControllerEvent* pEvent, IMeetingServiceWrap* pOwner)
-{
+
+IMeetingBOController* InitIMeetingBOControllerFunc(IMeetingBOControllerEvent* pEvent, IMeetingServiceWrap* pOwner){
+
 	if (pOwner && pOwner->GetSDKObj())
 	{
 		ZOOM_SDK_NAMESPACE::IMeetingBOController* pObj = pOwner->GetSDKObj()->GetMeetingBOController();
