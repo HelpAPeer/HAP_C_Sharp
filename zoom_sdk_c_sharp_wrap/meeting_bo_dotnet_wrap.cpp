@@ -509,4 +509,10 @@ namespace ZOOM_SDK_DOTNET_WRAP {
 		return TranslateBOData(ZOOM_SDK_NAMESPACE::CSDKWrap::GetInst().GetMeetingServiceWrap().
 			GetMeetingBOController().GetBODataHelper());
 	}
+
+	IBOAdminDotNet^ CMeetingBOControllerDotNetWrap::GetBOAdminHelper()
+	{
+		return TranslateBOAdmin(ZOOM_SDK_NAMESPACE::CSDKWrap::GetInst().GetMeetingServiceWrap().
+			GetMeetingBOController().GetBOAdminHelper());
+	}
 }

@@ -30,5 +30,6 @@ void UninitIMeetingBOControllerFunc(IMeetingBOController* obj)
 IMPL_FUNC_0(IMeetingBOController, IsBOStarted, bool, false)
 IMPL_FUNC_0(IMeetingBOController, GetBOCreatorHelper, IBOCreator*, NULL)
 IMPL_FUNC_0(IMeetingBOController, GetBODataHelper, IBOData*, NULL)
+IMPL_FUNC_0(IMeetingBOController, GetBOAdminHelper, IBOAdmin*, NULL)
 
 END_ZOOM_SDK_NAMESPACE

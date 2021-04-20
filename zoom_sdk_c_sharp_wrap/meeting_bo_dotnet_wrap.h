@@ -132,6 +132,7 @@ public
         bool IsBOStarted();
         IBOCreatorDotNet ^ GetBOCreatorHelper();
         IBODataDotNet ^ GetBODataHelper();
+        IBOAdminDotNet ^ GetBOAdminHelper();
     };
 
 private
@@ -149,6 +150,7 @@ private
         virtual bool IsBOStarted();
         virtual IBOCreatorDotNet ^ GetBOCreatorHelper();
         virtual IBODataDotNet ^ GetBODataHelper();
+        virtual IBOAdminDotNet^ GetBOAdminHelper();
 
         virtual void Add_CB_OnNewBroadcastMessageReceived(OnNewBroadcastMessageReceived ^ cb)
         {

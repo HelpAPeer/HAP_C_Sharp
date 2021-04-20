@@ -71,7 +71,11 @@ namespace zoom_sdk_demo
 
 
             //This only works if you are host, TOOD: need to check if I have host privileges before calling this
+
+
+
             IMeetingBOControllerDotNetWrap BO_controller = CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().GetMeetingBOController();
+            Console.WriteLine("can we start BO Rooms {0}",BO_controller.GetBOAdminHelper().CanStartBO());
 
 
 
@@ -79,12 +83,15 @@ namespace zoom_sdk_demo
             //Array list_of_BOs = BO_controller.GetBreakoutRoomsInfoList();
 
             //If we are not host, we can't create BO rooms
+
+            //AssignNewUserToRunningBO 
             if (!(BO_controller is null))
             {
                 foreach (Group g in groups)
                 {
 
                     string id = BO_controller.GetBOCreatorHelper().CreateBO(g.Name);
+                 
                     int index = groups.IndexOf(g);
                     if (index >= 0)
                     {
@@ -94,12 +101,15 @@ namespace zoom_sdk_demo
                     //Now we need to assign each member to group
                     //https://devforum.zoom.us/t/startbo-does-not-start-breakout-room/47459
                     IBODataDotNet BO_data= CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().GetMeetingBOController().GetBODataHelper();
-                    string[] users_left = BO_data.GetUnassginedUserList();
+                   string[] users_left = BO_data.GetUnassginedUserList();
+
+               
                     foreach (string user in users_left) {
                         Console.WriteLine("The ID of the user to add {0}. The id of the BO room is {1}",user, id);
                         Console.WriteLine("The username is {0}", BO_data.GetBOUserName(user));
                         bool status=BO_controller.GetBOCreatorHelper().AssignUserToBO(user, id);
                         Console.WriteLine(status);
+                        
                     }
                     foreach (Participant p in g.Participants_in_group)
                     {

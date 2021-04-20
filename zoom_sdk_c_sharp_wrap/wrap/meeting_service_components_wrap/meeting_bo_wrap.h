@@ -20,6 +20,10 @@ DEFINE_FUNC_0(GetBOCreatorHelper, IBOCreator*)
 //virtual IBOData*	   GetBODataHelper() = 0;
 DEFINE_FUNC_0(GetBODataHelper, IBOData*)
 
+
+//virtual IBOAdmin* GetBOAdminHelper() = 0;
+DEFINE_FUNC_0(GetBOAdminHelper, IBOAdmin*)
+
 //virtual bool IsBOStarted() = 0;
 DEFINE_FUNC_0(IsBOStarted, bool)
 

@@ -820,6 +820,7 @@ Interface ZOOM_SDK_DOTNET_WRAP.IMeetingBOControllerDotNetWrap: AutoLayout, AnsiC
     IsBOStarted(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
     GetBOCreatorHelper(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
     GetBODataHelper(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
+    GetBOAdminHelper(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, Abstract
 Struct ZOOM_SDK_DOTNET_WRAP.BO_CTRL_USER_STATUS: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
   :System.Enum
   Fields:
