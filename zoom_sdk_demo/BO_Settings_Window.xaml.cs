@@ -75,8 +75,8 @@ namespace zoom_sdk_demo
 
             Participant me = ParticipantManager.instance.participants.FirstOrDefault(p => p.isMyself == true);
 
-            //If we are not host, we can't create BO rooms
-            if (me.hasHostPrivileges())
+            //If we are not host, we can't create BO rooms. Also if me does not exist that we can't do anything
+            if (!(me is null) &&  me.hasHostPrivileges())
             {
 
                 IMeetingBOControllerDotNetWrap BO_controller = CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().GetMeetingBOController();
@@ -102,6 +102,7 @@ namespace zoom_sdk_demo
 
                     //Now we need to assign each member to group
                     //https://devforum.zoom.us/t/startbo-does-not-start-breakout-room/47459
+                    //https://devforum.zoom.us/t/breakout-troubles-and-crashes/47452
                     IBODataDotNet BO_data = CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().GetMeetingBOController().GetBODataHelper();
 
                     //TODO;unassasigned users not refereshing

@@ -159,7 +159,7 @@
             </Grid.RowDefinitions>
 
 
-            <WindowsFormsHost Margin="10"  Grid.Row="0" Name="ZoomPlace">
+            <WindowsFormsHost Margin="10"  Grid.Row="0" Name="ZoomPlace" >
                 <wf:Panel x:Name="CBox"/>
             </WindowsFormsHost>
 
