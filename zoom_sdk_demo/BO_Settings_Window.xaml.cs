@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -74,7 +75,7 @@ namespace zoom_sdk_demo
 
             Participant me = ParticipantManager.instance.participants.FirstOrDefault(p => p.isMyself == true);
 
-
+            //If we are not host, we can't create BO rooms
             if (me.hasHostPrivileges())
             {
 
@@ -83,18 +84,13 @@ namespace zoom_sdk_demo
 
 
 
-                // only gets all the breakout rooms when you are host
-                //Array list_of_BOs = BO_controller.GetBreakoutRoomsInfoList();
-
-                //If we are not host, we can't create BO rooms
-
                 //AssignNewUserToRunningBO 
 
-
+                string id = "";
                 foreach (Group g in groups)
                 {
 
-                    string id = BO_controller.GetBOCreatorHelper().CreateBO(g.Name);
+                    id = BO_controller.GetBOCreatorHelper().CreateBO(g.Name);
 
                     int index = groups.IndexOf(g);
                     if (index >= 0)
@@ -102,62 +98,77 @@ namespace zoom_sdk_demo
                         GroupManager.instance.groups[index].group_ID = id;
                     }
 
-                    //Now we need to assign each member to group
-                    //https://devforum.zoom.us/t/startbo-does-not-start-breakout-room/47459
-                    IBODataDotNet BO_data = CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().GetMeetingBOController().GetBODataHelper();
-                    string[] users_left = BO_data.GetUnassginedUserList();
+                }
 
+                //Now we need to assign each member to group
+                //https://devforum.zoom.us/t/startbo-does-not-start-breakout-room/47459
+                IBODataDotNet BO_data = CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().GetMeetingBOController().GetBODataHelper();
+                string[] users_left = BO_data.GetUnassginedUserList();
+           
 
-                    foreach (string user in users_left)
+                foreach (string user in users_left)
+                {
+                    Console.WriteLine("The ID of the user to add {0}. The id of the BO room is {1}", user, id);
+                    Console.WriteLine("The username is {0}", BO_data.GetBOUserName(user));
+                    //we might need to add a wait time between calls here
+                    //Thread.Sleep(TimeSpan.FromSeconds(5));
+                    bool status = BO_controller.GetBOCreatorHelper().AssignUserToBO(user, id);
+
+                    //TODO;unassasigned users not refereshing
+
+                    if (!BO_controller.IsBOStarted())
                     {
-                        Console.WriteLine("The ID of the user to add {0}. The id of the BO room is {1}", user, id);
-                        Console.WriteLine("The username is {0}", BO_data.GetBOUserName(user));
-                        bool status = BO_controller.GetBOCreatorHelper().AssignUserToBO(user, id);
-                        Console.WriteLine(status);
-
+                        //Thread.Sleep(TimeSpan.FromSeconds(2));
+                        Console.WriteLine("We did not start BO rooms");
+                        BO_controller.GetBOAdminHelper().StartBO();
                     }
-                    foreach (Participant p in g.Participants_in_group)
-                    {
-                        bool success = BO_controller.GetBOCreatorHelper().AssignUserToBO(p.ID.ToString(), id);
-                        Console.WriteLine("Adding {0} succes:? {1}, ID {2}", p.Name, success, p.ID);
-                    }
+                    BO_controller.GetBOAdminHelper().AssignNewUserToRunningBO(user, id);
 
 
                 }
+                //foreach (Participant p in g.Participants_in_group)
+                //{
+                //    bool success = BO_controller.GetBOCreatorHelper().AssignUserToBO(p.ID.ToString(), id);
+                //    Console.WriteLine("Adding {0} succes:? {1}, ID {2}", p.Name, success, p.ID);
+                //}
 
-                //we might need to start BO at the end
+
             }
 
-
-            //if (list_of_BOs.Length > 0)
-            //if (!(list_of_BOs is null))
-            //{
-            //    for (int i = list_of_BOs.GetLowerBound(0); i <= list_of_BOs.GetUpperBound(0); i++)
-            //    {
-            //        IBreakoutRoomsInfoDotNet breakout_room = (IBreakoutRoomsInfoDotNet)list_of_BOs.GetValue(i);
-            //        Console.WriteLine(breakout_room.GetBID());
-            //        String b_id = breakout_room.GetBID();
-            //        Console.WriteLine(breakout_room.GetBreakoutRoomName());
-            //        String b_roomName = breakout_room.GetBreakoutRoomName();
-            //        Group group_toModify = groups.FirstOrDefault(group => group.Name.Contains(b_roomName));
-
-
-            //        if (!(group_toModify is null))
-            //        {
-            //            Console.WriteLine("We Found something");
-            //            group_toModify.group_ID = breakout_room.GetBID();
-            //            int index = groups.IndexOf(group_toModify);
-            //            groups.RemoveAt(index);
-            //            groups.Insert(index, group_toModify);
-            //        }
-
-            //        //BO_controller.JoinBreakoutRoom(breakout_room.GetBID());
-            //    }
-            //}
+            //we might need to start BO at the end
             Close();
-
-
         }
+
+
+        //if (list_of_BOs.Length > 0)
+        //if (!(list_of_BOs is null))
+        //{
+        //    for (int i = list_of_BOs.GetLowerBound(0); i <= list_of_BOs.GetUpperBound(0); i++)
+        //    {
+        //        IBreakoutRoomsInfoDotNet breakout_room = (IBreakoutRoomsInfoDotNet)list_of_BOs.GetValue(i);
+        //        Console.WriteLine(breakout_room.GetBID());
+        //        String b_id = breakout_room.GetBID();
+        //        Console.WriteLine(breakout_room.GetBreakoutRoomName());
+        //        String b_roomName = breakout_room.GetBreakoutRoomName();
+        //        Group group_toModify = groups.FirstOrDefault(group => group.Name.Contains(b_roomName));
+
+
+        //        if (!(group_toModify is null))
+        //        {
+        //            Console.WriteLine("We Found something");
+        //            group_toModify.group_ID = breakout_room.GetBID();
+        //            int index = groups.IndexOf(group_toModify);
+        //            groups.RemoveAt(index);
+        //            groups.Insert(index, group_toModify);
+        //        }
+
+        //        //BO_controller.JoinBreakoutRoom(breakout_room.GetBID());
+        //    }
+        //}
+
+
+
+
 
         private void update_click(object sender, RoutedEventArgs e)
         {
