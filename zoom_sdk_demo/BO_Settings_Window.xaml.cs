@@ -98,33 +98,47 @@ namespace zoom_sdk_demo
                         GroupManager.instance.groups[index].group_ID = id;
                     }
 
-                }
 
-                //Now we need to assign each member to group
-                //https://devforum.zoom.us/t/startbo-does-not-start-breakout-room/47459
-                IBODataDotNet BO_data = CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().GetMeetingBOController().GetBODataHelper();
-                string[] users_left = BO_data.GetUnassginedUserList();
-           
 
-                foreach (string user in users_left)
-                {
-                    Console.WriteLine("The ID of the user to add {0}. The id of the BO room is {1}", user, id);
-                    Console.WriteLine("The username is {0}", BO_data.GetBOUserName(user));
-                    //we might need to add a wait time between calls here
-                    //Thread.Sleep(TimeSpan.FromSeconds(5));
-                    bool status = BO_controller.GetBOCreatorHelper().AssignUserToBO(user, id);
+                    //Now we need to assign each member to group
+                    //https://devforum.zoom.us/t/startbo-does-not-start-breakout-room/47459
+                    IBODataDotNet BO_data = CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().GetMeetingBOController().GetBODataHelper();
 
                     //TODO;unassasigned users not refereshing
+                    //This does not update in real time. If we unassign users, the list doesn't update. This is such trash
+                    string[] users_left = BO_data.GetUnassginedUserList();
 
-                    if (!BO_controller.IsBOStarted())
+
+                    foreach (string user in users_left)
                     {
-                        //Thread.Sleep(TimeSpan.FromSeconds(2));
-                        Console.WriteLine("We did not start BO rooms");
-                        BO_controller.GetBOAdminHelper().StartBO();
+                        Console.WriteLine("The ID of the user to add {0}. The id of the BO room is {1}", user, id);
+                        string name = BO_data.GetBOUserName(user);
+                        Console.WriteLine("The username is {0}", name);
+                        //we might need to add a wait time between calls here
+                        //Thread.Sleep(TimeSpan.FromSeconds(5));
+
+                        //TODO: need to find a better way to add users to grou
+                        //Both calls are needed!!
+
+                        if (!(g.Participants_in_group.FirstOrDefault(p => p.Name == name) is null))
+                        {
+
+                            bool status = BO_controller.GetBOCreatorHelper().AssignUserToBO(user, id);
+
+
+
+                            if (!BO_controller.IsBOStarted())
+                            {
+                                //Thread.Sleep(TimeSpan.FromSeconds(2));
+                                Console.WriteLine("We did not start BO rooms");
+                                BO_controller.GetBOAdminHelper().StartBO();
+                            }
+                            BO_controller.GetBOAdminHelper().AssignNewUserToRunningBO(user, id);
+
+                        }
+
+
                     }
-                    BO_controller.GetBOAdminHelper().AssignNewUserToRunningBO(user, id);
-
-
                 }
                 //foreach (Participant p in g.Participants_in_group)
                 //{
@@ -135,7 +149,9 @@ namespace zoom_sdk_demo
 
             }
 
-            //we might need to start BO at the end
+            //we might need to start Open the Breakout Room Dialog box to start the meeting. 
+            //IMeetingUIControllerDotNetWrap uictrl_service = CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().GetUIController();
+            //uictrl_service.ShowSharingToolbar
             Close();
         }
 
