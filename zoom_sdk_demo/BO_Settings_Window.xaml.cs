@@ -70,28 +70,32 @@ namespace zoom_sdk_demo
             //ZOOM_SDK_DOTNET_WRAP.IMeetingBreakoutRoomsControllerDotNetWrap BO_controller = ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().GetMeetingBreakoutRoomsController();
 
 
-            //This only works if you are host, TOOD: need to check if I have host privileges before calling this
+            //This only works if you are host, TOOD: need to check if I have host privileges before calling this. It's causing breaks
+
+            Participant me = ParticipantManager.instance.participants.FirstOrDefault(p => p.isMyself == true);
 
 
-
-            IMeetingBOControllerDotNetWrap BO_controller = CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().GetMeetingBOController();
-            Console.WriteLine("can we start BO Rooms {0}",BO_controller.GetBOAdminHelper().CanStartBO());
-
-
-
-            // only gets all the breakout rooms when you are host
-            //Array list_of_BOs = BO_controller.GetBreakoutRoomsInfoList();
-
-            //If we are not host, we can't create BO rooms
-
-            //AssignNewUserToRunningBO 
-            if (!(BO_controller is null))
+            if (me.hasHostPrivileges())
             {
+
+                IMeetingBOControllerDotNetWrap BO_controller = CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().GetMeetingBOController();
+                Console.WriteLine("can we start BO Rooms {0}", BO_controller.GetBOAdminHelper().CanStartBO());
+
+
+
+                // only gets all the breakout rooms when you are host
+                //Array list_of_BOs = BO_controller.GetBreakoutRoomsInfoList();
+
+                //If we are not host, we can't create BO rooms
+
+                //AssignNewUserToRunningBO 
+
+
                 foreach (Group g in groups)
                 {
 
                     string id = BO_controller.GetBOCreatorHelper().CreateBO(g.Name);
-                 
+
                     int index = groups.IndexOf(g);
                     if (index >= 0)
                     {
@@ -100,21 +104,22 @@ namespace zoom_sdk_demo
 
                     //Now we need to assign each member to group
                     //https://devforum.zoom.us/t/startbo-does-not-start-breakout-room/47459
-                    IBODataDotNet BO_data= CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().GetMeetingBOController().GetBODataHelper();
-                   string[] users_left = BO_data.GetUnassginedUserList();
+                    IBODataDotNet BO_data = CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().GetMeetingBOController().GetBODataHelper();
+                    string[] users_left = BO_data.GetUnassginedUserList();
 
-               
-                    foreach (string user in users_left) {
-                        Console.WriteLine("The ID of the user to add {0}. The id of the BO room is {1}",user, id);
+
+                    foreach (string user in users_left)
+                    {
+                        Console.WriteLine("The ID of the user to add {0}. The id of the BO room is {1}", user, id);
                         Console.WriteLine("The username is {0}", BO_data.GetBOUserName(user));
-                        bool status=BO_controller.GetBOCreatorHelper().AssignUserToBO(user, id);
+                        bool status = BO_controller.GetBOCreatorHelper().AssignUserToBO(user, id);
                         Console.WriteLine(status);
-                        
+
                     }
                     foreach (Participant p in g.Participants_in_group)
                     {
                         bool success = BO_controller.GetBOCreatorHelper().AssignUserToBO(p.ID.ToString(), id);
-                        Console.WriteLine("Adding {0} succes:? {1}, ID {2}", p.Name, success,p.ID);
+                        Console.WriteLine("Adding {0} succes:? {1}, ID {2}", p.Name, success, p.ID);
                     }
 
 
