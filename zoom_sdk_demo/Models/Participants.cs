@@ -53,7 +53,6 @@ namespace zoom_sdk_demo.Models
             this.isStudent = true;
             return true;
         }
-
         // Override of ToString for data export
         public override string ToString()
         {
@@ -71,14 +70,22 @@ namespace zoom_sdk_demo.Models
                 if (q.used && q.responses.ContainsKey(Name))
                 {
                     numQ++;
-                    if (q.responses[Name].Item2)
+                    if (q.numerical)
                     {
-                        eval++;
+                        eval += Convert.ToDouble(q.responses[Name].Item1) / 50 - 0.5; // Assuming input range of 0-100, standardizes as -1 to 1 
                     }
                     else
                     {
-                        eval--;
+                        if (q.responses[Name].Item2)
+                        {
+                            eval++;
+                        }
+                        else
+                        {
+                            eval--;
+                        }
                     }
+                    
                 }
                 else if (q.used)
                 {
