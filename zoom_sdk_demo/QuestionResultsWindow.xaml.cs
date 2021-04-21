@@ -34,7 +34,29 @@ namespace zoom_sdk_demo
         {
             this.problem = problem;
             this.DataContext = this.problem;
+            this.problem.PropertyChanged += Question_PropertyChanged;
             response_list.ItemsSource = this.problem.responses;
+        }
+
+        public void RefreshList()
+        {
+            response_list.Items.Refresh();
+        }
+
+        private void Question_PropertyChanged(object sender, System.EventArgs e)
+        {
+            Console.WriteLine("Detected property changed");
+            RefreshList();
+        }
+
+        private void MarkCorrect_Click(object sender, RoutedEventArgs e)
+        {
+            KeyValuePair<string, Tuple<string, bool>> student = (KeyValuePair<string, Tuple<string, bool>>)(sender as Button).DataContext;
+            problem.MarkResponseCorrect(student.Key);
+
+            response_list.Items.Refresh();
+            //problem.responses[student.Key] = new Tuple<string, bool> (student.Value.Item1, true);
+            //Question focus = 
         }
     }
 }
