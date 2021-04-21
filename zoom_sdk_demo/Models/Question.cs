@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace zoom_sdk_demo.Models
 {
-    public class Question
+    
+    public class Question : INotifyPropertyChanged
     {
         public String question { get; set; } = "";
         //TODO might need to change this later to an array if a question can have multiple answers
@@ -20,6 +24,9 @@ namespace zoom_sdk_demo.Models
 
         public IDictionary<string, Tuple<string, bool>> responses { get; set; } = new Dictionary<string, Tuple<string, bool>>();
         public ISet<string> nonresponders { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
 
         // Todo
 
@@ -62,6 +69,7 @@ namespace zoom_sdk_demo.Models
             {
                 nonresponders.Remove(student);
             }
+            OnPropertyChanged();
         }
 
         public static Question FromCsv(string csvLine)
@@ -76,6 +84,18 @@ namespace zoom_sdk_demo.Models
             q.answerString = values[1];
 
             return q;
+        }
+
+        public void MarkResponseCorrect(string student)
+        {
+            responses[student] = new Tuple<string, bool>(responses[student].Item1, true);
+            OnPropertyChanged();
+        }
+
+        protected void OnPropertyChanged([CallerMemberName] string name = null)
+        {
+            Console.WriteLine("Sending property changed");
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
     }
 

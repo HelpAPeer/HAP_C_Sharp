@@ -33,7 +33,7 @@ namespace zoom_sdk_demo.Models
                 }
                 else
                 {
-                    string response = msg.Trim().Substring(2).Trim();
+                    string response = msg.Trim().Substring(2).Trim().ToLowerInvariant();
                     Console.WriteLine("Logging response to question-" + response);
 
                     QuestionManager.instance.activeQuestion.LogResponse(sdr, response);
