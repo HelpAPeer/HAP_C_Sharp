@@ -15,6 +15,7 @@ namespace zoom_sdk_demo.Models
         public static Session instance = new Session();
         private Session() { }
         public bool zoomEmbedded { get; set; } = true;
+        public bool firstJoin { get; set; } = true;
 
     }
 }

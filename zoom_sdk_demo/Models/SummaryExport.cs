@@ -11,7 +11,9 @@ namespace zoom_sdk_demo.Models
 
     class SummaryExport
     {
-        public static SummaryExport instance;
+        // Referencing from the singleton would be better than creating a new instance in the window. 
+        // we don't want it tied to a window because it's hard to reference to it. 
+        public static SummaryExport instance = new SummaryExport();
 
         public List<Group[]> groupings = new List<Group[]>();
         public ObservableCollection<Question> questions;
@@ -23,7 +25,8 @@ namespace zoom_sdk_demo.Models
         public string meeting = "Insert meeting title here";
         public string startTime = "";
 
-        public SummaryExport()
+        //this is private to disallow no more than one instance of this class to be created
+        private SummaryExport()
         {
             instance = this;
         }
@@ -34,7 +37,7 @@ namespace zoom_sdk_demo.Models
             startTime = start.ToString();
             questions = q;
         }
-        
+
         public void SaveGroups(ObservableCollection<Group> groups)
         {
 
@@ -47,7 +50,7 @@ namespace zoom_sdk_demo.Models
         {
             string path = Directory.GetCurrentDirectory();
 
-            File.WriteAllText(Path.Combine(path,filePath), GenerateOutput());
+            File.WriteAllText(Path.Combine(path, filePath), GenerateOutput());
         }
 
         public string GenerateOutput()
@@ -63,7 +66,7 @@ namespace zoom_sdk_demo.Models
             output.AppendLine(sectionDivider);
 
             // Participants
-            foreach(Participant student in ParticipantManager.instance.participants)
+            foreach (Participant student in ParticipantManager.instance.participants)
             {
                 output.AppendLine(student.Name);
                 //output.Append("Evaluation: "); output.AppendLine(student.Evaluation[0].ToString());
@@ -76,9 +79,9 @@ namespace zoom_sdk_demo.Models
             output.AppendLine(sectionDivider);
             output.AppendLine("Saved Group Configurations");
             output.AppendLine(sectionDivider);
-            for (int i = 0; i < groupings.Count;i++)
+            for (int i = 0; i < groupings.Count; i++)
             {
-                output.Append("Group Configuration "); output.AppendLine((i+1).ToString());
+                output.Append("Group Configuration "); output.AppendLine((i + 1).ToString());
                 foreach (Group g in groupings[i])
                 {
                     output.Append(g.Name); output.Append(": "); output.AppendLine(String.Join<Participant>(", ", g.Participants_in_group));
@@ -95,7 +98,8 @@ namespace zoom_sdk_demo.Models
             output.AppendLine(sectionDivider);
 
             // cheeck if questions is null before starting
-            if (!(questions is null)) {
+            if (!(questions is null))
+            {
                 foreach (Question q in questions)
                 {
                     if (!q.used) continue;
@@ -120,11 +124,11 @@ namespace zoom_sdk_demo.Models
                     output.AppendLine(entryDivider);
                 }
             }
-       
+
 
             return output.ToString();
         }
     }
 
-    
+
 }

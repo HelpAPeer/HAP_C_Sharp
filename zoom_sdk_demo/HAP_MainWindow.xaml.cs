@@ -34,7 +34,7 @@ namespace zoom_sdk_demo
 
 
 
-        SummaryExport summary;
+        //SummaryExport summary;
 
         public HAP_MainWindow()
         {
@@ -54,7 +54,7 @@ namespace zoom_sdk_demo
             questions_list.ItemsSource = QuestionManager.instance.questions;
             participant_list.ItemsSource = ParticipantManager.instance.participants;
             groups_list.ItemsSource = GroupManager.instance.groups;
-            summary = new SummaryExport();
+            //summary = new SummaryExport();
 
         }
 
@@ -75,7 +75,8 @@ namespace zoom_sdk_demo
             SendMessage((System.IntPtr)firstHwd.value, WM_SYSCOMMAND, SC_MAXIMIZE, 0);
 
             //Use this opportunity to set up Summary Export
-            summary.SetMeetingInfo(CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().GetMeetingInfo().GetInviteEmailTitle(), DateTime.Now, QuestionManager.instance.questions);
+            //BOB is going to move this to somewhere a bit better. This function is called everytime you hope between Zoom Rooms as well
+
 
         }
         private void TextBox_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
@@ -176,7 +177,7 @@ namespace zoom_sdk_demo
         {
             //LeaveMeetingCmd ID = LeaveMeetingCmd.END_MEETING;
             //CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().Leave(ID);
-            summary.WriteSummary();
+            SummaryExport.instance.WriteSummary();
             System.Windows.Application.Current.Shutdown();
         }
 
@@ -240,7 +241,7 @@ namespace zoom_sdk_demo
             else
             {
                 (sender as Button).Content = "Pop Zoom Window";
-                //embedZoom();
+                embedZoom();
                 Session.instance.zoomEmbedded = true;
             }
         }
