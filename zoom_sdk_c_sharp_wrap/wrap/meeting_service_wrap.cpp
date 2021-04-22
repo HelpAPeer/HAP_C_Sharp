@@ -55,6 +55,7 @@ IMPL_FUNC_AND_MEMBER(IMeetingService, T_GetMeetingClosedCaptionController, IClos
 IMPL_FUNC_AND_MEMBER(IMeetingService, T_GetMeetingRealNameAuthController, IZoomRealNameAuthMeetingHelperWrap);
 IMPL_FUNC_AND_MEMBER(IMeetingService, T_GetMeetingInterpretationController, IMeetingInterpretationControllerWrap);
 IMPL_FUNC_AND_MEMBER(IMeetingService, T_GetMeetingEmojiReactionController, IEmojiReactionControllerWrap);
+IMPL_FUNC_AND_MEMBER(IMeetingService, T_GetMeetingBOController, IMeetingBOControllerWrap);
 #if (defined UserInterfaceClass)
 IMPL_FUNC_0(IMeetingService, GetMeetingConfiguration, IMeetingConfiguration*, NULL)
 IMPL_FUNC_0(IMeetingService, GetUIController, IMeetingUIController*, NULL)

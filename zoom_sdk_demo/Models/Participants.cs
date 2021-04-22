@@ -22,6 +22,8 @@ namespace zoom_sdk_demo.Models
         // TODO: Distinguish teachers from students
         public bool isStudent = true;
 
+        public bool isMyself = false;
+
         // Index 0 is always Evaluations from quizzes for now
         public List<double> Evaluation = new List<double>();
 
@@ -34,6 +36,7 @@ namespace zoom_sdk_demo.Models
             if (user.IsMySelf())
             {
                 this.isStudent = false;
+                this.isMyself = true;
                 return false;
             }
 
@@ -53,6 +56,14 @@ namespace zoom_sdk_demo.Models
             this.isStudent = true;
             return true;
         }
+
+        public bool hasHostPrivileges() {
+            ZOOM_SDK_DOTNET_WRAP.IUserInfoDotNetWrap user = ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().
+                    GetMeetingParticipantsController().GetUserByUserID((uint)this.ID);
+
+            return user.IsHost();
+        }
+
         // Override of ToString for data export
         public override string ToString()
         {

@@ -20,6 +20,7 @@
 #include "meeting_service_components_wrap/meeting_realname_auth_helper_wrap.h"
 #include "meeting_service_components_wrap/meeting_interpretation_ctrl_wrap.h"
 #include "meeting_service_components_wrap/meeting_emoji_reaction_wrap.h"
+#include "meeting_service_components_wrap/meeting_bo_wrap.h"
 
 BEGIN_ZOOM_SDK_NAMESPACE
 ZOOM_SDK_NAMESPACE::IMeetingService* InitIMeetingServiceFunc(ZOOM_SDK_NAMESPACE::IMeetingServiceEvent* pEvent);
@@ -151,7 +152,9 @@ DEFINE_FUNC_AND_MEMBER(T_GetMeetingWebinarController, IMeetingWebinarControllerW
 DEFINE_FUNC_AND_MEMBER(T_GetMeetingClosedCaptionController, IClosedCaptionControllerWrap)
 DEFINE_FUNC_AND_MEMBER(T_GetMeetingRealNameAuthController, IZoomRealNameAuthMeetingHelperWrap)
 //DEFINE_FUNC_AND_MEMBER(T_GetMeetingQAController, IMeetingQAControllerWrap)
-//DEFINE_FUNC_AND_MEMBER(T_GetMeetingBOController, IMeetingBOControllerWrap)
+
+DEFINE_FUNC_AND_MEMBER(T_GetMeetingBOController, IMeetingBOControllerWrap)
+
 DEFINE_FUNC_AND_MEMBER(T_GetMeetingInterpretationController, IMeetingInterpretationControllerWrap)
 DEFINE_FUNC_AND_MEMBER(T_GetMeetingEmojiReactionController, IEmojiReactionControllerWrap)
 //need wrap it in next release.todo

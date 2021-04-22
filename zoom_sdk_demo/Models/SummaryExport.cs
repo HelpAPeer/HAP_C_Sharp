@@ -94,29 +94,33 @@ namespace zoom_sdk_demo.Models
             output.AppendLine("Quiz Results");
             output.AppendLine(sectionDivider);
 
-            foreach(Question q in questions)
-            {
-                if (!q.used) continue;
-                output.AppendLine(q.question);
-                output.AppendLine(q.imagePath);
-                foreach (KeyValuePair<string, Tuple<string,bool>> response in q.responses)
+            // cheeck if questions is null before starting
+            if (!(questions is null)) {
+                foreach (Question q in questions)
                 {
-                    output.Append(response.Key);
-                    output.Append(" \t| ");
-                    if (response.Value.Item2)
+                    if (!q.used) continue;
+                    output.AppendLine(q.question);
+                    output.AppendLine(q.imagePath);
+                    foreach (KeyValuePair<string, Tuple<string, bool>> response in q.responses)
                     {
-                        output.Append("Correct \t| ");
+                        output.Append(response.Key);
+                        output.Append(" \t| ");
+                        if (response.Value.Item2)
+                        {
+                            output.Append("Correct \t| ");
+                        }
+                        else
+                        {
+                            output.Append("Incorrect \t| ");
+                        }
+                        output.AppendLine(response.Value.Item1);
                     }
-                    else
-                    {
-                        output.Append("Incorrect \t| ");
-                    }
-                    output.AppendLine(response.Value.Item1);
-                }
 
-                output.AppendLine();
-                output.AppendLine(entryDivider);
+                    output.AppendLine();
+                    output.AppendLine(entryDivider);
+                }
             }
+       
 
             return output.ToString();
         }

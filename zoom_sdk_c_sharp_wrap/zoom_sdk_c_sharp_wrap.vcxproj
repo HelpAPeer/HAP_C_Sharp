@@ -152,6 +152,7 @@
     <ClInclude Include="customized_annotation_dotnet_wrap.h" />
     <ClInclude Include="meeting_annotation_dotnet_wrap.h" />
     <ClInclude Include="meeting_audio_dotnet_wrap.h" />
+    <ClInclude Include="meeting_bo_dotnet_wrap.h" />
     <ClInclude Include="meeting_breakout_rooms_dotnet_wrap.h" />
     <ClInclude Include="meeting_chat_dotnet_wrap.h" />
     <ClInclude Include="meeting_configuration_dotnet_wrap.h" />
@@ -189,6 +190,7 @@
     <ClInclude Include="wrap\macro_define.h" />
     <ClInclude Include="wrap\meeting_service_components_wrap\meeting_annotation_wrap.h" />
     <ClInclude Include="wrap\meeting_service_components_wrap\meeting_audio_wrap.h" />
+    <ClInclude Include="wrap\meeting_service_components_wrap\meeting_bo_wrap.h" />
     <ClInclude Include="wrap\meeting_service_components_wrap\meeting_breakout_rooms_wrap.h" />
     <ClInclude Include="wrap\meeting_service_components_wrap\meeting_chat_wrap.h" />
     <ClInclude Include="wrap\meeting_service_components_wrap\meeting_closedcaption_ctrl_wrap.h" />
@@ -232,6 +234,7 @@
     <ClCompile Include="customized_annotation_dotnet_wrap.cpp" />
     <ClCompile Include="meeting_annotation_dotnet_wrap.cpp" />
     <ClCompile Include="meeting_audio_dotnet_wrap.cpp" />
+    <ClCompile Include="meeting_bo_dotnet_wrap.cpp" />
     <ClCompile Include="meeting_breakout_rooms_dotnet_wrap.cpp" />
     <ClCompile Include="meeting_chat_dotnet_wrap.cpp" />
     <ClCompile Include="meeting_configuration_dotnet_wrap.cpp" />
@@ -312,6 +315,7 @@
     <ClCompile Include="wrap\meeting_service_components_wrap\meeting_audio_wrap.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="wrap\meeting_service_components_wrap\meeting_bo_wrap.cpp" />
     <ClCompile Include="wrap\meeting_service_components_wrap\meeting_breakout_rooms_wrap.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>

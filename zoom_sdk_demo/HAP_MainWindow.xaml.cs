@@ -38,7 +38,7 @@ namespace zoom_sdk_demo
         //public static Question activeQuestion = null;
 
         //public Question activeQuestion = null;
-        
+
         ChatListener chat = new ChatListener();
         SummaryExport summary;
 
@@ -96,14 +96,21 @@ namespace zoom_sdk_demo
 
         private void participant_list_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var student = (Participant)e.AddedItems[0];
-
-            id_lastSelected = ParticipantManager.instance.participants.IndexOf(student);
-            if (student.Notes.Equals(GlobalVar.default_note))
+            if (participant_list.SelectedIndex > 0)
             {
-                student.Notes += student.Name;
+                var student = (Participant)e.AddedItems[0];
+
+                id_lastSelected = ParticipantManager.instance.participants.IndexOf(student);
+                if (student.Notes.Equals(GlobalVar.default_note))
+                {
+                    student.Notes += student.Name;
+                }
+                NoteTextBox.Text = student.Notes;
             }
-            NoteTextBox.Text = student.Notes;
+            else
+            {
+                NoteTextBox.Text = "Select participant";
+            }
 
         }
 
@@ -202,6 +209,8 @@ namespace zoom_sdk_demo
 
             // we are doing this via the group
             Console.WriteLine(group.Participants_in_group.Count);
+            // To make sure we have nothing selected whwn we change the order
+            participant_list.SelectedIndex = -1;
             for (int i = group.Participants_in_group.Count; i-- > 0;)
             {
                 Console.WriteLine("We are here");
@@ -223,6 +232,7 @@ namespace zoom_sdk_demo
             }
 
         }
+
     }
 
 
