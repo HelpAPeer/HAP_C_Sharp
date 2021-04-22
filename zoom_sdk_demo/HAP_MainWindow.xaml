@@ -24,7 +24,7 @@
                 <DockPanel LastChildFill="False" Background="White">
                     <Button Click="Add_Question_Click" Margin="5" Padding="5,2" DockPanel.Dock="Top" HorizontalAlignment="Right" Content="+" FontSize="24">
                     </Button>
-                    <ListView  x:Name="questions_list"  DockPanel.Dock="Top" ItemsSource="{Binding}" >
+                    <ListView  x:Name="questions_list"  DockPanel.Dock="Top" ItemsSource="{Binding}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
                                 <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -36,7 +36,7 @@
                                 <Border Background="#D9D9D9" CornerRadius="10">
                                     <DockPanel Margin="5">
                                         <!--<TextBlock DockPanel.Dock="Top">Question 1</TextBlock>-->
-                                        <TextBlock DockPanel.Dock="Top" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" Text="{Binding Path=question, FallbackValue='Question'}" />
+                                        <TextBlock DockPanel.Dock="Top" TextWrapping="Wrap" MaxWidth="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualWidth}" TextTrimming="CharacterEllipsis" Text="{Binding Path=question, FallbackValue='Question'}" />
 
                                         <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" DockPanel.Dock="Bottom">
                                             <Button Margin="5" Content="Results" Click="viewresults_Click"></Button>
