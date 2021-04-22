@@ -8,7 +8,7 @@ namespace zoom_sdk_demo.Models
 {
     class ChatListener
     {
-        static string trigger = "!~";
+        static string trigger = "==";
 
 
         public ChatListener()
