@@ -16,41 +16,45 @@
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        <TabControl Grid.Column="1">
-            <!--<TabItem Header="Chat">
+        <DockPanel Grid.Column="1">
+            <Button DockPanel.Dock="Top" Content="Pop Zoom Window" Margin="10" Click="ZoomEmbeddToggle"/>
+
+
+            <TabControl>
+                <!--<TabItem Header="Chat">
                 <Label Content="chat with your students" />
             </TabItem>-->
-            <TabItem Header="Quiz">
-                <DockPanel LastChildFill="False" Background="White">
-                    <Button Click="Add_Question_Click" Margin="5" Padding="5,2" DockPanel.Dock="Top" HorizontalAlignment="Right" Content="+" FontSize="24">
-                    </Button>
-                    <ListView  x:Name="questions_list"  DockPanel.Dock="Top" ItemsSource="{Binding}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
-                        <ListView.ItemContainerStyle>
-                            <Style TargetType="ListViewItem">
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                            </Style>
-                        </ListView.ItemContainerStyle>
+                <TabItem Header="Quiz">
+                    <DockPanel LastChildFill="False" Background="White">
+                        <Button Click="Add_Question_Click" Margin="5" Padding="5,2" DockPanel.Dock="Top" HorizontalAlignment="Right" Content="+" FontSize="24">
+                        </Button>
+                        <ListView  x:Name="questions_list"  DockPanel.Dock="Top" ItemsSource="{Binding}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                </Style>
+                            </ListView.ItemContainerStyle>
 
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <Border Background="#D9D9D9" CornerRadius="10">
-                                    <DockPanel Margin="5">
-                                        <!--<TextBlock DockPanel.Dock="Top">Question 1</TextBlock>-->
-                                        <TextBlock DockPanel.Dock="Top" TextWrapping="Wrap" MaxWidth="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualWidth}" TextTrimming="CharacterEllipsis" Text="{Binding Path=question, FallbackValue='Question'}" />
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Background="#D9D9D9" CornerRadius="10">
+                                        <DockPanel Margin="5">
+                                            <!--<TextBlock DockPanel.Dock="Top">Question 1</TextBlock>-->
+                                            <TextBlock DockPanel.Dock="Top" TextWrapping="Wrap" MaxWidth="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualWidth}" TextTrimming="CharacterEllipsis" Text="{Binding Path=question, FallbackValue='Question'}" />
 
-                                        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" DockPanel.Dock="Bottom">
-                                            <Button Margin="5" Content="Results" Click="viewresults_Click"></Button>
-                                            <Button Margin="5" Content="Screenshare Question" Click="usequestion_Click"></Button>
-                                        </StackPanel>
-                                    </DockPanel>
-                                </Border>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                        <!--<Border Background="#D9D9D9" CornerRadius="10">
+                                            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" DockPanel.Dock="Bottom">
+                                                <Button Margin="5" Content="Results" Click="viewresults_Click"></Button>
+                                                <Button Margin="5" Content="Screenshare Question" Click="usequestion_Click"></Button>
+                                            </StackPanel>
+                                        </DockPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                            <!--<Border Background="#D9D9D9" CornerRadius="10">
                             <DockPanel Margin="5">
                                 -->
-                        <!--<TextBlock DockPanel.Dock="Top">Question 1</TextBlock>-->
-                        <!--
+                            <!--<TextBlock DockPanel.Dock="Top">Question 1</TextBlock>-->
+                            <!--
                                 <TextBlock DockPanel.Dock="Top">Solve for X</TextBlock>
 
                                 <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" DockPanel.Dock="Bottom">
@@ -62,65 +66,65 @@
 
 
                         </Border>-->
-                    </ListView>
-                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" HorizontalAlignment="Right">
-                        <Button Margin="5" Content="Results"></Button>
-                        <Button Margin="5" Content="Stop" IsEnabled="True" ></Button>
-                    </StackPanel>
-                </DockPanel>
+                        </ListView>
+                        <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" HorizontalAlignment="Right">
+                            <Button Margin="5" Content="Results"></Button>
+                            <Button Margin="5" Content="Stop" IsEnabled="True" ></Button>
+                        </StackPanel>
+                    </DockPanel>
 
 
-            </TabItem>
-            <TabItem Header="Group" Width="Auto">
-                <DockPanel Height="Auto" Background="White" >
-                    <StackPanel Margin="10" DockPanel.Dock="Top" HorizontalAlignment="Right">
-                        <Button Click="SetupUpGroups_click" VerticalAlignment="Bottom">Setup Groups</Button>
-                    </StackPanel>
+                </TabItem>
+                <TabItem Header="Group" Width="Auto">
+                    <DockPanel Height="Auto" Background="White" >
+                        <StackPanel Margin="10" DockPanel.Dock="Top" HorizontalAlignment="Right">
+                            <Button Click="SetupUpGroups_click" VerticalAlignment="Bottom">Setup Groups</Button>
+                        </StackPanel>
 
-                    <ListView x:Name="groups_list"  DockPanel.Dock="Top" ItemsSource="{Binding}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                        <ListView.ItemContainerStyle>
-                            <Style TargetType="ListViewItem">
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                            </Style>
-                        </ListView.ItemContainerStyle>
+                        <ListView x:Name="groups_list"  DockPanel.Dock="Top" ItemsSource="{Binding}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                </Style>
+                            </ListView.ItemContainerStyle>
 
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <Border Background="#E5E5E5" CornerRadius="10" Margin="5">
-                                    <Grid Margin="10" >
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="2*"/>
-                                            <ColumnDefinition Width="1*"/>
-                                        </Grid.ColumnDefinitions>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="*"/>
-                                            <RowDefinition Height="2*"/>
-                                        </Grid.RowDefinitions>
-                                        <TextBlock Grid.Column="0" Text="{Binding Path=Name}"/>
-                                        <Button Grid.Column="1" HorizontalAlignment="Right" Click="join_Bo_click">Join</Button>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Background="#E5E5E5" CornerRadius="10" Margin="5">
+                                        <Grid Margin="10" >
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="2*"/>
+                                                <ColumnDefinition Width="1*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="2*"/>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock Grid.Column="0" Text="{Binding Path=Name}"/>
+                                            <Button Grid.Column="1" HorizontalAlignment="Right" Click="join_Bo_click">Join</Button>
 
-                                        <ItemsControl Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{Binding Participants_in_group}">
-                                            <ItemsControl.ItemTemplate>
-                                                <DataTemplate>
-                                                    <StackPanel Orientation="Horizontal" Margin="5">
-                                                        <Image Source="Assets/user-alt-512.png" Height="23" Width="25"></Image>
-                                                        <TextBlock Text="{Binding Name}"/>
-                                                    </StackPanel>
-                                                </DataTemplate>
-                                            </ItemsControl.ItemTemplate>
-                                            <ItemsControl.ItemsPanel>
-                                                <ItemsPanelTemplate>
-                                                    <WrapPanel/>
-                                                </ItemsPanelTemplate>
-                                            </ItemsControl.ItemsPanel>
+                                            <ItemsControl Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{Binding Participants_in_group}">
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <StackPanel Orientation="Horizontal" Margin="5">
+                                                            <Image Source="Assets/user-alt-512.png" Height="23" Width="25"></Image>
+                                                            <TextBlock Text="{Binding Name}"/>
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                                <ItemsControl.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <WrapPanel/>
+                                                    </ItemsPanelTemplate>
+                                                </ItemsControl.ItemsPanel>
 
-                                        </ItemsControl>
-                                    </Grid>
-                                </Border>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
+                                            </ItemsControl>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
 
-                        <!--<ListViewItem Margin="10" Background="#E5E5E5" Width="Auto">
+                            <!--<ListViewItem Margin="10" Background="#E5E5E5" Width="Auto">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="2*"/>
@@ -146,11 +150,13 @@
                         </ListViewItem>-->
 
 
-                    </ListView>
+                        </ListView>
 
-                </DockPanel>
-            </TabItem>
-        </TabControl>
+                    </DockPanel>
+                </TabItem>
+            </TabControl>
+
+        </DockPanel>
 
         <Grid>
             <Grid.RowDefinitions>

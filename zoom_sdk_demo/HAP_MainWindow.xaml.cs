@@ -1,21 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.Windows.Interop;
 using zoom_sdk_demo.Models;
 using ZOOM_SDK_DOTNET_WRAP;
-using System.ComponentModel;
 
 namespace zoom_sdk_demo
 {
@@ -40,6 +31,9 @@ namespace zoom_sdk_demo
         //public Question activeQuestion = null;
 
         ChatListener chat = new ChatListener();
+
+
+
         SummaryExport summary;
 
         public HAP_MainWindow()
@@ -233,6 +227,23 @@ namespace zoom_sdk_demo
 
         }
 
+
+
+        private void ZoomEmbeddToggle(object sender, RoutedEventArgs e)
+        {
+            if (Session.instance.zoomEmbedded)
+            {
+                (sender as Button).Content = "Dock Zoom Window";
+                Session.instance.zoomEmbedded = false;
+            }
+
+            else
+            {
+                (sender as Button).Content = "Pop Zoom Window";
+                //embedZoom();
+                Session.instance.zoomEmbedded = true;
+            }
+        }
     }
 
 
