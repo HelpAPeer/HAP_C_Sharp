@@ -98,8 +98,6 @@ namespace zoom_sdk_demo
                         GroupManager.instance.groups[index].group_ID = id;
                     }
 
-
-
                     //Now we need to assign each member to group
                     //https://devforum.zoom.us/t/startbo-does-not-start-breakout-room/47459
                     //https://devforum.zoom.us/t/breakout-troubles-and-crashes/47452
