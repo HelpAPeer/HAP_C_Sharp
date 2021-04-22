@@ -1,4 +1,4 @@
-﻿<!--Top most shoudl keep this window on top even if zoom starts acting odd-->
+﻿<!--Top most should keep this window on top even if zoom starts acting odd-->
 <Window x:Class="zoom_sdk_demo.ShowQuestionWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -8,7 +8,8 @@
         Topmost="True"
         mc:Ignorable="d"
         SizeToContent="Width"
-        Title="ShowQuestionWindow" Height="360" Width="640">
+        Title="ShowQuestionWindow" Height="360" Width="640"
+        WindowStartupLocation="CenterScreen">
     <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Stretch">
         <Grid>
             <StackPanel HorizontalAlignment="Center"  VerticalAlignment="Center">
