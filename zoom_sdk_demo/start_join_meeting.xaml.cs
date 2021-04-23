@@ -75,6 +75,13 @@ namespace zoom_sdk_demo
                         // Would be best to update the observable list. Instead of tying a new one https://gist.github.com/tymorrow/9397870
 
                         //Check that we aren't join a breakout room! We don't want to get the new part
+                        if (Session.instance.firstJoin)
+                        {
+                            //SummaryExport.instance.SetMeetingInfo(CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().GetMeetingInfo().GetInviteEmailTitle(), DateTime.Now, QuestionManager.instance.questions);
+                            SummaryExport.instance.SetMeetingInfo(CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().GetMeetingInfo().GetMeetingTopic(), DateTime.Now, QuestionManager.instance.questions);
+                            Session.instance.firstJoin = false;
+                        }
+
                         if (!GroupManager.instance.joinedBO_Room)
                         {
                             ParticipantManager.instance.GetParticipantsInMeeting();
@@ -90,6 +97,8 @@ namespace zoom_sdk_demo
                         GroupManager.instance.joinedBO_Room = false;
                     }
                     break;
+
+
                 default://todo
                     break;
             }
@@ -127,7 +136,7 @@ namespace zoom_sdk_demo
         public void onCoHostChangeNotification(UInt32 userId, bool isCoHost)
         {
             Console.WriteLine("Co-Host was changed.{0} {1}", userId, isCoHost);
-            ParticipantManager.instance.coHostChanged(userId,isCoHost);
+            ParticipantManager.instance.coHostChanged(userId, isCoHost);
 
         }
         public void onLowOrRaiseHandStatusChanged(bool bLow, UInt32 userid)
@@ -153,15 +162,15 @@ namespace zoom_sdk_demo
             ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().Add_CB_onMeetingStatusChanged(onMeetingStatusChanged);
             ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().
                 GetMeetingParticipantsController().Add_CB_onHostChangeNotification(onHostChangeNotification);
-            
+
             // add the onCoHostChangeNotification. this was added to the wrapper in order for this to work.
             ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().
                GetMeetingParticipantsController().Add_CB_onCoHostChangeNotification(onCoHostChangeNotification);
 
-      
 
-                       ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().
-                GetMeetingParticipantsController().Add_CB_onLowOrRaiseHandStatusChanged(onLowOrRaiseHandStatusChanged);
+
+            ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().
+     GetMeetingParticipantsController().Add_CB_onLowOrRaiseHandStatusChanged(onLowOrRaiseHandStatusChanged);
             ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().
                 GetMeetingParticipantsController().Add_CB_onUserJoin(onUserJoin);
             ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().

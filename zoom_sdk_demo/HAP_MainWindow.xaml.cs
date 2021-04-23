@@ -1,21 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.Windows.Interop;
 using zoom_sdk_demo.Models;
 using ZOOM_SDK_DOTNET_WRAP;
-using System.ComponentModel;
 
 namespace zoom_sdk_demo
 {
@@ -34,13 +25,18 @@ namespace zoom_sdk_demo
         static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
         private const int WM_SYSCOMMAND = 0x112;
         private const int SC_MAXIMIZE = 0xF030;
+        private const int SC_RESTORE = 0xF120;
+
 
         //public static Question activeQuestion = null;
 
         //public Question activeQuestion = null;
 
         ChatListener chat = new ChatListener();
-        SummaryExport summary;
+
+
+
+        //SummaryExport summary;
 
         public HAP_MainWindow()
         {
@@ -60,7 +56,7 @@ namespace zoom_sdk_demo
             questions_list.ItemsSource = QuestionManager.instance.questions;
             participant_list.ItemsSource = ParticipantManager.instance.participants;
             groups_list.ItemsSource = GroupManager.instance.groups;
-            summary = new SummaryExport();
+            //summary = new SummaryExport();
 
         }
 
@@ -70,8 +66,8 @@ namespace zoom_sdk_demo
             ValueType va_1 = new HWNDDotNet();
             ValueType va_2 = new HWNDDotNet();
             uictrl_service.GetMeetingUIWnd(ref va_1, ref va_2);
-            // need to check if dual screen or not
-            uictrl_service.EnterFullScreen(true, false);
+            // need to check if dual screen or not. The below makes it full screen
+            //uictrl_service.EnterFullScreen(true, false);
             HWNDDotNet firstHwd = (HWNDDotNet)va_1;
 
             SetParent((System.IntPtr)firstHwd.value, CBox.Handle);
@@ -81,7 +77,28 @@ namespace zoom_sdk_demo
             SendMessage((System.IntPtr)firstHwd.value, WM_SYSCOMMAND, SC_MAXIMIZE, 0);
 
             //Use this opportunity to set up Summary Export
-            summary.SetMeetingInfo(CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().GetMeetingInfo().GetInviteEmailTitle(), DateTime.Now, QuestionManager.instance.questions);
+            //BOB is going to move this to somewhere a bit better. This function is called everytime you hope between Zoom Rooms as well
+            // you can find it in start_join_meeting.xaml.cs look for on in meeting status. You should see it there
+
+        }
+        private void popZoomwindow()
+        {
+            // Reference: https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setparent
+            // https://stackoverflow.com/questions/21635473/remove-parent-of-window-or-form
+            IMeetingUIControllerDotNetWrap uictrl_service = CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().GetUIController();
+            ValueType va_1 = new HWNDDotNet();
+            ValueType va_2 = new HWNDDotNet();
+            uictrl_service.GetMeetingUIWnd(ref va_1, ref va_2);
+            HWNDDotNet firstHwd = (HWNDDotNet)va_1;
+            uictrl_service.ExitFullScreen(true, false);
+            SetParent((IntPtr)firstHwd.value, IntPtr.Zero);
+
+            //uint style = GetWindowLong((IntPtr)firstHwd.value, GWL_STYLE);
+            //style = (style | WS_POPUP) & (~WS_CHILD);
+            //SetWindowLong((IntPtr)firstHwd.value, GWL_STYLE, style);
+
+            SendMessage((System.IntPtr)firstHwd.value, WM_SYSCOMMAND, SC_RESTORE, 0);
+
 
         }
         private void TextBox_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
@@ -182,7 +199,7 @@ namespace zoom_sdk_demo
         {
             //LeaveMeetingCmd ID = LeaveMeetingCmd.END_MEETING;
             //CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().Leave(ID);
-            summary.WriteSummary();
+            SummaryExport.instance.WriteSummary();
             System.Windows.Application.Current.Shutdown();
         }
 
@@ -233,6 +250,25 @@ namespace zoom_sdk_demo
 
         }
 
+
+
+        private void ZoomEmbeddToggle(object sender, RoutedEventArgs e)
+        {
+            if (Session.instance.zoomEmbedded)
+            {
+                (sender as Button).Content = "Dock Zoom Window";
+                popZoomwindow();
+                Session.instance.zoomEmbedded = false;
+            }
+
+            else
+            {
+                (sender as Button).Content = "Pop Zoom Window";
+                embedZoom();
+                //popZoomwindow();
+                Session.instance.zoomEmbedded = true;
+            }
+        }
     }
 
 
