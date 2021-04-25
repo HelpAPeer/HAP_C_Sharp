@@ -34,10 +34,11 @@ namespace zoom_sdk_demo
 
         ChatListener chat = new ChatListener();
 
-   
-        private ShowQuestionWindow showquestion = new ShowQuestionWindow(); 
+
+        private ShowQuestionWindow showquestion = new ShowQuestionWindow();
         private AddQuestionWindow addQuestionWindow = new AddQuestionWindow();
         private QuestionResultsWindow viewresults = new QuestionResultsWindow();
+        private BO_Settings_Window bo_Settings_Window = new BO_Settings_Window();
 
         //SummaryExport summary;
 
@@ -205,10 +206,17 @@ namespace zoom_sdk_demo
         private void SetupUpGroups_click(object sender, RoutedEventArgs e)
         {
 
-            var bo_Settings_Window = new BO_Settings_Window();
+
             //bo_Settings_Window.ShowDialog();
 
+            if (PresentationSource.FromVisual(bo_Settings_Window) == null)
+            {
+                bo_Settings_Window = new BO_Settings_Window();
+            }
             bo_Settings_Window.Show();
+            bo_Settings_Window.Activate();
+
+
         }
 
         void Wnd_Closing(object sender, CancelEventArgs e)
