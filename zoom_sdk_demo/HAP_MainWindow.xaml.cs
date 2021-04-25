@@ -34,6 +34,7 @@ namespace zoom_sdk_demo
 
         ChatListener chat = new ChatListener();
 
+        private ShowQuestionWindow showquestion = new ShowQuestionWindow(); // TODO: Make more resource efficient
 
 
         //SummaryExport summary;
@@ -160,9 +161,14 @@ namespace zoom_sdk_demo
 
             QuestionManager.instance.activeQuestion = problem;
 
-            var showquestion = new ShowQuestionWindow(); // TODO: Make more resource efficient
-            showquestion.UpdateQuestion(problem);
 
+            //Source: https://stackoverflow.com/questions/381973/how-do-you-tell-if-a-wpf-window-is-closed
+            if (PresentationSource.FromVisual(showquestion) == null)
+            {
+                showquestion = new ShowQuestionWindow();
+            }
+
+            showquestion.UpdateQuestion(problem);
             showquestion.Show();
             Console.WriteLine(problem.question);
             problem.used = true;
