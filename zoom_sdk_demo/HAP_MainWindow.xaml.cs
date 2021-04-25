@@ -34,8 +34,9 @@ namespace zoom_sdk_demo
 
         ChatListener chat = new ChatListener();
 
-        private ShowQuestionWindow showquestion = new ShowQuestionWindow(); // TODO: Make more resource efficient
-
+   
+        private ShowQuestionWindow showquestion = new ShowQuestionWindow(); 
+        private AddQuestionWindow addQuestionWindow = new AddQuestionWindow();
 
         //SummaryExport summary;
 
@@ -138,19 +139,22 @@ namespace zoom_sdk_demo
             if ((ParticipantManager.instance.participants.Count != 0) && (id_lastSelected < ParticipantManager.instance.participants.Count))
             {
                 ParticipantManager.instance.participants[id_lastSelected].Notes = NoteTextBox.Text;
-
-
-
             }
 
         }
 
         private void Add_Question_Click(object sender, RoutedEventArgs e)
         {
-            var addQuestionWindow = new AddQuestionWindow();
-            //this was ShowDialog before. Which froze all the other windows
-            addQuestionWindow.Show();
 
+            //this was ShowDialog before. Which froze all the other windows
+            if (PresentationSource.FromVisual(addQuestionWindow) == null)
+            {
+                addQuestionWindow = new AddQuestionWindow();
+            }
+
+            addQuestionWindow.setupQuestionWindow();
+            addQuestionWindow.Show();
+            addQuestionWindow.Activate();
         }
 
 
@@ -158,7 +162,6 @@ namespace zoom_sdk_demo
         private void usequestion_Click(object sender, RoutedEventArgs e)
         {
             Question problem = (sender as Button).DataContext as Question;
-
             QuestionManager.instance.activeQuestion = problem;
 
 
@@ -183,11 +186,12 @@ namespace zoom_sdk_demo
         }
         private void viewresults_Click(object sender, RoutedEventArgs e)
         {
+            //TODO: make one instance
+
             Question problem = (sender as Button).DataContext as Question;
 
-            var viewresults = new QuestionResultsWindow();
+            QuestionResultsWindow viewresults = new QuestionResultsWindow();
             viewresults.UpdateQuestion(problem);
-
             viewresults.Show();
         }
 
