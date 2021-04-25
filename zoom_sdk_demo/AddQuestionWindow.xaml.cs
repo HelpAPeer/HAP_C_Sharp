@@ -19,6 +19,12 @@ namespace zoom_sdk_demo
             DataContext = new Question();
             InitializeComponent();
             questions_list.ItemsSource = QuestionManager.instance.questions;
+       
+
+        }
+
+
+        public void setupQuestionWindow() {
             if (QuestionManager.instance.questions.Count > 0)
             {
                 //We select the top item by default
@@ -30,10 +36,7 @@ namespace zoom_sdk_demo
                 //We add a new question by default
                 Add_New_question();
             }
-
         }
-
-
 
         private void import_Questions_click(object sender, RoutedEventArgs e)
         {

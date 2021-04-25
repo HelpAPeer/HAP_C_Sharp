@@ -35,6 +35,10 @@ namespace zoom_sdk_demo
         ChatListener chat = new ChatListener();
 
 
+        private ShowQuestionWindow showquestion = new ShowQuestionWindow();
+        private AddQuestionWindow addQuestionWindow = new AddQuestionWindow();
+        private QuestionResultsWindow viewresults = new QuestionResultsWindow();
+        private BO_Settings_Window bo_Settings_Window = new BO_Settings_Window();
 
         //SummaryExport summary;
 
@@ -137,19 +141,22 @@ namespace zoom_sdk_demo
             if ((ParticipantManager.instance.participants.Count != 0) && (id_lastSelected < ParticipantManager.instance.participants.Count))
             {
                 ParticipantManager.instance.participants[id_lastSelected].Notes = NoteTextBox.Text;
-
-
-
             }
 
         }
 
         private void Add_Question_Click(object sender, RoutedEventArgs e)
         {
-            var addQuestionWindow = new AddQuestionWindow();
-            //this was ShowDialog before. Which froze all the other windows
-            addQuestionWindow.Show();
 
+            //this was ShowDialog before. Which froze all the other windows
+            if (PresentationSource.FromVisual(addQuestionWindow) == null)
+            {
+                addQuestionWindow = new AddQuestionWindow();
+            }
+
+            addQuestionWindow.setupQuestionWindow();
+            addQuestionWindow.Show();
+            addQuestionWindow.Activate();
         }
 
 
@@ -157,12 +164,16 @@ namespace zoom_sdk_demo
         private void usequestion_Click(object sender, RoutedEventArgs e)
         {
             Question problem = (sender as Button).DataContext as Question;
-
             QuestionManager.instance.activeQuestion = problem;
 
-            var showquestion = new ShowQuestionWindow(); // TODO: Make more resource efficient
-            showquestion.UpdateQuestion(problem);
 
+            //Source: https://stackoverflow.com/questions/381973/how-do-you-tell-if-a-wpf-window-is-closed
+            if (PresentationSource.FromVisual(showquestion) == null)
+            {
+                showquestion = new ShowQuestionWindow();
+            }
+
+            showquestion.UpdateQuestion(problem);
             showquestion.Show();
             Console.WriteLine(problem.question);
             problem.used = true;
@@ -177,22 +188,35 @@ namespace zoom_sdk_demo
         }
         private void viewresults_Click(object sender, RoutedEventArgs e)
         {
+            //TODO: make one instance
+
             Question problem = (sender as Button).DataContext as Question;
 
-            var viewresults = new QuestionResultsWindow();
-            viewresults.UpdateQuestion(problem);
+            if (PresentationSource.FromVisual(viewresults) == null)
+            {
+                viewresults = new QuestionResultsWindow();
+            }
 
+            viewresults.UpdateQuestion(problem);
             viewresults.Show();
+            viewresults.Activate();
         }
 
 
         private void SetupUpGroups_click(object sender, RoutedEventArgs e)
         {
 
-            var bo_Settings_Window = new BO_Settings_Window();
+
             //bo_Settings_Window.ShowDialog();
 
+            if (PresentationSource.FromVisual(bo_Settings_Window) == null)
+            {
+                bo_Settings_Window = new BO_Settings_Window();
+            }
             bo_Settings_Window.Show();
+            bo_Settings_Window.Activate();
+
+
         }
 
         void Wnd_Closing(object sender, CancelEventArgs e)
