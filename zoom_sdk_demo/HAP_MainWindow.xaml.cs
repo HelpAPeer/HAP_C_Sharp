@@ -37,6 +37,7 @@ namespace zoom_sdk_demo
    
         private ShowQuestionWindow showquestion = new ShowQuestionWindow(); 
         private AddQuestionWindow addQuestionWindow = new AddQuestionWindow();
+        private QuestionResultsWindow viewresults = new QuestionResultsWindow();
 
         //SummaryExport summary;
 
@@ -190,9 +191,14 @@ namespace zoom_sdk_demo
 
             Question problem = (sender as Button).DataContext as Question;
 
-            QuestionResultsWindow viewresults = new QuestionResultsWindow();
+            if (PresentationSource.FromVisual(viewresults) == null)
+            {
+                viewresults = new QuestionResultsWindow();
+            }
+
             viewresults.UpdateQuestion(problem);
             viewresults.Show();
+            viewresults.Activate();
         }
 
 
