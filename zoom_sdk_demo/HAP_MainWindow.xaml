@@ -68,7 +68,7 @@
                         </Border>-->
                         </ListView>
                         <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" HorizontalAlignment="Right">
-                            <Button Margin="5" Content="Results"></Button>
+                        
                             <Button Margin="5" Content="Stop" IsEnabled="True" ></Button>
                         </StackPanel>
                     </DockPanel>
