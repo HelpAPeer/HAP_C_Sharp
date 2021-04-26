@@ -60,7 +60,7 @@ namespace zoom_sdk_demo.Models
             }
             else
             {
-                answers = new List<string>(answerstring.Split('\n'));
+                answers = new List<string>(answerstring.ToLowerInvariant().Split('\n'));
             }
 
             responses = new Dictionary<string, Tuple<string, bool>>();
@@ -72,7 +72,7 @@ namespace zoom_sdk_demo.Models
             answers.Clear();
             if (answerString.Length > 0)
             {
-                answers.AddRange(answerString.Split('\n'));
+                answers.AddRange(answerString.ToLowerInvariant().Split('\n'));
             }
 
         }

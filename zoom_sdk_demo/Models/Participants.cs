@@ -79,12 +79,12 @@ namespace zoom_sdk_demo.Models
             double eval = 0;
             foreach (Question q in questions)
             {
-                if (q.used && q.responses.ContainsKey(Name))
+                if ((q.used && q.answers.Count > 0) && q.responses.ContainsKey(Name))
                 {
                     numQ++;
                     try
                     {
-                        eval += Convert.ToDouble(q.responses[Name].Item1) / 50 - 0.5; // Assuming input range of 0-100, standardizes as -1 to 1 
+                        eval += Convert.ToDouble(q.responses[Name].Item1) / 50 - 1; // Assuming input range of 0-100, standardizes as -1 to 1 
                     }
                     catch
                     {
