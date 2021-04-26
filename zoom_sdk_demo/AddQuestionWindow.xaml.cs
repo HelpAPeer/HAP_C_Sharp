@@ -19,9 +19,24 @@ namespace zoom_sdk_demo
             DataContext = new Question();
             InitializeComponent();
             questions_list.ItemsSource = QuestionManager.instance.questions;
+       
+
         }
 
 
+        public void setupQuestionWindow() {
+            if (QuestionManager.instance.questions.Count > 0)
+            {
+                //We select the top item by default
+                questions_list.SelectedIndex = 0;
+            }
+
+            else
+            {
+                //We add a new question by default
+                Add_New_question();
+            }
+        }
 
         private void import_Questions_click(object sender, RoutedEventArgs e)
         {
@@ -54,7 +69,7 @@ namespace zoom_sdk_demo
             questions.ForEach(QuestionManager.instance.questions.Add);
         }
 
- 
+
 
 
 
@@ -91,10 +106,15 @@ namespace zoom_sdk_demo
 
         private void New_Question_Click(object sender, RoutedEventArgs e)
         {
+
+            Add_New_question();
+        }
+
+        private void Add_New_question()
+        {
             Question question = new Question();
             QuestionManager.instance.questions.Add(question);
             questions_list.SelectedItem = question;
-
         }
 
         private void Delete_Click(object sender, RoutedEventArgs e)

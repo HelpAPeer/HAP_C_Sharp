@@ -1,21 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.Windows.Interop;
 using zoom_sdk_demo.Models;
 using ZOOM_SDK_DOTNET_WRAP;
-using System.ComponentModel;
 
 namespace zoom_sdk_demo
 {
@@ -34,13 +25,22 @@ namespace zoom_sdk_demo
         static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
         private const int WM_SYSCOMMAND = 0x112;
         private const int SC_MAXIMIZE = 0xF030;
+        private const int SC_RESTORE = 0xF120;
+
 
         //public static Question activeQuestion = null;
 
         //public Question activeQuestion = null;
-        
+
         ChatListener chat = new ChatListener();
-        SummaryExport summary;
+
+
+        private ShowQuestionWindow showquestion = new ShowQuestionWindow();
+        private AddQuestionWindow addQuestionWindow = new AddQuestionWindow();
+        private QuestionResultsWindow viewresults = new QuestionResultsWindow();
+        private BO_Settings_Window bo_Settings_Window = new BO_Settings_Window();
+
+        //SummaryExport summary;
 
         public HAP_MainWindow()
         {
@@ -60,7 +60,7 @@ namespace zoom_sdk_demo
             questions_list.ItemsSource = QuestionManager.instance.questions;
             participant_list.ItemsSource = ParticipantManager.instance.participants;
             groups_list.ItemsSource = GroupManager.instance.groups;
-            summary = new SummaryExport();
+            //summary = new SummaryExport();
 
         }
 
@@ -70,8 +70,8 @@ namespace zoom_sdk_demo
             ValueType va_1 = new HWNDDotNet();
             ValueType va_2 = new HWNDDotNet();
             uictrl_service.GetMeetingUIWnd(ref va_1, ref va_2);
-            // need to check if dual screen or not
-            uictrl_service.EnterFullScreen(true, false);
+            // need to check if dual screen or not. The below makes it full screen
+            //uictrl_service.EnterFullScreen(true, false);
             HWNDDotNet firstHwd = (HWNDDotNet)va_1;
 
             SetParent((System.IntPtr)firstHwd.value, CBox.Handle);
@@ -81,7 +81,28 @@ namespace zoom_sdk_demo
             SendMessage((System.IntPtr)firstHwd.value, WM_SYSCOMMAND, SC_MAXIMIZE, 0);
 
             //Use this opportunity to set up Summary Export
-            summary.SetMeetingInfo(CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().GetMeetingInfo().GetInviteEmailTitle(), DateTime.Now, QuestionManager.instance.questions);
+            //BOB is going to move this to somewhere a bit better. This function is called everytime you hope between Zoom Rooms as well
+            // you can find it in start_join_meeting.xaml.cs look for on in meeting status. You should see it there
+
+        }
+        private void popZoomwindow()
+        {
+            // Reference: https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setparent
+            // https://stackoverflow.com/questions/21635473/remove-parent-of-window-or-form
+            IMeetingUIControllerDotNetWrap uictrl_service = CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().GetUIController();
+            ValueType va_1 = new HWNDDotNet();
+            ValueType va_2 = new HWNDDotNet();
+            uictrl_service.GetMeetingUIWnd(ref va_1, ref va_2);
+            HWNDDotNet firstHwd = (HWNDDotNet)va_1;
+            uictrl_service.ExitFullScreen(true, false);
+            SetParent((IntPtr)firstHwd.value, IntPtr.Zero);
+
+            //uint style = GetWindowLong((IntPtr)firstHwd.value, GWL_STYLE);
+            //style = (style | WS_POPUP) & (~WS_CHILD);
+            //SetWindowLong((IntPtr)firstHwd.value, GWL_STYLE, style);
+
+            SendMessage((System.IntPtr)firstHwd.value, WM_SYSCOMMAND, SC_RESTORE, 0);
+
 
         }
         private void TextBox_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
@@ -96,14 +117,21 @@ namespace zoom_sdk_demo
 
         private void participant_list_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var student = (Participant)e.AddedItems[0];
-
-            id_lastSelected = ParticipantManager.instance.participants.IndexOf(student);
-            if (student.Notes.Equals(GlobalVar.default_note))
+            if (participant_list.SelectedIndex > 0)
             {
-                student.Notes += student.Name;
+                var student = (Participant)e.AddedItems[0];
+
+                id_lastSelected = ParticipantManager.instance.participants.IndexOf(student);
+                if (student.Notes.Equals(GlobalVar.default_note))
+                {
+                    student.Notes += student.Name;
+                }
+                NoteTextBox.Text = student.Notes;
             }
-            NoteTextBox.Text = student.Notes;
+            else
+            {
+                NoteTextBox.Text = "Select participant";
+            }
 
         }
 
@@ -113,19 +141,22 @@ namespace zoom_sdk_demo
             if ((ParticipantManager.instance.participants.Count != 0) && (id_lastSelected < ParticipantManager.instance.participants.Count))
             {
                 ParticipantManager.instance.participants[id_lastSelected].Notes = NoteTextBox.Text;
-
-
-
             }
 
         }
 
         private void Add_Question_Click(object sender, RoutedEventArgs e)
         {
-            var addQuestionWindow = new AddQuestionWindow();
-            //this was ShowDialog before. Which froze all the other windows
-            addQuestionWindow.Show();
 
+            //this was ShowDialog before. Which froze all the other windows
+            if (PresentationSource.FromVisual(addQuestionWindow) == null)
+            {
+                addQuestionWindow = new AddQuestionWindow();
+            }
+
+            addQuestionWindow.setupQuestionWindow();
+            addQuestionWindow.Show();
+            addQuestionWindow.Activate();
         }
 
 
@@ -133,12 +164,16 @@ namespace zoom_sdk_demo
         private void usequestion_Click(object sender, RoutedEventArgs e)
         {
             Question problem = (sender as Button).DataContext as Question;
-
             QuestionManager.instance.activeQuestion = problem;
 
-            var showquestion = new ShowQuestionWindow(); // TODO: Make more resource efficient
-            showquestion.UpdateQuestion(problem);
 
+            //Source: https://stackoverflow.com/questions/381973/how-do-you-tell-if-a-wpf-window-is-closed
+            if (PresentationSource.FromVisual(showquestion) == null)
+            {
+                showquestion = new ShowQuestionWindow();
+            }
+
+            showquestion.UpdateQuestion(problem);
             showquestion.Show();
             Console.WriteLine(problem.question);
             problem.used = true;
@@ -153,29 +188,42 @@ namespace zoom_sdk_demo
         }
         private void viewresults_Click(object sender, RoutedEventArgs e)
         {
+            //TODO: make one instance
+
             Question problem = (sender as Button).DataContext as Question;
 
-            var viewresults = new QuestionResultsWindow();
-            viewresults.UpdateQuestion(problem);
+            if (PresentationSource.FromVisual(viewresults) == null)
+            {
+                viewresults = new QuestionResultsWindow();
+            }
 
+            viewresults.UpdateQuestion(problem);
             viewresults.Show();
+            viewresults.Activate();
         }
 
 
         private void SetupUpGroups_click(object sender, RoutedEventArgs e)
         {
 
-            var bo_Settings_Window = new BO_Settings_Window();
+
             //bo_Settings_Window.ShowDialog();
 
+            if (PresentationSource.FromVisual(bo_Settings_Window) == null)
+            {
+                bo_Settings_Window = new BO_Settings_Window();
+            }
             bo_Settings_Window.Show();
+            bo_Settings_Window.Activate();
+
+
         }
 
         void Wnd_Closing(object sender, CancelEventArgs e)
         {
             //LeaveMeetingCmd ID = LeaveMeetingCmd.END_MEETING;
             //CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().Leave(ID);
-            summary.WriteSummary();
+            SummaryExport.instance.WriteSummary();
             System.Windows.Application.Current.Shutdown();
         }
 
@@ -202,6 +250,8 @@ namespace zoom_sdk_demo
 
             // we are doing this via the group
             Console.WriteLine(group.Participants_in_group.Count);
+            // To make sure we have nothing selected whwn we change the order
+            participant_list.SelectedIndex = -1;
             for (int i = group.Participants_in_group.Count; i-- > 0;)
             {
                 Console.WriteLine("We are here");
@@ -222,6 +272,26 @@ namespace zoom_sdk_demo
 
             }
 
+        }
+
+
+
+        private void ZoomEmbeddToggle(object sender, RoutedEventArgs e)
+        {
+            if (Session.instance.zoomEmbedded)
+            {
+                (sender as Button).Content = "Dock Zoom Window";
+                popZoomwindow();
+                Session.instance.zoomEmbedded = false;
+            }
+
+            else
+            {
+                (sender as Button).Content = "Pop Zoom Window";
+                embedZoom();
+                //popZoomwindow();
+                Session.instance.zoomEmbedded = true;
+            }
         }
     }
 

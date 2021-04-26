@@ -22,6 +22,8 @@ namespace zoom_sdk_demo.Models
         // TODO: Distinguish teachers from students
         public bool isStudent = true;
 
+        public bool isMyself = false;
+
         // Index 0 is always Evaluations from quizzes for now
         public List<double> Evaluation = new List<double>();
 
@@ -34,6 +36,7 @@ namespace zoom_sdk_demo.Models
             if (user.IsMySelf())
             {
                 this.isStudent = false;
+                this.isMyself = true;
                 return false;
             }
 
@@ -53,13 +56,22 @@ namespace zoom_sdk_demo.Models
             this.isStudent = true;
             return true;
         }
+
+        public bool hasHostPrivileges()
+        {
+            ZOOM_SDK_DOTNET_WRAP.IUserInfoDotNetWrap user = ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().
+                    GetMeetingParticipantsController().GetUserByUserID((uint)this.ID);
+
+            return user.IsHost();
+        }
+
         // Override of ToString for data export
         public override string ToString()
         {
             return Name;
         }
 
-        public double Evaluate(ObservableCollection<Question> questions )
+        public double Evaluate(ObservableCollection<Question> questions)
         {
             Console.WriteLine("Evaluating student " + Name);
 
@@ -85,7 +97,7 @@ namespace zoom_sdk_demo.Models
                             eval--;
                         }
                     }
-                    
+
                 }
                 else if (q.used)
                 {
@@ -202,13 +214,15 @@ namespace zoom_sdk_demo.Models
 
         }
 
-        public void coHostChanged(UInt32 userId, bool isCoHost) {
+        public void coHostChanged(UInt32 userId, bool isCoHost)
+        {
 
             ZOOM_SDK_DOTNET_WRAP.IUserInfoDotNetWrap user = ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().
                 GetMeetingParticipantsController().GetUserByUserID((uint)userId);
 
             Participant potential_host = participants.SingleOrDefault(i => i.ID == (int)userId);
-            if (!(potential_host is null)) {
+            if (!(potential_host is null))
+            {
                 int index = participants.IndexOf(potential_host);
                 //if co_host than it is not a student. 
                 // if not a co-host than it is a student.but we could be myself. better to just rin the member function
@@ -242,7 +256,7 @@ namespace zoom_sdk_demo.Models
                 }
 
             }
-       
+
 
         }
         public void ChangeName(UInt32 userId, string userName)
@@ -323,6 +337,19 @@ namespace zoom_sdk_demo.Models
         public static int CompareStudents((Participant, double) a, (Participant, double) b)
         {
             return a.Item2.CompareTo(b.Item2);
+        }
+
+        public string getHelpAPeerAppName()
+        {
+            Participant me = this.participants.FirstOrDefault(p => p.isMyself == true);
+            if (me is null)
+            {
+                return "";
+            }
+            else
+            {
+                return me.Name;
+            }
         }
     }
 }

@@ -10,8 +10,9 @@ using System.Runtime.CompilerServices;
 
 namespace zoom_sdk_demo.Models
 {
-    
-    public class Question : INotifyPropertyChanged
+    //TODO: INotifpropertychanged is breaking observable collection in Question scenario
+    //public class Question : INotifyPropertyChanged
+    public class Question 
     {
 
         public String question { get; set; } = "";

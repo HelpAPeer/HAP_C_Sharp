@@ -41,6 +41,7 @@ AcceptsReturn="True" Height="74" TextChanged="UpdateQuestionAnswers"></TextBox>
                     <DataTemplate>
                         <Border Background="#D9D9D9" CornerRadius="10" Margin="5">
                             <DockPanel Margin="5" Width="100">
+                                <TextBlock DockPanel.Dock="Top" Text="Question:" FontWeight="Bold"/>
                                 <TextBlock DockPanel.Dock="Top" Text="{Binding Path=question}" TextTrimming="WordEllipsis" TextWrapping="NoWrap" />
 
                             </DockPanel>
