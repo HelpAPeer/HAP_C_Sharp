@@ -1,22 +1,10 @@
 Help a Peer
-4/26/2021 11:00:59 AM
+4/26/2021 12:12:41 PM
 
 
 ================================
 Participants List and Notes
 ================================
-Ryan Eckert
-Good question
-
-------------------------
-Hanhui Lu
-Good question
-
-------------------------
-Ruth Comley
-Select participant
-
-------------------------
 HelpA Peer
 Write your thoughts here on 
 
@@ -24,21 +12,6 @@ Write your thoughts here on
 ================================
 Saved Group Configurations
 ================================
-Group Configuration 1
-Room 1: Ruth Comley, Carl Rosendahl
-Room 2: Hanhui Lu, Ryan Eckert
-Teachers & Assistants: Karen Xu (she/her), HelpA Peer
-
-------------------------
 ================================
 Quiz Results
 ================================
-Do we prefer Smart or regular quizzing?
-
-Ryan Eckert 	| Correct 	| smart quizzing
-Hanhui Lu 	| Correct 	| smart
-Karen Xu (she/her) 	| Incorrect 	| no quizzing
-Carl Rosendahl 	| Correct 	| intelligent quizzing
-Ruth Comley 	| Incorrect 	| quiz
-
-------------------------
