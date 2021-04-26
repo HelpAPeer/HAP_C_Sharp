@@ -13,7 +13,6 @@ namespace zoom_sdk_demo.Models
     
     public class Question : INotifyPropertyChanged
     {
-        static string numeric = "~n";
 
         public String question { get; set; } = "";
         //TODO might need to change this later to an array if a question can have multiple answers
@@ -23,8 +22,6 @@ namespace zoom_sdk_demo.Models
         public bool used { get; set; } = false;
 
         public List<string> answers { get; set; } = new List<string>();
-
-        public bool numerical = false;
 
         public IDictionary<string, Tuple<string, bool>> responses { get; set; } = new Dictionary<string, Tuple<string, bool>>();
         public ISet<string> nonresponders { get; set; }
@@ -56,23 +53,29 @@ namespace zoom_sdk_demo.Models
             }
 
             question = questionstring;
-            if (answerstring.Equals(numeric))
-            {
-                numerical = true;
-            }
-            else if (answerstring.Length <= 0)
+            if (answerstring.Length <= 0)
             {
                 answers = new List<string>();
             }
             else
             {
-                answers = new List<string>(answerstring.Split(','));
+                answers = new List<string>(answerstring.Split('\n'));
             }
 
             responses = new Dictionary<string, Tuple<string, bool>>();
             answers = new List<string>();
         }
 
+        public void SetAnswersFromAnswerString()
+        {
+            answers.Clear();
+            if (answerString.Length > 0)
+            {
+                answers.AddRange(answerString.Split('\n'));
+            }
+
+        }
+        
         public void LogResponse(string student, string response)
         {
             Console.WriteLine("We are loggin response");
@@ -85,12 +88,9 @@ namespace zoom_sdk_demo.Models
 
             Tuple<string, bool> eval;
             // Evaluate the response
-            if (numerical || answers.Count == 0)
+            if (answers.Count == 0 || answers.Contains(response)) //TODO: Add methods for regrading, both for adding more answers and for marking specific student as correct
             {
-                eval = Tuple.Create(response, true);
-            }
-            if (answers.Contains(response)) //TODO: Add methods for regrading, both for adding more answers and for marking specific student as correct
-            {
+
                 eval = Tuple.Create(response, true);
             }
             else

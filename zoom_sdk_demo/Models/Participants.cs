@@ -70,11 +70,11 @@ namespace zoom_sdk_demo.Models
                 if (q.used && q.responses.ContainsKey(Name))
                 {
                     numQ++;
-                    if (q.numerical)
+                    try
                     {
                         eval += Convert.ToDouble(q.responses[Name].Item1) / 50 - 0.5; // Assuming input range of 0-100, standardizes as -1 to 1 
                     }
-                    else
+                    catch
                     {
                         if (q.responses[Name].Item2)
                         {

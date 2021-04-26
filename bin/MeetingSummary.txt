@@ -1,11 +1,31 @@
 Please join Zoom meeting in progress
-4/21/2021 6:17:50 AM
+4/22/2021 10:19:45 AM
 
 
 ================================
 Participants List and Notes
 ================================
+Karen Xu (she/her)
+
+
+------------------------
+Jessica Hammer (she/her)
+Write your thoughts here on Jessica Hammer (she/her)
+
+------------------------
+Ryan Eckert
+Notes are cool
+
+------------------------
+Hanhui Lu
+Write your thoughts here on 
+
+------------------------
 HelpA Peer
+Write your thoughts here on 
+
+------------------------
+Ebrahim Karam
 Write your thoughts here on 
 
 ------------------------
@@ -15,13 +35,10 @@ Saved Group Configurations
 ================================
 Quiz Results
 ================================
+What is the name of the project?
 
-
-HelpA Peer 	| Correct 	| 100
-
-------------------------
-Test
-
-HelpA Peer 	| Incorrect 	| 100
+Hanhui Lu 	| Correct 	| hap
+Karen Xu (she/her) 	| Incorrect 	| not sure
+Moshe Mahler (he/him) 	| Correct 	| help a peer
 
 ------------------------
