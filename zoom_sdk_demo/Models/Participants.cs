@@ -212,7 +212,7 @@ namespace zoom_sdk_demo.Models
                 int index = participants.IndexOf(last_host);
                 participants[index].isParticpantStudent();
             }
-           
+
 
             Console.WriteLine("Host Changed");
             if (potential_host.Name == user.GetUserNameW())
@@ -350,6 +350,26 @@ namespace zoom_sdk_demo.Models
         public static int CompareStudents((Participant, double) a, (Participant, double) b)
         {
             return a.Item2.CompareTo(b.Item2);
+        }
+
+        public void raiseHandCounter(bool bLow, UInt32 userid)
+        {
+
+            Participant participant_toModify = participants.SingleOrDefault(user => user.ID == (int)userid);
+
+            if (!(participant_toModify is null))
+            {
+                int index = participants.IndexOf(participant_toModify);
+                if (bLow)
+                {
+                    //TODO: this is happening twice for some reason
+                    participant_toModify.numberOfTimesRaisedHand += 1;
+                    participants.RemoveAt(index);
+                    participants.Insert(index, participant_toModify);
+                }
+
+            }
+
         }
 
         public string getHelpAPeerAppName()

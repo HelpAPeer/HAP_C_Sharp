@@ -68,7 +68,7 @@
                         </Border>-->
                         </ListView>
                         <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" HorizontalAlignment="Right">
-                        
+
                             <!--<Button Margin="5" Content="Stop" IsEnabled="True" ></Button>-->
                         </StackPanel>
                     </DockPanel>
@@ -184,12 +184,35 @@
 
                 <DockPanel Grid.Column="0" Margin="15">
                     <TextBlock  DockPanel.Dock="Top" Margin="5">Participants</TextBlock>
-                    <ListBox DockPanel.Dock="Bottom" x:Name="participant_list"  ScrollViewer.VerticalScrollBarVisibility="Visible"
+                    <ListBox DockPanel.Dock="Bottom" x:Name="participant_list" HorizontalContentAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Visible"
           ScrollViewer.CanContentScroll="False" SelectionChanged="participant_list_SelectionChanged">
 
-                        <ListBox.ItemTemplate>
+
+                        <!--<d:ListBoxItem>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+
+                                <TextBlock Grid.Column="0" Text="Name"/>
+                                <TextBlock Grid.Column="1" Text="89"/>
+
+                            </Grid>
+                        </d:ListBoxItem>-->
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                        <ListBox.ItemTemplate >
                             <DataTemplate>
-                                <TextBlock Text="{Binding Name}"/>
+                                <DockPanel Margin="10" LastChildFill="False">
+                                    <TextBlock DockPanel.Dock="Left" Text="{Binding Name}"/>
+                                    <TextBlock DockPanel.Dock="Right" Text="{Binding numberOfTimesRaisedHand}"/>
+                                </DockPanel>
+                           
                             </DataTemplate>
                         </ListBox.ItemTemplate>
 
