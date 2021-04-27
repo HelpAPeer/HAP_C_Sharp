@@ -141,8 +141,10 @@ namespace zoom_sdk_demo
         }
         public void onLowOrRaiseHandStatusChanged(bool bLow, UInt32 userid)
         {
-            //todo
+            Console.WriteLine("SomeOne Raised Hand id:{0} handUp {1}", userid, bLow);
+            ParticipantManager.instance.raiseHandCounter(bLow, userid);
         }
+
         public void onUserNameChanged(UInt32 userId, string userName)
         {
             ParticipantManager.instance.ChangeName(userId, userName);

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -69,6 +69,7 @@ namespace zoom_sdk_demo.Models
             foreach (Participant student in ParticipantManager.instance.participants)
             {
                 output.AppendLine(student.Name);
+                output.AppendLine("Raised Hand "+ student.numberOfTimesRaisedHand.ToString() + " times" );
                 //output.Append("Evaluation: "); output.AppendLine(student.Evaluation[0].ToString());
                 output.AppendLine(student.Notes);
                 output.AppendLine();

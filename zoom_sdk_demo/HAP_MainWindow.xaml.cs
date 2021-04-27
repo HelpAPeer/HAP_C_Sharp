@@ -213,6 +213,7 @@ namespace zoom_sdk_demo
             {
                 bo_Settings_Window = new BO_Settings_Window();
             }
+            bo_Settings_Window.prepTheGroups();
             bo_Settings_Window.Show();
             bo_Settings_Window.Activate();
 
