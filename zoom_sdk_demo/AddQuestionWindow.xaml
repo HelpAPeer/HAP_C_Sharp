@@ -17,7 +17,7 @@
             <TextBox DockPanel.Dock="Top" Text="{Binding Path=question, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Height="97" Margin="10,0,9.8,0" AcceptsReturn="True"/>
             <TextBlock Margin="10,16,10,0"  DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Enter the Answer"/>
             <TextBox  DockPanel.Dock="Top" Name="Answer_textbox" Text="{Binding Path=answerString, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="10,10,9.8,10" TextWrapping="Wrap"
-AcceptsReturn="True" Height="74" ></TextBox>
+AcceptsReturn="True" Height="74" TextChanged="UpdateQuestionAnswers"></TextBox>
 
             <Button DockPanel.Dock="Top" HorizontalAlignment="Center" Content="Add an Image to Question" Click="Add_image_click"/>
             <TextBlock DockPanel.Dock="Top" Text="{Binding Path=imagePath, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextWrapping="Wrap" x:Name="image_filepath"/>

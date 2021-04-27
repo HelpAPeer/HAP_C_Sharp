@@ -131,5 +131,11 @@ namespace zoom_sdk_demo
         {
             Close();
         }
+
+        private void UpdateQuestionAnswers(object sender, TextChangedEventArgs e)
+        {
+            Question question = (Question)DataContext;
+            question.SetAnswersFromAnswerString();
+        }
     }
 }
