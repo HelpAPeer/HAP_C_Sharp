@@ -21,8 +21,10 @@ namespace zoom_sdk_demo.Models
 
         // TODO: Distinguish teachers from students
         public bool isStudent = true;
+        public bool isHost = false;
 
         public bool isMyself = false;
+        public int numberOfTimesRaisedHand { get; set; } = 0;
 
         // Index 0 is always Evaluations from quizzes for now
         public List<double> Evaluation = new List<double>();
@@ -33,36 +35,38 @@ namespace zoom_sdk_demo.Models
             ZOOM_SDK_DOTNET_WRAP.IUserInfoDotNetWrap user = ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().
                     GetMeetingParticipantsController().GetUserByUserID((uint)this.ID);
 
+            bool isStudent = true;
+            this.isHost = false;
             if (user.IsMySelf())
             {
-                this.isStudent = false;
+
                 this.isMyself = true;
-                return false;
+                isStudent = false;
             }
 
             if (user.IsHost())
             {
-                this.isStudent = false;
-                return false;
+                this.isHost = true;
+                isStudent = false;
             }
 
             if (user.GetUserRole() == ZOOM_SDK_DOTNET_WRAP.UserRole.USERROLE_COHOST)
             {
-                this.isStudent = false;
-                return false;
+
+                isStudent = false;
 
             }
 
-            this.isStudent = true;
-            return true;
+            this.isStudent = isStudent;
+            return isStudent;
         }
 
         public bool hasHostPrivileges()
         {
             ZOOM_SDK_DOTNET_WRAP.IUserInfoDotNetWrap user = ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().
                     GetMeetingParticipantsController().GetUserByUserID((uint)this.ID);
-
-            return user.IsHost();
+            this.isHost = user.IsHost();
+            return this.isHost;
         }
 
         // Override of ToString for data export
@@ -200,6 +204,15 @@ namespace zoom_sdk_demo.Models
                   GetMeetingParticipantsController().GetUserByUserID((uint)userId);
 
             Participant potential_host = participants.SingleOrDefault(i => i.ID == (int)userId);
+            //We need to remove the host mark below
+            Participant last_host = participants.SingleOrDefault(i => i.isHost == true);
+
+            if (!(last_host is null))
+            {
+                int index = participants.IndexOf(last_host);
+                participants[index].isParticpantStudent();
+            }
+           
 
             Console.WriteLine("Host Changed");
             if (potential_host.Name == user.GetUserNameW())
@@ -207,7 +220,7 @@ namespace zoom_sdk_demo.Models
                 int index = participants.IndexOf(potential_host);
                 //making sure the host is specified
                 participants[index].isParticpantStudent();
-                Console.WriteLine("Everthing Seems fine. Host ID did not change");
+                //Console.WriteLine("Everthing Seems fine. Host ID did not change");
 
             }
 
