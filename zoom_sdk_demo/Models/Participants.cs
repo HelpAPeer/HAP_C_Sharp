@@ -360,7 +360,7 @@ namespace zoom_sdk_demo.Models
             if (!(participant_toModify is null))
             {
                 int index = participants.IndexOf(participant_toModify);
-                if (bLow)
+                if (!bLow)
                 {
                     //TODO: this is happening twice for some reason
                     participant_toModify.numberOfTimesRaisedHand += 1;
