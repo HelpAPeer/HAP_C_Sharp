@@ -27,17 +27,21 @@ namespace zoom_sdk_demo
         public BO_Settings_Window()
         {
             InitializeComponent();
-            if (GroupManager.instance.groups.Count < 1)
-            {
-                ParticipantManager.instance.EvaluateStudents(QuestionManager.instance.questions);
-                GroupManager.instance.getGroups();
-            }
+
             this.DataContext = GroupManager.instance.groups;
             groupSize_block.Text = GroupManager.instance.groupSize.ToString();
         }
 
 
 
+        public void prepTheGroups()
+        {
+            if (GroupManager.instance.groups.Count < 1)
+            {
+                ParticipantManager.instance.EvaluateStudents(QuestionManager.instance.questions);
+                GroupManager.instance.getGroups();
+            }
+        }
 
         private void IncreaseGroupSize_Click(object sender, RoutedEventArgs e)
         {
@@ -76,7 +80,7 @@ namespace zoom_sdk_demo
             Participant me = ParticipantManager.instance.participants.FirstOrDefault(p => p.isMyself == true);
 
             //If we are not host, we can't create BO rooms. Also if me does not exist that we can't do anything
-            if (!(me is null) &&  me.hasHostPrivileges())
+            if (!(me is null) && me.hasHostPrivileges())
             {
 
                 IMeetingBOControllerDotNetWrap BO_controller = CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().GetMeetingBOController();
