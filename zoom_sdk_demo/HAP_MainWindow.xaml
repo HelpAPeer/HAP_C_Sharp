@@ -215,7 +215,7 @@
                                 <DockPanel Margin="10" LastChildFill="False">
                                     <TextBlock DockPanel.Dock="Left" Text="{Binding Name}"/>
                                     <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
-                                        <TextBlock  Text="{Binding talk_time ,Converter={StaticResource contributionPercentage}}" Margin="5,0"  />
+                                        <TextBlock  Text="{Binding Path=TalkTime,  Converter={StaticResource contributionPercentage}}" Margin="5,0"  />
                                         <TextBlock  Text="{Binding numberOfTimesRaisedHand}"/>
                                     </StackPanel>
                                 </DockPanel>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using System.ComponentModel;
 
 namespace zoom_sdk_demo.Models
 {
@@ -12,7 +13,7 @@ namespace zoom_sdk_demo.Models
         public const string default_note = "Write your thoughts here on ";
     }
 
-    public class Participant 
+    public class Participant : INotifyPropertyChanged
     {
         public int ID { get; set; }
         public string Name { get; set; } = "";
@@ -29,7 +30,28 @@ namespace zoom_sdk_demo.Models
         // Index 0 is always Evaluations from quizzes for now
         public List<double> Evaluation = new List<double>();
 
-        public int talk_time { get; set; } = 0;
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private int talk_time = 0;
+
+        public int TalkTime
+        {
+            get { return this.talk_time; }
+            set
+            {
+                if (this.talk_time != value)
+                {
+                    this.talk_time = value;
+                    this.NotifyPropertyChanged("TalkTime");
+                }
+            }
+        }
+
+        public void NotifyPropertyChanged(string propName)
+        {
+            if (this.PropertyChanged != null)
+                this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
+        }
 
         public bool isParticpantStudent()
         {
@@ -377,6 +399,7 @@ namespace zoom_sdk_demo.Models
         public void whoIsTalking(Array plstActiveAudio)
         {
             Session.instance.total_talking_time += 1;
+            Console.WriteLine(Session.instance.total_talking_time);
 
             for (int i = plstActiveAudio.GetLowerBound(0); i <= plstActiveAudio.GetUpperBound(0); i++)
             {
@@ -387,14 +410,16 @@ namespace zoom_sdk_demo.Models
 
                 Console.WriteLine("{0} is contibuting", user.GetUserNameW());
 
-                Participant participant_toModify = participants.SingleOrDefault(p => p.ID == (int)userid);
+                Participant participant_toModify = participants.SingleOrDefault(p => p.ID == userid);
 
                 if (!(participant_toModify is null))
                 {
+                    Console.WriteLine("adding Time");
                     int index = participants.IndexOf(participant_toModify);
-                    participant_toModify.talk_time += 1;
-                    participants.RemoveAt(index);
-                    participants.Insert(index, participant_toModify);
+                    participants[index].TalkTime += 1;
+                    //participant_toModify.talk_time += 1;
+                    //participants.RemoveAt(index);
+                    //participants.Insert(index, participant_toModify);
                 }
 
             }

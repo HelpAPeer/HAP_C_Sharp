@@ -14,9 +14,10 @@ namespace zoom_sdk_demo.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             int talk_time = (int)value;
-            if (Session.instance.total_talking_time != 0)
+       
+            if (Session.instance.total_talking_time >0)
             {
-                int percetage_time = (talk_time / Session.instance.total_talking_time) * 100;
+                int percetage_time = ((talk_time * 100) / Session.instance.total_talking_time) ;
                 return percetage_time.ToString() + "%";
 
             }
