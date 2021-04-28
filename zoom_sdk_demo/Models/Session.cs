@@ -16,6 +16,7 @@ namespace zoom_sdk_demo.Models
         private Session() { }
         public bool zoomEmbedded { get; set; } = true;
         public bool firstJoin { get; set; } = true;
+        public int total_talking_time = 0;
 
     }
 }

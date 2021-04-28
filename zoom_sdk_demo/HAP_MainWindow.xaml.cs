@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
@@ -117,7 +117,7 @@ namespace zoom_sdk_demo
 
         private void participant_list_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (participant_list.SelectedIndex > 0)
+            if (participant_list.SelectedIndex >= 0)
             {
                 var student = (Participant)e.AddedItems[0];
 
