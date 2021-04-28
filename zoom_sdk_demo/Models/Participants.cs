@@ -12,7 +12,7 @@ namespace zoom_sdk_demo.Models
         public const string default_note = "Write your thoughts here on ";
     }
 
-    public class Participant
+    public class Participant 
     {
         public int ID { get; set; }
         public string Name { get; set; } = "";
@@ -28,6 +28,8 @@ namespace zoom_sdk_demo.Models
 
         // Index 0 is always Evaluations from quizzes for now
         public List<double> Evaluation = new List<double>();
+
+        public int talk_time { get; set; } = 0;
 
         public bool isParticpantStudent()
         {
@@ -370,6 +372,32 @@ namespace zoom_sdk_demo.Models
 
             }
 
+        }
+
+        public void whoIsTalking(Array plstActiveAudio)
+        {
+            Session.instance.total_talking_time += 1;
+
+            for (int i = plstActiveAudio.GetLowerBound(0); i <= plstActiveAudio.GetUpperBound(0); i++)
+            {
+                int userid = (int)(UInt32)plstActiveAudio.GetValue(i);
+
+                ZOOM_SDK_DOTNET_WRAP.IUserInfoDotNetWrap user = ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().
+            GetMeetingParticipantsController().GetUserByUserID((uint)userid);
+
+                Console.WriteLine("{0} is contibuting", user.GetUserNameW());
+
+                Participant participant_toModify = participants.SingleOrDefault(p => p.ID == (int)userid);
+
+                if (!(participant_toModify is null))
+                {
+                    int index = participants.IndexOf(participant_toModify);
+                    participant_toModify.talk_time += 1;
+                    participants.RemoveAt(index);
+                    participants.Insert(index, participant_toModify);
+                }
+
+            }
         }
 
         public string getHelpAPeerAppName()
