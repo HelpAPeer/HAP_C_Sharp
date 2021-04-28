@@ -423,6 +423,11 @@ namespace zoom_sdk_demo.Models
                 }
 
             }
+
+            //TODO: we need to do a notify property chanegd for the entire list of particpants. this to keep the percentages consistent
+            for (int i = 0; i < participants.Count; i++) {
+                participants[i].NotifyPropertyChanged("TalkTime");
+            }
         }
 
         public string getHelpAPeerAppName()
