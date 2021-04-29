@@ -14,6 +14,7 @@
         Closing="Wnd_Closing">
     <Window.Resources>
         <converters:ContributionPercentage x:Key="contributionPercentage"/>
+        <converters:StringToImage x:Key="stringToImage"/>
     </Window.Resources>
     <Grid Background="#E5E5E5">
         <Grid.ColumnDefinitions>

@@ -109,6 +109,7 @@
       <DependentUpon>BO_Settings_Window.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\ContributionPercentage.cs" />
+    <Compile Include="Converters\StringToImage.cs" />
     <Compile Include="HAP_MainWindow.xaml.cs">
       <DependentUpon>HAP_MainWindow.xaml</DependentUpon>
     </Compile>
