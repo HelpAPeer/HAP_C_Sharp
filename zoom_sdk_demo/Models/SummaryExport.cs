@@ -69,7 +69,14 @@ namespace zoom_sdk_demo.Models
             foreach (Participant student in ParticipantManager.instance.participants)
             {
                 output.AppendLine(student.Name);
-                output.AppendLine("Raised Hand "+ student.numberOfTimesRaisedHand.ToString() + " times" );
+                output.AppendLine("Raised Hand " + student.numberOfTimesRaisedHand.ToString() + " times");
+
+                int contribution_percentage = 0;
+
+                if (Session.instance.total_talking_time != 0)
+                    contribution_percentage = (student.TalkTime * 100) / Session.instance.total_talking_time;
+
+                output.AppendLine("Contributed " + contribution_percentage.ToString() + "% of the discussion");
                 //output.Append("Evaluation: "); output.AppendLine(student.Evaluation[0].ToString());
                 output.AppendLine(student.Notes);
                 output.AppendLine();

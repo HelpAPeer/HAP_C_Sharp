@@ -139,6 +139,16 @@ namespace zoom_sdk_demo
             ParticipantManager.instance.coHostChanged(userId, isCoHost);
 
         }
+
+        public void onUserActiveAudioChange(Array plstActiveAudio)
+        {
+            Console.WriteLine("Someone is contributing");
+            if (!(plstActiveAudio is null))
+            {
+                ParticipantManager.instance.whoIsTalking(plstActiveAudio);
+            }
+            //TODO: add some logic hear that would say the contribution of each
+        }
         public void onLowOrRaiseHandStatusChanged(bool bLow, UInt32 userid)
         {
             Console.WriteLine("SomeOne Raised Hand id:{0} handUp {1}", userid, bLow);
@@ -179,8 +189,11 @@ namespace zoom_sdk_demo
                 GetMeetingParticipantsController().Add_CB_onUserLeft(onUserLeft);
             ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().
                 GetMeetingParticipantsController().Add_CB_onUserNameChanged(onUserNameChanged);
-            //CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().GetMeetingParticipantsController().
+
+            CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().GetMeetingAudioController().Add_CB_onUserActiveAudioChange(onUserActiveAudioChange);
+
         }
+
         private void button_start_api_Click(object sender, RoutedEventArgs e)
         {
             RegisterCallBack();
