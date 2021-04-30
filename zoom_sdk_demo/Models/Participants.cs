@@ -29,6 +29,9 @@ namespace zoom_sdk_demo.Models
         // Index 0 is always Evaluations from quizzes for now
         public List<double> Evaluation = new List<double>();
 
+        public string Performance { get; set; } = "neutral";
+        public static bool Sharing { get; set; } = false;
+
         public bool isParticpantStudent()
         {
 
@@ -83,34 +86,40 @@ namespace zoom_sdk_demo.Models
             double eval = 0;
             foreach (Question q in questions)
             {
-                if ((q.used && q.answers.Count > 0) && q.responses.ContainsKey(Name))
-                {
-                    numQ++;
-                    try
-                    {
-                        eval += Convert.ToDouble(q.responses[Name].Item1) / 50 - 1; // Assuming input range of 0-100, standardizes as -1 to 1 
-                    }
-                    catch
-                    {
-                        if (q.responses[Name].Item2)
-                        {
-                            eval++;
-                        }
-                        else
-                        {
-                            eval--;
-                        }
-                    }
-
-                }
-                else if (q.used)
-                {
-                    Console.WriteLine("Student " + Name + " has not responded to question " + q.question);
-                }
-                else
+                if (!q.used)
                 {
                     Console.WriteLine("Question is not eligable");
                 }
+                else if (!q.responses.ContainsKey(Name))
+                {
+                    Console.WriteLine("Student " + Name + " has not responded to question " + q.question);
+                }
+                else if (q.answers.Count > 0)
+                {
+                    numQ++;
+                    if (q.responses[Name].Item2)
+                    {
+                        eval++;
+                    }
+                    else
+                    {
+                        eval--;
+                    }
+                }    
+                else 
+                {
+                    try
+                    {
+                        eval += Convert.ToDouble(q.responses[Name].Item1) / 50 - 1; // Assuming input range of 0-100, standardizes as -1 to 1 
+                        numQ++;
+                    }
+                    catch
+                    {
+
+                    }
+                    
+                }
+
             }
             if (numQ > 0)
             {
@@ -122,7 +131,14 @@ namespace zoom_sdk_demo.Models
                 {
                     Evaluation[0] = eval / numQ;
                 }
-
+                if (Evaluation[0] < -0.5)
+                {
+                    Performance = "poor";
+                }
+                else if (Evaluation[0] < 0)
+                {
+                    Performance = "subpar";
+                }
                 Console.WriteLine(Name + " evaluated as " + Evaluation[0]);
                 return eval / numQ;
             }
@@ -324,10 +340,10 @@ namespace zoom_sdk_demo.Models
         {
             foreach (Participant p in participants)
             {
-                if (p.isStudent)
-                {
+                //if (p.isStudent)
+                //{
                     p.Evaluate(questions);
-                }
+                //}
             }
         }
 

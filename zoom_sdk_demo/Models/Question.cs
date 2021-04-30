@@ -22,6 +22,8 @@ namespace zoom_sdk_demo.Models
 
         public bool used { get; set; } = false;
 
+        public bool categories { get; set; } = false;
+
         public List<string> answers { get; set; } = new List<string>();
 
         public IDictionary<string, Tuple<string, bool>> responses { get; set; } = new Dictionary<string, Tuple<string, bool>>();
@@ -72,7 +74,12 @@ namespace zoom_sdk_demo.Models
             answers.Clear();
             if (answerString.Length > 0)
             {
-                answers.AddRange(answerString.ToLowerInvariant().Split('\n'));
+                answers.AddRange(answerString.ToLowerInvariant().Split('\n').Select( s => s.Trim()));
+            }
+            Console.WriteLine();
+            foreach (string s in answers)
+            {
+                Console.WriteLine(s);
             }
 
         }
