@@ -21,6 +21,7 @@ namespace zoom_sdk_demo.Models
         {
             string msg = chatMsg.GetContent();
             string sdr = chatMsg.GetSenderDisplayName();
+            // bool all = chatMsg.IsChatToAll;
 
             Console.WriteLine("Message recieved: " + msg);
 

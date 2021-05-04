@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using zoom_sdk_demo.Models;
 using ZOOM_SDK_DOTNET_WRAP;
+using System.ComponentModel;
 
 namespace zoom_sdk_demo
 {
@@ -23,6 +24,8 @@ namespace zoom_sdk_demo
     /// </summary>
     public partial class BO_Settings_Window : Window
     {
+
+        
 
         public BO_Settings_Window()
         {
@@ -213,6 +216,9 @@ namespace zoom_sdk_demo
             {
                 (sender as Button).Content = "Share Groups";
                 HeaderToHide.Visibility = Visibility.Visible;
+                Participant.Sharing = false;
+                DataContext = null;
+                DataContext = GroupManager.instance.groups;
                 ZOOM_SDK_DOTNET_WRAP.CZoomSDKeDotNetWrap.Instance.GetMeetingServiceWrap().GetMeetingShareController().StopShare();
                 return;
             }
@@ -222,6 +228,9 @@ namespace zoom_sdk_demo
 
             //TODO: Need to hide the top part
             HeaderToHide.Visibility = Visibility.Collapsed;
+            Participant.Sharing = true;
+            DataContext = null;
+            DataContext = GroupManager.instance.groups;
             (sender as Button).Content = stop_share;
 
         }
