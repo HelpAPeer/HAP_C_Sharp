@@ -12,6 +12,8 @@ In order to run HAP you would need an APP key and app secret from ZOOM to be abl
 In order to do this you would need the following
 * Visual Studio 2019 or higher
 * ZOOM Pro account to be able to get the key and secret. ([Pricing details](https://zoom.us/pricing))
+![image](https://user-images.githubusercontent.com/10140799/117348953-d7841c00-ae78-11eb-8691-0ee8df6dc74b.png)
+
 * Windows 10 machine with at least 4 GB of RAM. (Please note that the extension might run on any windows machine but our testing was done on windows 10)
   - Please note that just like ZOOM this is a 32-bit application which might not be supported by the tech community in the long run.
 
@@ -31,6 +33,7 @@ In order to do this you would need the following
 ```
 4. Rebuild the project to modify the current exe.
    1. Make sure of the following setting when building (Release and ANY CPU)
+![image](https://user-images.githubusercontent.com/10140799/117349040-f1256380-ae78-11eb-9cda-17e72f5f70d7.png)
 
 
 
@@ -43,12 +46,12 @@ In order to do this you would need the following
 
 
 ## In order to make edits to the project
-The actual Project file is in the ZOOM SDK Demo folder
 
-We decided that we would each separate branches and work on them as needed.
-We then merge those newly implemented features into master
+1. open the folder `zoom_sdk_demo`
+2. Click on `zoom_sdk_demo.sln` to open this in Visual Studio 2019 or higher
+3. The hierachy would look as follows. (Models contains classes) XAML files contain the UI descriptions. Converters help convert aspects from the model to the UI. 
 
-This is based on the C# ZOOM SDK wrapper
+![image](https://user-images.githubusercontent.com/10140799/117349352-4b262900-ae79-11eb-8542-c24074c72274.png)
 
 ## The C# wrapper
 We were required to add some functionalities to the C# wrapper. We added the following functionalities
@@ -68,8 +71,17 @@ If you need to make edits to the wrapper yourself, please benefit from the follo
 1. open the folder labeled `zoom_sdk_c_sharp_wrap` folder
 2. Click on `zoom_sdk_c_sharp_wrap.sln`
 3. Edit the files to expand the wrappers functionalities
-4. Right click on `zoom_sdk_dotnet_wrap` in the hierarchy and click on `build` or `rebuild`
-5. At the end, this should update your `zoom_sdk_dotnet_wrap.dll`, `zoom_sdk_dotnet_wrap.pdb` and `zoom_sdk_dotnet_wrap.dll.metagen` in the bin folder.
+4. Select `Release` from the build mode
+
+![image](https://user-images.githubusercontent.com/10140799/117349996-077fef00-ae7a-11eb-8e02-088bc9859daf.png)
+
+
+6. Right click on `zoom_sdk_dotnet_wrap` in the hierarchy and click on `build` or `rebuild`
+
+![image](https://user-images.githubusercontent.com/10140799/117349717-b7a12800-ae79-11eb-9791-b0be87a00e30.png)
+
+
+6. At the end, this should update your `zoom_sdk_dotnet_wrap.dll`, `zoom_sdk_dotnet_wrap.pdb` and `zoom_sdk_dotnet_wrap.dll.metagen` in the bin folder.
 
 This will allow new functionalities to be present when you edit the HAP project files.
 
