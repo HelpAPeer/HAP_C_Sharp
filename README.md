@@ -1,14 +1,25 @@
 # HAP (Help-A-Peer)
 More details on the project can be found on the link [here](https://projects.etc.cmu.edu/help-a-peer/)
 This exteniosn hopwefully will allow teachers and researchers to gain more insights from online learnign environments. 
+## The tech Used
+This setup was run using WPF and C#. 
+We needed the following exteranl libraries for certain functionalities.
+* [ModernWPF](https://github.com/Kinnara/ModernWpf)
+* [gong-wpf-dragdrop](https://github.com/punker76/gong-wpf-dragdrop)
 
 ## To RUN HAP
 In order to run HAP you would need an APP key and app secret from ZOOM to be able to do the ZOOM SDK calls. 
+In order to do this you would need the following
+* Visual Studio 2019 or higher
+* ZOOM Pro account to be able to get the key and secret. ([Pricing details](https://zoom.us/pricing))
+* Windows 10 machine with at least 4 GB of RAM. (Please note that the extension might run on any windows machine but our testing was done on windows 10)
+
+
 
 ### Adding your own key
+1. Open `zoom_sdk_demo` folder
 
-
-### Runing the exe . 
+### Runing the exe 
 1. Open the bin folder
 2. Click on the file called "zoom_sdk_demo.exe"
 3. You would get a series of prompts that will lead to ZOOM being opened emebedded in the HAP extension
