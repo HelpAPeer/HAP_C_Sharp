@@ -95,6 +95,9 @@ If you need to make edits to the wrapper yourself, please benefit from the follo
 This will allow new functionalities to be present when you edit the HAP project files.
 
 
+## Tech Hierarchy
+![HAP Architecture](https://user-images.githubusercontent.com/10140799/117478294-f5ab5400-af2c-11eb-865c-0fb2875a02cc.png)
+
 ## Other Links and Resources
 
 https://marketplace.zoom.us/docs/sdk/native-sdks/windows/c-sharp-wrapper
