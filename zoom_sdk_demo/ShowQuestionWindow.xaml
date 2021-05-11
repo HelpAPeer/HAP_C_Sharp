@@ -18,7 +18,7 @@
         <Grid>
             <StackPanel HorizontalAlignment="Center"  VerticalAlignment="Center">
                 <TextBlock x:Name="QuestionText" HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" FontSize="20pt" MaxWidth="450" TextWrapping="Wrap" Text="{Binding Path=question ,FallbackValue='Question Text is here'}"></TextBlock>
-                <TextBlock x:Name="ReminderText" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12" Foreground="DarkGray" FontWeight="Bold">Put == before your answer to the quesiton.</TextBlock>
+                <TextBlock x:Name="ReminderText" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12" Foreground="DarkGray" FontWeight="Bold">Put == before your answer to the question.</TextBlock>
                 <TextBlock x:Name="ChatText" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12" Foreground="DarkGray" FontWeight="Bold" Visibility="Hidden">Send as chat to</TextBlock>
 
                 <Image Source="{Binding Path=imagePath, Converter={StaticResource stringToImage}}" Width="320" Stretch="Uniform" />
