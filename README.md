@@ -1,6 +1,15 @@
 # HAP (Help-A-Peer)
 More details on the project can be found on the link [here](https://projects.etc.cmu.edu/help-a-peer/)
 This extension hopefully will allow teachers and researchers to gain more insights from online learning environments.
+
+You can view a quick demo and introduction to the project [here](https://youtu.be/sBlNdLGb7jE?list=PLgK8ktcGDGs-akoue8Qr5VS8HvMtQQz0k)
+![image](https://user-images.githubusercontent.com/10140799/117351217-73af2280-ae7b-11eb-863a-b41b64071a82.png)
+
+This product is meant to faciltate the following in ZOOM
+* Quizzing
+* Grouping
+* Student Support
+
 ## The tech Used
 This setup was run using WPF and C#. The ZOOM SKD has its header files in C++.
 We needed the following external libraries for certain functionalities.
@@ -85,6 +94,9 @@ If you need to make edits to the wrapper yourself, please benefit from the follo
 
 This will allow new functionalities to be present when you edit the HAP project files.
 
+
+## Tech Hierarchy
+![HAP Architecture](https://user-images.githubusercontent.com/10140799/117478294-f5ab5400-af2c-11eb-865c-0fb2875a02cc.png)
 
 ## Other Links and Resources
 
